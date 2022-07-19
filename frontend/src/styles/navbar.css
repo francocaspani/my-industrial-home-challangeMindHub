@@ -18,9 +18,15 @@
 }
 
 .logo {
-    width: 13%;
+    width: 10rem;
+    /* margin-left: 3rem; */
 }
 
 .icons {
 }
 
+@media(max-width: 900px) {
+    .logo {
+        width: 5rem;
+    }
+}
