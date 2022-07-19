@@ -39,7 +39,7 @@ export default function MediaCard() {
       />
       <CardContent className='ctnContent'>
         <Typography gutterBottom variant="h4" component="div"> 
-          Lamp {/*  name producto */}     
+          Lampara {/*  name producto */}     
         </Typography>
       </CardContent>
       <CardActions>
