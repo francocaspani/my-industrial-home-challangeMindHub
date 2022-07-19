@@ -43,19 +43,19 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   justifyContent: 'center',
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
+// const StyledInputBase = styled(InputBase)(({ theme }) => ({
+//   color: 'inherit',
+//   '& .MuiInputBase-input': {
+//     padding: theme.spacing(1, 1, 1, 0),
+//     // vertical padding + font size from searchIcon
+//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+//     transition: theme.transitions.create('width'),
+//     width: '100%',
+//     [theme.breakpoints.up('md')]: {
+//       width: '20ch',
+//     },
+//   },
+// }));
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -156,8 +156,8 @@ export default function Navbar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box  sx={{ flexGrow: 1 }}>
+      <AppBar className='container-navbar' position="static">
         <Toolbar className='toolbar'>
             <Box className='ham-search'>
                 <IconButton
@@ -169,27 +169,28 @@ export default function Navbar() {
                 >
                     <MenuIcon />
                 </IconButton>
+                    <SearchIcon />
                 <Search>
                     <SearchIconWrapper>
-                    <SearchIcon />
                     </SearchIconWrapper>
-                    <StyledInputBase
+                    {/* <StyledInputBase
                     placeholder="Search…"
                     inputProps={{ 'aria-label': 'search' }}
-                    />
+                    /> */}
                 </Search>
             </Box>
-            <Box>
-                <Typography
+            <Box className='title'>
+                <img className='logo' src='https://cdn.discordapp.com/attachments/998343174818889748/998786396615622846/MY-INDUSTRIAL-HOME.png'/>
+                {/* <Typography
                     variant="h6"
                     noWrap
                     component="div"
                     sx={{ display: { xs: 'none', sm: 'block' } }}
                 >
                     My Industrial Home
-                </Typography>
+                </Typography> */}
             </Box>
-            <Box>
+            <Box className='icons'>
                 <Box sx={{ flexGrow: 1 }} />
                 <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                     <IconButton size="large" aria-label="show 4 new mails" color="inherit">
