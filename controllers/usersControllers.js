@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken')
 
 const usersControllers = {
     signUpUser: async (req, res) => {
-        let { firstName, lastName, email, password, avatar, country, from } = req.body.userData
+        let { firstName, lastName, email, password, country, from } = req.body.userData
         try {
             const userExist = await User.findOne({ email })
             const verification = false
