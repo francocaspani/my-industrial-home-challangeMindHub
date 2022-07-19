@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap+Condensed&display=swap');
+
+*{
+    font-family: 'Asap Condensed', sans-serif;
+}
+.mainContainer{
+    height: 55vh;
+    background-color: #4D4D4D;
+}
+
+.titleInput{
+    color: white;
+    font-size: 1.3rem;
+    margin: 0 0 1rem 0;
+    padding: 15px;
+}
+
+.everyTitle{
+    font-size: 1.3rem;
+}
+
+.containerInfo{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.containerFooter p {
+    color: white;
+}
+
+.everyContainer{
+    /* background-color: rgba(44, 35, 30, 0.873); */
+    width: 14rem;   /* o  23% o 24vw */
+    height: 15rem;  /* o 28vh */
+    border-radius: 5%;
+}
+
+.containerFooter{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+
+.everyImage{
+    margin: 0 .5rem;
+}
+
+.icon{
+    margin: 0 .3rem;
+}
+
+.containerPayments{
+    flex-grow: 1;
+} 
+
+.rights{
+    flex-grow: 1;
+}
+
+.socialMedias{
+    flex-grow: 1.1;
+}
+
+.infoFooter{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.infoFooter a {
+    text-decoration: none;
+    color: white;
+    padding: .3rem;
+}
+
+.infoContact{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.containerPayments img{
+    color: white;
+}
