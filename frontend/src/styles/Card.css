@@ -1,0 +1,21 @@
+.ctnCard{
+ display: flex;
+ inline-size: auto;
+ margin: .3rem;
+}
+.css-1ri6ub7-MuiPaper-root-MuiCard-root{
+    min-width: 18vw;
+}
+.ctnContent{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.css-1t6e9jv-MuiCardActions-root{
+    justify-content: end;
+    margin: 0;
+    padding: 0;
+}
+.css-46bh2p-MuiCardContent-root{
+    padding: 10px 0px 2px 10px;
+}
