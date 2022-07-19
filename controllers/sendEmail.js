@@ -20,7 +20,7 @@ const sendEmail = async (email, uniqueString, firstName) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'francocaspani.dev@gmail.com',
+            user: 'myindustrialh@gmail.com',
             type: 'OAuth2',
             clientId: process.env.GOOGLE_CLIENTID,
             clientSecret: process.env.GOOGLE_CLIENTSECRET,
