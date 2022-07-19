@@ -4,8 +4,8 @@ const productSchema = new mongoose.Schema({
     name: { type: String, required: true },
     detail: { type: String, required: true },
     img: { type: String, required: true },
-    left: { type: Number, required: true },
-    bottom: { type: Number, required: true },
+    left: { type: Number },
+    bottom: { type: Number },
     price: { type: Number },
     ambient: { type: mongoose.Types.ObjectId, ref: 'ambient' },
     rating: { type: Array },
@@ -16,7 +16,8 @@ const productSchema = new mongoose.Schema({
         rating: {type: Number}
     }],
     size: { type: String },
-    hashtags: { type: Array }
+    hashtags: { type: Array },
+    stock: { type: Number }
 })
 
 const Product = mongoose.model('product', productSchema)
