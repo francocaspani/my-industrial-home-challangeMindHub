@@ -1,0 +1,9 @@
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ham-search {
+    display: flex;
+    width: fit-content;
+}
