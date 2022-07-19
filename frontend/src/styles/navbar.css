@@ -1,0 +1,26 @@
+.container-navbar {
+    position: fixed !important;
+    background-color: black !important;
+    opacity: 70%;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    /* background-color: black; */
+    /* opacity: 30%; */
+}
+
+.ham-search {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+}
+
+.logo {
+    width: 13%;
+}
+
+.icons {
+}
+
