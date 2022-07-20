@@ -7,8 +7,6 @@
 .toolbar {
     display: flex;
     justify-content: space-between;
-    /* background-color: black; */
-    /* opacity: 30%; */
 }
 
 .ham-search {
@@ -19,11 +17,54 @@
 
 .logo {
     width: 10rem;
-    /* margin-left: 3rem; */
 }
 
-/* .icons {
-} */
+.search-container {
+    height: 25vh;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.search-input {
+    width: 30%;
+    margin: auto;
+}
+
+.links {
+    text-decoration: none;
+    color: rgb(66, 64, 64);
+}
+
+.search-product {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 15rem;
+    padding-bottom: 2rem;
+}
+
+.img-search {
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
+}
+
+.name-search {
+    font-size: 1rem;
+    padding: .5rem;
+}
+
+.price-search {
+    font-size: 1rem;
+}
+
+.drawer {
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: wrap;
+}
 
 @media(max-width: 900px) {
     .logo {

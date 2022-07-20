@@ -14,7 +14,7 @@ const productsReducer = (state = initialState, action) => {
                 productsFiltered: action.payload
             }
         case 'filterProductsByName':
-            const filtered = state.products.filter(products => products.name.toLowerCase().startsWith(action.payload.trim().toLowerCase()))
+            const filtered = state.products.filter(products => products.name.toLowerCase().includes(action.payload.trim().toLowerCase()))
             return {
                 ...state,
                 productsFiltered : filtered
