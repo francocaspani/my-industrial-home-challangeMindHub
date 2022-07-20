@@ -4,7 +4,7 @@
     font-family: 'Asap Condensed', sans-serif;
 }
 .mainContainer{
-    height: 55vh;
+    height: 35vh;
     background-color: #4D4D4D;
 }
 
@@ -23,7 +23,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 2rem 0;
+    margin: 1rem 0;
 }
 
 .containerFooter p {
@@ -33,7 +33,7 @@
 .everyContainer{
     /* background-color: rgba(44, 35, 30, 0.873); */
     width: 14rem;   /* o  23% o 24vw */
-    height: 15rem;  /* o 28vh */
+    height: 10rem;  /* o 28vh */
     border-radius: 5%;
 }
 
