@@ -1,18 +1,23 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+// import "swiper/css";
+// import "swiper/css/pagination";
+// import "swiper/css/navigation";
 
 import "../styles/carouselRooms.css";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
+import {useSelector} from "react-redux";
+// import ambientActions from "../redux/actions/ambientActions";
 
 export default function CarouselRooms() {
+  const ambient= useSelector((store) => store.ambientsReducer.ambients)
+  console.log(ambient)
+
   return (
     <>
       <Swiper
@@ -29,8 +34,13 @@ export default function CarouselRooms() {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-
-        <SwiperSlide>Slide 1</SwiperSlide>
+        {ambient.map(eachambient =>
+          <SwiperSlide key={eachambient.id} style={{ backgroundImage: `url("${eachambient.img}")`, backgroundSize: "cover" }}>
+            <div>
+              <p>{eachambient.name}</p>
+            </div>
+          </SwiperSlide>
+        )}
       </Swiper>
     </>
   );
