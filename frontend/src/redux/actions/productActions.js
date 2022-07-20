@@ -7,6 +7,7 @@ const productActions = {
             try {
                 const res = await axios.get(`${urlBackend}/products`)
                 dispatch({ type: 'getProducts', payload: res.data.response.products })
+                return res
             } catch (error) {
                 console.log(error)
             }

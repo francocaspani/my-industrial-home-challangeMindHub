@@ -8,11 +8,12 @@ import SignUp from '../src/components/SignUp'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ambientActions from '../src/redux/actions/ambientActions'
-import productActions from '../src/redux/actions/productActions'
+import productActions from './redux/actions/productActions'
 import usersActions from './redux/actions/userActions';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+
 
 export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
 
@@ -45,6 +46,10 @@ function App() {
     }
   }, [])
   
+  // useEffect(()=>{
+  //   dispatch(productActions.getProducts()) 
+  //   // eslint-disable-next-line 
+  // },[])
 
   return (
     <div className="App">
