@@ -16,6 +16,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import '../styles/navbar.css'
+import { Link as LinkRouter } from "react-router-dom"
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -98,8 +99,12 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <LinkRouter to='/signin'> 
+      <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
+      </LinkRouter>
+      <LinkRouter to='/signup'> 
+      <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
+      </LinkRouter>
     </Menu>
   );
 
@@ -180,15 +185,7 @@ export default function Navbar() {
                 </Search>
             </Box>
             <Box className='title'>
-                <img className='logo' src='https://cdn.discordapp.com/attachments/998343174818889748/998786396615622846/MY-INDUSTRIAL-HOME.png'/>
-                {/* <Typography
-                    variant="h6"
-                    noWrap
-                    component="div"
-                    sx={{ display: { xs: 'none', sm: 'block' } }}
-                >
-                    My Industrial Home
-                </Typography> */}
+                <img className='logo' src='https://media.discordapp.net/attachments/998343174818889748/999050414328647870/MY-INDUSTRIAL-HOME-black.png'/>
             </Box>
             <Box className='icons'>
                 <Box sx={{ flexGrow: 1 }} />
