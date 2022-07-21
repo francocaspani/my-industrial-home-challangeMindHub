@@ -28,7 +28,7 @@ const productControllers = {
         })
     },
     addProduct: async (req, res) => {
-        const { name, detail, img, price, size, hashtags } = req.body
+        const { name, detail, img, price, size, hashtags, stock } = req.body
         let product
         let error = null
         try {
@@ -38,7 +38,8 @@ const productControllers = {
                 img,
                 price,
                 size,
-                hashtags
+                hashtags,
+                stock
             }).save()
         } catch (err) { error = err }
         res.json({
