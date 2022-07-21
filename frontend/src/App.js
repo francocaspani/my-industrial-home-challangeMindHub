@@ -13,7 +13,7 @@ import usersActions from './redux/actions/userActions';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-
+import Favorites from "./pages/Favorites"
 
 export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
 
@@ -56,6 +56,7 @@ function App() {
       <Navbar />
       <Routes location={location} key={location.pathname}>
         <Route path='/home' element={<Index />} />
+        <Route path='/Favorites' element={<Favorites />} />
         <Route path='/' element={<Index />} />
         <Route path='/*' element={<Index />} />
         <Route path='/signin' element={<SignIn/>} />

@@ -195,6 +195,7 @@ export default function Navbar() {
                         <ShoppingCartIcon />
                     </Badge>
                     </IconButton>
+                    <LinkRouter to={"/Favorites"} >
                     <IconButton
                     size="large"
                     aria-label="show 17 new notifications"
@@ -204,6 +205,7 @@ export default function Navbar() {
                         <FavoriteIcon />
                     </Badge>
                     </IconButton>
+                      </LinkRouter>
                     <IconButton
                     size="large"
                     edge="end"

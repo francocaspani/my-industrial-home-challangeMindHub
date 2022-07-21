@@ -140,7 +140,7 @@ export default function Card({ product }) {
           >
             <Box sx={style} >
               <img className='imageModal' src={product.img} alt="product imagee" />
-              <Box sx={{ margin: "1rem" }}>
+              <Box sx={{ margin: "1rem" ,display:"flex",flexDirection:"column",justifyContent:"space-around"}}>
                 <Typography sx={{ fontSize: "2rem" }} gutterBottom variant="h4" component="div">
                   {product.name} {/*  name producto */}
                 </Typography>
