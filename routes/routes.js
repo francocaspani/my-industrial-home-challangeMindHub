@@ -33,7 +33,7 @@ Router.route('/productsByAmbient/:id')
 // .post(passport.authenticate('jwt',{ session: false}),handleLikes)
 
 const usersControllers = require('../controllers/usersControllers');
-const {signUpUser, logInUser, getUsers, verifyEmail, verifyToken} = usersControllers
+const {signUpUser, logInUser, getUsers, verifyEmail, verifyToken, handleFavourites} = usersControllers
 
 Router.route('/auth/signup')
 .post(validator,signUpUser)
@@ -49,6 +49,9 @@ Router.route('/verify/:uniqueString')
 
 Router.route('/auth/verifytoken')
 .get(passport.authenticate('jwt',{ session: false}), verifyToken)
+
+Router.route('/favourite/:id')
+.post(passport.authenticate('jwt',{ session: false}),handleFavourites)
 
 const reviewsControllers = require('../controllers/reviewsControllers');
 const {addReview, modifyReview, deleteReview} = reviewsControllers

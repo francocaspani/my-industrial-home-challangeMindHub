@@ -197,7 +197,52 @@ const usersControllers = {
                 message: 'Please log in again'
             })
         }
-    }
+    },
+   handleFavourites: async (req, res) => {
+            const idUser = req.user.id
+            const idProduct = req.params.id
+            let user
+            try {
+                user = await User.find({ _id: idUser })
+                user = user[0]
+                if (user.favourite.length > 0) {
+                    if (user.favourite.indexOf(idProduct) === -1) {
+                        user.favourite.push(idProduct)
+                        await user.save()
+                        res.json({
+                            response: { user },
+                            success: true,
+                            message: 'Added to favourites'
+                        })
+                    } else {
+                        const index = user.favourite.indexOf(idProduct)
+                        user.favourite.splice(index, 1)
+                        await user.save()
+                        res.json({
+                            response: { user },
+                            success: true,
+                            message: 'Removed from favourites'
+                        })
+                    }
+                } else {
+                    user.favourite.push(idProduct)
+                    await user.save()
+                    res.json({
+                        response: { user },
+                        success: true,
+                        message: 'Added to favourites'
+                    })
+                }
+            } catch (error) {
+                console.log(error)
+                res.json({
+                    response: 'Error',
+                    success: false,
+                    message: 'Something went wrogn, please try again'
+                })
+            }
+    
+        }
 }
 
 module.exports = usersControllers
