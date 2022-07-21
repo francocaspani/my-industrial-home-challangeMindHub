@@ -27,9 +27,6 @@ export default function Product(props) {
     }, [id])
     console.log(id)
 
-    // const products = useSelector(store => store.productReducer.products)
-    // console.log(products)
-
     const card = useSelector(store => store.productsReducer.product)
     console.log(card)
 
@@ -53,16 +50,16 @@ export default function Product(props) {
 
                         </Card>
                         <Box sx={{ width: 500, marginTop: '2rem' }}>
-                            <Card>
+                            <Card sx={{height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                                 <Typography variant="body2" color="text.secondary">
-                                    {card.size}
+                                Sizes: {card.size}
                                 </Typography>
                             </Card>
                             <Box>
                                 <Box sx={{ width: 500, marginTop: '2rem', marginBottom: '2rem' }}>
                                     <Card sx={{ minHeight: '8rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
                                         <Typography variant="body2" color="text.secondary">
-                                            Opinions
+                                            Opinions Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum perspiciatis et ab eaque, nemo totam cum molestiae? Odio incidunt ratione harum, quam voluptatum sint, ipsam accusamus iusto neque quasi nobis!
                                         </Typography>
                                     </Card>
                                 </Box>
@@ -72,12 +69,12 @@ export default function Product(props) {
 
 
 
-                    <Box sx={{ display: 'flex', justifyConten: 'center', alignItems: 'center', flexDirection: 'column', paddingTop: '13rem', width: 500, }}>
+                    <Box sx={{ display: 'flex', justifyConten: 'center', alignItems: 'center', flexDirection: 'column', paddingTop: '15rem', width: 500, }}>
                         <Typography gutterBottom variant="h5" component="div">
                             {card.name}
                         </Typography>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Typography sx={{ marginRight: '2rem' }}>Price: $ 120 </Typography>
+                            <Typography sx={{ marginRight: '2rem' }}>Price: $ {card.price} </Typography>
                             <Stack sx={{ marginLeft: '2rem' }} spacing={1}>
                                 <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
                             </Stack>
