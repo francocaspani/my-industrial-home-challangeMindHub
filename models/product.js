@@ -18,7 +18,8 @@ const productSchema = new mongoose.Schema({
     }],
     size: { type: String },
     hashtags: { type: Array },
-    stock: { type: Number }
+    stock: { type: Number },
+    extraImg: {type: Array}
 })
 
 const Product = mongoose.model('product', productSchema)
