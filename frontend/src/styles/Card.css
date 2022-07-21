@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
    }
-   .css-bhp9pd-MuiPaper-root-MuiCard-root {
+   .css-bhp9pd-MuiPaper-root-MuiCard-root {  /*CARD */
        width: 20rem !important;
        height: 31rem !important;
        display: flex !important;
@@ -51,7 +51,7 @@
       margin-bottom: 15px;
       padding-bottom: 15px;
   }
-  .buttonCarrito {
+  .buttonModal {
     margin-top: 5px;
     margin-left:5px ;
     width: 100%;

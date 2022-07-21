@@ -58,7 +58,7 @@ export default function MediaCard({ product }) {
           <CardActions className='buttonsCards' sx={{justifyContent:"center"}} >
 
             {/* BOTONES */}
-            <Button sx={{size:"small",color:'#000000'}} className='buttonloco' onClick={handleOpen}>Quickshop</Button>
+            <Button sx={{size:"small",color:'#000000'}} className='buttonModal' onClick={handleOpen}>Quickshop</Button>
            {/* MODAL */}
             <Modal
               open={open}
