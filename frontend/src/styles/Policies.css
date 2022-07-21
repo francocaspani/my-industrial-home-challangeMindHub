@@ -1,0 +1,41 @@
+.cardPolicies{
+    background-color: #6a5143a0;
+    margin-top: 1rem;
+}
+
+.ulListPolicies{
+    list-style: inside;
+}
+
+.liPolicies{
+    padding: .5rem;
+}
+
+.olListPolicies{
+    padding-left:10px ;
+}
+
+.mainContainerPolicies{
+    display: flex;
+    flex-grow: 1;
+    padding-top:6rem;
+    padding-bottom: 2rem;
+}
+
+.titlePolicies{
+    text-align: center;
+}
+
+.subtitlePolicies{
+    padding: 1rem 0;
+    font-size: 1.4rem;
+    letter-spacing: 0.05rem;
+}
+
+.secondSubtitlePolicies{
+     font-size: 1.3rem;
+}
+
+.textPolicies, .liPolicies{
+    font-size: 1.1rem;
+}
