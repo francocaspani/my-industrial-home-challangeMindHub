@@ -10,37 +10,42 @@ import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import Carousel from 'react-grid-carousel'
-// import { useParams } from 'react-router-dom'
-// import { useDispatch } from 'react-redux';
-// import productActions from '../redux/actions/productActions'
-// import { useSelector } from 'react-redux';
-// import { useEffect } from 'react';
+import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import productActions from '../redux/actions/productActions'
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 
 
-export default function Product() {
+export default function Product(props) {
 
-    // const { id } = useParams()
-    // const dispatch = useDispatch()
-    // useEffect(() => {
-    //     dispatch(productActions.getOneProduct(id))
-    // }, [id])
+    const { id } = useParams()
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(productActions.getOneProduct('62d6cf246b9ba7fd1f6c1478'))
+    }, [id])
+    console.log(id)
 
-    // const card = useSelector(store => store.productsReducer.getOneProduct)
-    // console.log(card)
+    // const products = useSelector(store => store.productReducer.products)
+    // console.log(products)
+
+    const card = useSelector(store => store.productsReducer.product)
+    console.log(card)
 
     return (
         <>
-            <Box >
+            <Box key={card._id}>
+
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
 
                     <Box sx={{ paddingTop: '8rem', marginRight: '10rem' }}>
-                        <Card  sx={{ width: 500 }}>
+                        <Card sx={{ width: 500 }}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
                                     height="500"
-                                    image="https://i.imgur.com/xUwiPZV.jpg"
+                                    image={card.img}
                                     alt="product"
                                 />
                             </CardActionArea>
@@ -50,8 +55,7 @@ export default function Product() {
                         <Box sx={{ width: 500, marginTop: '2rem' }}>
                             <Card>
                                 <Typography variant="body2" color="text.secondary">
-                                    Informacion y medidas del producto
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, id est dicta mollitia accusamus debitis quia eius ut. Modi error quasi quae? Aut, doloremque amet? Recusandae error incidunt tempora ullam?
+                                    {card.size}
                                 </Typography>
                             </Card>
                             <Box>
@@ -68,15 +72,13 @@ export default function Product() {
 
 
 
-
-
                     <Box sx={{ display: 'flex', justifyConten: 'center', alignItems: 'center', flexDirection: 'column', paddingTop: '13rem', width: 500, }}>
                         <Typography gutterBottom variant="h5" component="div">
-                            Product name
+                            {card.name}
                         </Typography>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Typography sx={{marginRight: '2rem'}}>Price: $ 120 </Typography>
-                            <Stack sx={{marginLeft: '2rem'}} spacing={1}>
+                            <Typography sx={{ marginRight: '2rem' }}>Price: $ 120 </Typography>
+                            <Stack sx={{ marginLeft: '2rem' }} spacing={1}>
                                 <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
                             </Stack>
                         </Box>
@@ -84,12 +86,12 @@ export default function Product() {
                             <CardContent>
 
                                 <Typography variant="body2" color="text.secondary">
-                                    Description.... Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio quasi, doloribus quibusdam id ullam nobis sequi aliquam alias quas non cumque tempore quisquam sed quos earum at, maiores dolores dolore.
+                                    {card.detail}
                                 </Typography>
                             </CardContent>
                         </Box>
                         <Box>
-                            <Button sx={{ width: '13rem', margin: '2rem', backgroundColor: '#7c5e49' }} variant="contained" disableElevation>
+                            <Button sx={{ width: '13rem', margin: '2rem', backgroundColor: '#7c5e49', color: 'white' }} color="success" variant="contained" disableElevation>
                                 <AddShoppingCartIcon />
                                 ⠀⠀Add to cart
                             </Button>
@@ -108,18 +110,19 @@ export default function Product() {
                 </Box>
 
                 <Box sx={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
-                    <Carousel cols={4} rows={1} gap={10} loop>
+                    <Carousel cols={4} rows={1} gap={10} loop autoplay={5000} mobileBreakpoint={200}>
+
                         <Carousel.Item>
-                            <img height='300rem' width="400rem" src="https://i.imgur.com/4HqEtE1.jpg" />
+                            <img height='200rem' width="300rem" src="https://i.imgur.com/4HqEtE1.jpg" />
                         </Carousel.Item>
                         <Carousel.Item>
-                            <img height='300rem' width="400rem" src="https://i.imgur.com/1BELyvw.jpg" />
+                            <img height='200rem' width="300rem" src="https://i.imgur.com/1BELyvw.jpg" />
                         </Carousel.Item>
                         <Carousel.Item>
-                            <img height='300rem' width="400rem" src="https://i.imgur.com/VymuMhW.jpg" />
+                            <img height='200rem' width="300rem" src="https://i.imgur.com/VymuMhW.jpg" />
                         </Carousel.Item>
                         <Carousel.Item>
-                            <img height='300rem' width="400rem" src="https://i.imgur.com/UlPLPyf.jpg" />
+                            <img height='200rem' width="300rem" src="https://i.imgur.com/UlPLPyf.jpg" />
                         </Carousel.Item>
                     </Carousel>
                 </Box>

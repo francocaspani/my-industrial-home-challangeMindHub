@@ -13,6 +13,7 @@ import usersActions from './redux/actions/userActions';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import Product from './components/ProductDetails';
 
 export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
 
@@ -55,6 +56,7 @@ function App() {
         <Route path='/*' element={<Index />} />
         <Route path='/signin' element={<SignIn/>} />
         <Route path='/signup' element={<SignUp/>} />
+        <Route path='/product' element={<Product/>} />
       </Routes>
       <Footer />
       <ToastContainer />
