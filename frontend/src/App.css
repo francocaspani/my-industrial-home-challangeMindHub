@@ -44,3 +44,10 @@
     transform: rotate(360deg);
   }
 }
+.containerIndex{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}

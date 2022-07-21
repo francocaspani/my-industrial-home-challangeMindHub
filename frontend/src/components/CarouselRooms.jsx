@@ -3,10 +3,10 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-// import "swiper/css";
-// import "swiper/css/pagination";
-// import "swiper/css/navigation";
-
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
 import "../styles/carouselRooms.css";
 
 // import required modules
@@ -16,15 +16,17 @@ import {useSelector} from "react-redux";
 
 export default function CarouselRooms() {
   const ambient= useSelector((store) => store.ambientsReducer.ambients)
-  console.log(ambient)
-
+  
   return (
-    <>
+    <div className="containerCarouselRooms">
+     <div className="titleCaruselRooms">
+      <p>Discover our Rooms</p>
+      </div>
       <Swiper
-        spaceBetween={30}
+        spaceBetween={20}
         centeredSlides={true}
         autoplay={{
-          delay: 600,
+          delay: 6000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -35,13 +37,13 @@ export default function CarouselRooms() {
         className="mySwiper"
       >
         {ambient.map(eachambient =>
-          <SwiperSlide key={eachambient.id} style={{ backgroundImage: `url("${eachambient.img}")`, backgroundSize: "cover" }}>
-            <div>
+          <SwiperSlide className='imageRoom' key={eachambient._id} style={{ backgroundImage: `url("${eachambient.img}")`, backgroundSize: "cover" }}>
+            <div className="roomName">
               <p>{eachambient.name}</p>
             </div>
           </SwiperSlide>
         )}
       </Swiper>
-    </>
+    </div>
   );
 }
