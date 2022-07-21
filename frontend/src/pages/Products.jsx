@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../components/Card';
+import MediaCard from '../components/MediaCard';
 import { useDispatch, useSelector } from 'react-redux';
 import Noresults from '../components/Noresults';
 import { useState, useEffect } from 'react';
@@ -19,7 +19,7 @@ function Products() {
   return (
     <>
     <div className='ctnCard'>
-    {producto?.length > 0 ? producto.map(product => <Card  product={product} />) : (<Noresults/>)}
+    {producto?.length > 0 ? producto.map(product => <MediaCard  product={product} />) : (<Noresults/>)}
     </div>
     </>
   )
