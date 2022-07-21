@@ -14,9 +14,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import Favorites from "./pages/Favorites"
+import Policies from './pages/Policies';
+import Product from './components/ProductDetails';
 
 export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
-
+//export const urlBackend = 'http://localhost:4000/api'
 
 
 function App() {
@@ -61,6 +63,8 @@ function App() {
         <Route path='/*' element={<Index />} />
         <Route path='/signin' element={<SignIn/>} />
         <Route path='/signup' element={<SignUp/>} />
+        <Route path='/policies' element={<Policies/>}/>
+        <Route path='/product' element={<Product/>} />
       </Routes>
       <Footer />
       <ToastContainer />

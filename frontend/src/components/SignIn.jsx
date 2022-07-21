@@ -36,9 +36,9 @@ function SignIn() {
 
   return (
     <div className='main-sign'>
-        <img className='img-sign' src='https://img.freepik.com/fotos-premium/loft-estilo-industrial-balcon-interior-3d-render_269031-362.jpg?w=2000'/>
+        <img alt='img-sign' className='img-sign' src='https://img.freepik.com/fotos-premium/loft-estilo-industrial-balcon-interior-3d-render_269031-362.jpg?w=2000'/>
         <div className='container-form'>
-            <img className='logo-sign' src='https://cdn.discordapp.com/attachments/998343174818889748/998786396615622846/MY-INDUSTRIAL-HOME.png'/>
+            <img alt='img-sign' className='logo-sign' src='https://cdn.discordapp.com/attachments/998343174818889748/998786396615622846/MY-INDUSTRIAL-HOME.png'/>
             <div className="container-sign">
                 <div className="form">
                     <form onSubmit={HandleSubmit}>

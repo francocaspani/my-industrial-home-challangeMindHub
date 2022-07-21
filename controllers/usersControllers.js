@@ -38,7 +38,6 @@ const usersControllers = {
                     lastName,
                     email,
                     password: [hashPassword],
-                    avatar,
                     country,
                     from: [from],
                     verification,
