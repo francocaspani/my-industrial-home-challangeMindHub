@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,50 +16,106 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 import '../styles/navbar.css'
 import { Link as LinkRouter } from "react-router-dom"
-
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-// const StyledInputBase = styled(InputBase)(({ theme }) => ({
-//   color: 'inherit',
-//   '& .MuiInputBase-input': {
-//     padding: theme.spacing(1, 1, 1, 0),
-//     // vertical padding + font size from searchIcon
-//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-//     transition: theme.transitions.create('width'),
-//     width: '100%',
-//     [theme.breakpoints.up('md')]: {
-//       width: '20ch',
-//     },
-//   },
-// }));
+import { useEffect } from 'react';
+import productActions from '../redux/actions/productActions';
 
 export default function Navbar() {
+
+  const dispatch = useDispatch()
+
+  const [search, setSearch] = React.useState(null);
+  
+  React.useEffect(()=> {
+    dispatch(productActions.filterProductsByName(search))
+    setSearch(search)
+  }, [search])
+  
+  const products = useSelector(store => store.productsReducer.productsFiltered)
+
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+  console.log(toggleDrawer)
+  const searcher = (anchor) => (
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      // onClick={toggleDrawer(anchor, false)}
+      // onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <div className="search-container">
+        <input placeholder='Search by name' type="text" id="loginName" className="search-input" onKeyUp={(event) => {setSearch(event.target.value)}} />
+      </div>
+      <div className='drawer'>
+          {
+            (products.length < 21) ? products.map(product => (
+              <div className='search-product'>
+                <img alt='img-search' className='img-search' src={product.img} />
+                <p className='name-search'>{product.name}</p>
+                <p className='price-search'>$ {product.price}</p>
+              </div>
+            )) : <p></p>
+          }
+        </div>
+    </Box>
+  )
+
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {[{to: '/', name:'Home'}, {to: '/', name:'Spaces'}, {to: '/', name:'Products'}, {to: '/', name:'Shop'}, {to: '/', name:'Favs'}].map((text, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton>
+              <LinkRouter className='links' to={text.to}>
+                <ListItemText primary={text.name} />
+              </LinkRouter>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {[{to: '/signin', name:'Log-in'}, {to: '/signup', name:'Sign-up'}].map((text, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton>
+              <LinkRouter className='links' to={text.to}>
+                <ListItemText primary={text.name} />
+              </LinkRouter>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -99,10 +156,10 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <LinkRouter to='/signin'> 
+      <LinkRouter className='links' to='/signin'> 
       <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
       </LinkRouter>
-      <LinkRouter to='/signup'> 
+      <LinkRouter className='links' to='/signup'> 
       <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
       </LinkRouter>
     </Menu>
@@ -131,7 +188,7 @@ export default function Navbar() {
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Shop</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -143,7 +200,7 @@ export default function Navbar() {
             <FavoriteIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>Favs</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -161,7 +218,7 @@ export default function Navbar() {
   );
 
   return (
-    <Box  sx={{ flexGrow: 1 }}>
+    <Box  sx={{ flexGrow: 1, zIndex: '1000' }}>
       <AppBar className='container-navbar' position="static">
         <Toolbar className='toolbar'>
             <Box className='ham-search'>
@@ -171,21 +228,51 @@ export default function Navbar() {
                     color="inherit"
                     aria-label="open drawer"
                     sx={{ mr: 2 }}
+                    onClick={toggleDrawer('left', true)}
                 >
                     <MenuIcon />
                 </IconButton>
+                <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="open drawer"
+                    sx={{ mr: 2 }}
+                    onClick={toggleDrawer('top', true)}
+                >
                     <SearchIcon />
-                <Search>
-                    <SearchIconWrapper>
-                    </SearchIconWrapper>
-                    {/* <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ 'aria-label': 'search' }}
-                    /> */}
-                </Search>
+                </IconButton>
+                <div>
+                  {['left'].map((anchor) => (
+                    <React.Fragment key={anchor}>
+                      <Button sx={{display: 'none'}} onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                      <Drawer
+                        anchor={anchor}
+                        open={state[anchor]}
+                        onClose={toggleDrawer(anchor, false)}
+                      >
+                        {list(anchor)}
+                      </Drawer>
+                    </React.Fragment>
+                  ))}
+                </div>
+                <div>
+                  {['top'].map((anchor) => (
+                    <React.Fragment key={anchor}>
+                      <Button sx={{display: 'none'}} onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                      <Drawer
+                        anchor={anchor}
+                        open={state[anchor]}
+                        onClose={toggleDrawer(anchor, false)}
+                      >
+                        {searcher(anchor)}
+                      </Drawer>
+                    </React.Fragment>
+                  ))}
+                </div>
             </Box>
             <Box className='title'>
-                <img className='logo' src='https://media.discordapp.net/attachments/998343174818889748/999050414328647870/MY-INDUSTRIAL-HOME-black.png'/>
+                <img alt='logo' className='logo' src='https://media.discordapp.net/attachments/998343174818889748/999050414328647870/MY-INDUSTRIAL-HOME-black.png'/>
             </Box>
             <Box className='icons'>
                 <Box sx={{ flexGrow: 1 }} />
@@ -237,3 +324,6 @@ export default function Navbar() {
     </Box>
   );
 }
+
+
+
