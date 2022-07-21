@@ -19,7 +19,7 @@ const productControllers = {
         let error = null
         try {
             product = await Product.findOne({ _id: id })
-                .populate('ambient').populate('review.userId', { firstName: 1, lastName: 1, avatar: 1 })
+                // .populate('ambient').populate('review.userId', { firstName: 1, lastName: 1, avatar: 1 })
         } catch (err) { error = err }
         res.json({
             response: error ? 'ERROR' : { product },
