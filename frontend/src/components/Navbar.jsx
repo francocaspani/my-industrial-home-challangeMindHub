@@ -91,7 +91,7 @@ export default function Navbar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {[{to: '/', name:'Home'}, {to: '/', name:'Spaces'}, {to: '/', name:'Products'}, {to: '/', name:'Shop'}, {to: '/', name:'Favs'}].map((text, index) => (
+        {[{to: '/', name:'Home'}, {to: '/', name:'Spaces'}, {to: '/products', name:'Products'}, {to: '/', name:'Shop'}, {to: '/Favorites', name:'Favs'}].map((text, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton>
               <LinkRouter className='links' to={text.to}>
