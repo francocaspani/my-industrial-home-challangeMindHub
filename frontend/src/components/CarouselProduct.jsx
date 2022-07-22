@@ -15,7 +15,7 @@ export default function CarouselProduct() {
             {products.map(productdetails =>
                 <Carousel.Item key={productdetails._id}>
                     <Card className="carousel">
-                    <img className="img-caro" alt={productdetails.name} height='300rem' width="100%" src={productdetails.img} />
+                    <img className="img-caro" alt={productdetails.name} height='200rem' width="100%" src={productdetails.img} />
                     <Typography>{productdetails.name}</Typography>
                     </Card>
                 </Carousel.Item>

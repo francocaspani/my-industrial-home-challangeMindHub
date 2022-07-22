@@ -1,3 +1,14 @@
+@media (min-width: 1500px){
+    .sc-gzVnrw{
+        width: 80rem;
+    }
+}
+@media (min-width: 1500px){
+    .sc-bZQynM{
+        width: 80rem;
+    }
+}
+
 
 @media (max-width: 1500px){
     .sc-gzVnrw {
@@ -25,23 +36,27 @@
 @media (max-width: 1000px){
     .sc-gzVnrw {
         width: 50rem;
+        
     }
 }
 
 @media (max-width: 1000px){
     .sc-bZQynM {
         width: 50rem;
+        
     }
 }
 @media (max-width: 840px){
     .sc-gzVnrw {
         width: 40rem;
+        
     }
 }
 
 @media (max-width: 840px){
     .sc-bZQynM {
         width: 40rem;
+        
     }
 }
 

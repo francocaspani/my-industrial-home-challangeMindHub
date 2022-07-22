@@ -8,9 +8,9 @@ import { useSelector, useDispatch } from "react-redux";
 import reviewActions from '../redux/actions/reviewActions';
 import { Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import SendIcon from '@mui/icons-material/Send'
+import ModifyDeleteReview from '../components/ModifyDeleteReview'
+import { Link as LinkRouter } from 'react-router-dom'
 
 const style = { // estilo para la apertura de la imagen del producto desde la card
     position: 'absolute',
@@ -24,12 +24,12 @@ const style = { // estilo para la apertura de la imagen del producto desde la ca
 };
 
 export default function RatingReview({ product, handleReload }) {
-    const user = useSelector(store => store.usersReducer.userData)
+
     const [files, setFiles] = useState()
     const [rating, setRating] = useState(0)
     const dispatch = useDispatch()
-    const [reload, setReload] = useState(false)
     const token = localStorage.getItem('token')
+    const user = useSelector(store => store.usersReducer.userData)
 
     const [open, setOpen] = React.useState(false); // variables para el modal
     const handleOpen = () => setOpen(true);
@@ -60,32 +60,12 @@ export default function RatingReview({ product, handleReload }) {
 
     }
 
-    const reviews = [{
-
-    }]
-
-    async function handleModify(comment, token) {
-        // eslint-disable-next-line
-        const res = await dispatch(reviewActions.modifyComment(comment, token))
-        setReload(!reload)
-        console.log(res)
-    }
-
-
-    async function handleDelete(info, commentId, token) {
-        await dispatch(reviewActions.deleteComment(info, commentId, token))
-            .then(product.getOneProduct)
-        // console.log(id)
-    }
-
-
-
     const card = useSelector(store => store.productsReducer.product)
     console.log(card)
 
 
     return (
-        <div className='reviewContainer'>
+        <Box className='reviewContainer'>
             <span className='titleReviewContainer'>
                 <Typography>Ratings and Reviews</Typography>
                 <span onClick={handleOpen}><Typography>Write a review</Typography></span>
@@ -94,14 +74,14 @@ export default function RatingReview({ product, handleReload }) {
                     onClose={handleClose}
                 >
                     <Box sx={style} >
-                        <div>
+                        <Box>
                             <h1>White Your Review</h1>
                             <b><h3>{card.name}</h3></b>
-                            <div className='ratingModal'>
+                            <Box className='ratingModal'>
                                 <div>
                                     <img height={100} src={card.img} />
                                 </div>
-                                
+
                                 <Stack spacing={1}>
                                     <span className='ratingSelector'>
                                         <Typography>Product rating</Typography>
@@ -111,8 +91,8 @@ export default function RatingReview({ product, handleReload }) {
                                     </span>
 
                                 </Stack>
-                            </div>
-                            <div className='formBoxReview'>
+                            </Box>
+                            <Box className='formBoxReview'>
                                 <Typography>Share your thoughts with others.</Typography>
                                 <form className='formReview' onSubmit={handleReview}>
                                     <input type="text" placeholder='Review title*' required />
@@ -122,73 +102,31 @@ export default function RatingReview({ product, handleReload }) {
                                     <input type="file" onChange={(event) => setFiles(event.target.files)} />
                                     <button type='submit'>Submit Review</button>
                                 </form>
-                            </div>
-
-
-                        </div>
+                            </Box>
+                        </Box>
                     </Box>
                 </Modal>
-
             </span>
-
-            <div className='ratingBox'>
+            <Box className='ratingBox'>
                 <span className='ratingText'>
-                    <p>4.5 stars</p>
-                    <p>5 Reviews</p>
+                    <Typography>4.5 stars</Typography>
+                    <Typography>5 Reviews</Typography>
                 </span>
                 <Stack spacing={1}>
                     <Rating name="half-rating-read" defaultValue={4.5} precision={0.5} size='large' readOnly />
                 </Stack>
-            </div>
-
-            {/* Aca empieza el mapeo de cada review */}´
-
-            {/* {console.log("+´+´+´+´+ ", reviews)} */}
-
+            </Box>
             {product?.reviews.map((item, index) => {
                 return (
-
-
-                    <div key={index} className='everyReview'>
-                        <div className='imgReview'>
-                            <img height={100} src={item.img} alt='image' />
-                        </div>
-                        <div className='textReview'>
-                            <span className='ratingDateReview'>
-                                <Stack spacing={1}>
-                                    <Rating name="half-rating-read" defaultValue={item.rating} precision={0.5} readOnly />
-                                </Stack>
-                                <p>Fecha review</p>
-                            </span>
-
-                            {/* {user && user.id === item.userId._id ? */}
-                            <div className='comments'>
-                                <h2 suppressContentEditableWarning={true} contentEditable className='titleReview'>{item.titleReview}</h2>
-                                <p suppressContentEditableWarning={true} contentEditable className='descriptionReview'>{item.review}</p>
-                                <div className='comments2'>
-
-
-                                    <Button onClick={() => handleModify(item._id)} sx={{ margin: '.2rem' }} variant="outlined" color="success">
-                                        <EditIcon />
-                                    </Button>
-                                    <Button onClick={() => handleDelete(item._id)} sx={{ margin: '.2rem' }} variant="outlined" color="error">
-                                        <DeleteIcon />
-                                    </Button>
-                                </div>
-
-
-                            </div>
-                            {/* : <div> </div>} */}
-                        </div>
-
-
-                    </div>
+                    <ModifyDeleteReview item={item} handleReload={handleReload} />
                 )
             })}
-
-            {/* hasta aca el mapeo */}
-
-            <Button sx={{ marginLeft: '2rem',backgroundColor: '#4d4d4d' }} onClick={handleOpen} variant="contained" endIcon={<SendIcon />}>Write a review</Button>
-        </div>
+            {user ?
+                <Button sx={{ marginLeft: '2rem', backgroundColor: '#4d4d4d' }} onClick={handleOpen} color="success" variant="contained" endIcon={<SendIcon />}>Write a review</Button>
+                : <Box>
+                    <Box color="success" variant="contained" sx={{borderRadius: '.5rem', color: 'white', marginTop: '2rem', backgroundColor: '#4d4d4d' }}>Initial session to comment</Box>
+                </Box>
+            }
+        </Box>
     )
 }

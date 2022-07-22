@@ -13,9 +13,9 @@ import Carousel from '../components/CarouselProduct'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import productActions from '../redux/actions/productActions'
-import { useSelector } from 'react-redux';
 import { useEffect, useState} from 'react';
 import RatingDetails from '../components/RatingReview'
+
 
 export default function Product(props) {
 
@@ -40,10 +40,10 @@ export default function Product(props) {
         <>
             <Box key={card?._id}>
 
-                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Box className='cards-product-details' sx={{display: 'flex', justifyContent: 'center' }}>
 
-                    <Box sx={{ paddingTop: '8rem', marginRight: '10rem' }}>
-                        <Card sx={{ width: 500 }}>
+                    <Box sx={{ paddingTop: '8rem', margin: '1rem',  }}>
+                        <Card>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
@@ -55,7 +55,7 @@ export default function Product(props) {
 
 
                         </Card>
-                        <Box sx={{ width: 500, marginTop: '2rem' }}>
+                        <Box sx={{ marginTop: '1rem' }}>
                             <Card sx={{height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                                 <Typography variant="body2" color="text.secondary">
                                 Sizes: {card?.size}
@@ -66,7 +66,7 @@ export default function Product(props) {
 
 
 
-                    <Box sx={{ display: 'flex', justifyConten: 'center', alignItems: 'center', flexDirection: 'column', paddingTop: '8rem', width: 500, }}>
+                    <Box sx={{ display: 'flex', justifyConten: 'center', alignItems: 'center', flexDirection: 'column', paddingTop: '8rem', width: 500, margin: '1rem' }}>
                     <Card sx={{ height: 500 , display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                         <Typography gutterBottom variant="h5" component={'div'}>
                             {card?.name}
@@ -81,7 +81,7 @@ export default function Product(props) {
                         <Box>
                             <CardContent>
 
-                                <Typography variant="body2" color="text.secondary">
+                                <Typography sx={{marginTop: '2rem'}} variant="body2" color="text.secondary">
                                     {card?.detail}
                                 </Typography>
                             </CardContent>
@@ -104,7 +104,7 @@ export default function Product(props) {
                 </Box>
                 <Box>
                                 <Box className='box-review' sx={{ marginTop: '2rem', marginBottom: '2rem'}}>
-                                    <Card sx={{width: '60rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
+                                    <Card sx={{width: '50rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
                                         <Typography variant="body2" color="text.secondary">
                                         < RatingDetails product={card} handleReload={handleReload} />
                                         </Typography>

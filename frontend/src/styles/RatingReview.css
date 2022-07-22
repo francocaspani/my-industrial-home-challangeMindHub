@@ -114,23 +114,8 @@
     align-items: center;
 }
 
-@media (max-width: 940px) {
-    .box-review {
-        display: flex;
-        width: 50rem;
-    }
-}
 
-@media (max-width: 800px) {
-    .box-review {
-        display: flex;
-        width: 40rem;
-    }
-}
 
-@media (max-width: 650px) {
-    .box-review {
-        display: flex;
-        width: 30rem;
-    }
+.titlereview {
+    font-size: 1.3rem;
 }
