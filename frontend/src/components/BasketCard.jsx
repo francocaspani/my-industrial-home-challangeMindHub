@@ -34,7 +34,7 @@ function BasketCard({product, reload}) {
 
   return (
     <div className='basket'>
-        <img style={{width: '50px'}} alt='img-basket' src={product.productId.img} />
+        <img style={{width: '50px'}} alt='img-basket' src={product?.productId.img} />
         <div className='basket-name'>
             <p>{product.productId.name}</p>
             <p>$ {product.productId.price}</p>

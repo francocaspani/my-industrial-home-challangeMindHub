@@ -45,7 +45,6 @@ export default function MediaCard({ product }) {
     setProductmodel(event.target.value);
   }
 
-  console.log(product)
   return (
     <>
       <Card>

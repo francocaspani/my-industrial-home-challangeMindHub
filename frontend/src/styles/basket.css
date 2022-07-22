@@ -8,9 +8,10 @@
     flex-direction: column;
     justify-content: space-around;
     background-color: white;
-    margin-top: 4rem;
+    margin: 4rem 0;
     width: 25%;
     height: 15rem;
+    border: 1px solid gray;
 }
 
 .container-basket {
@@ -31,6 +32,7 @@
     flex-direction: column;
     justify-content: space-around;
     height: 3rem;
+    width: 15%;
 }
 
 .basket-amount {
@@ -54,8 +56,34 @@
     align-items: center;
 }
 
-.container-total {
+.container-total, .container-subtotal, .container-shipping{
     display: flex;
-    width: 50%;
+    width: 80%;
     justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.container-total {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.button-finish {
+    margin: .5rem auto;
+    width: 50%;
+    padding: .5rem;
+    background-color: rgb(223, 220, 220);
+}
+
+.button-continue {
+    margin: .5rem auto;
+    width: 50%;
+    padding: .5rem;
+    background-color: rgb(223, 220, 220);
+}
+
+.empty-basket {
+    font-size: 1.5rem;
+    margin-top: 4.5rem;
 }

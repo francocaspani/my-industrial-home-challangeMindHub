@@ -1,7 +1,6 @@
 import React, {useEffect,useState} from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import basketActions from '../redux/actions/basketActions'
-import DeleteIcon from '@mui/icons-material/Delete';
 import BasketCard from '../components/BasketCard'
 import "../styles/basket.css"
 import {Link as LinkRouter } from 'react-router-dom'
@@ -9,10 +8,10 @@ import {Link as LinkRouter } from 'react-router-dom'
 function Basket(props) {
 
     const [basketReload, setBasketReload] = useState(null)
-    const [basket , setBasket] = useState(null)
+    const [basket , setBasket] = useState([])
     const dispatch = useDispatch();
     const user = useSelector(store => store.usersReducer.userData)
-    const userBasket = useSelector(store => store.basketReducer.productsBasket)
+    // const userBasket = useSelector(store => store.basketReducer.productsBasket)
 
     const reload = ()=>{setBasketReload(!basketReload)}
 
@@ -21,32 +20,57 @@ function Basket(props) {
             dispatch(basketActions.getUserBasket()).then(res=>setBasket(res))
         }
       },[basketReload])
+      console.log(basket)
+    //   let prices;
+    //   useEffect(()=>{
+    //     if(basket) {
+    //         console.log(basket)
+    //         prices = basket?.map(product => product.productId.price) 
+    //     }
+    //   },[basket])
+    // // console.log(userBasket)
+    // console.log(basket.length)
 
-    console.log(userBasket)
+    
+    // console.log(prices)
+    // let totalBasket = 0;
+    // function addTotal() {
+    //     for(let i=0; i < prices; i++){
+    //       totalBasket = prices + totalBasket;
+    //     }
+    //     return totalBasket;
+    // }
+    // addTotal()
+    // console.log(totalBasket)
     // const basketload = useSelector(store => store.addToBasket())
 
     return (
         <div className="main-container-basket">
             {/* <h2>Basket</h2> */}
-            <div className='container-basket'>
+            {
+                 basket?.length !== 0 ?
+            (<div className='container-basket'>
                 {
-                     basket && basket?.map(product => (
+                     basket?.map(product => (
                        <BasketCard product={product} reload={reload}/>
                     ))
                 }
-            </div>
+            </div>) : (<div className='container-basket'><p className='empty-basket'>Your basket is empty.</p></div>)
+            }
             <div className='main-container-sub'>
                 <div className='container-subtotal'>
-                    <p>Subtotal</p>
-                    <p>234</p>
+                    <p>Subtotal:</p>
+                    <p>$234</p>
                 </div>
-                <div>Shipping</div>
+                <div className='container-shipping'>Shipping</div>
                 <div className='container-total'>
-                    <h3>Total</h3>
-                    <p>234</p>
+                    <p>Total:</p>
+                    <p>$234</p>
                 </div>
-                <div className='button-finish'>Proceed to checkout</div>
-                <div className='button-continue'>Continue shopping</div>
+                <div className='container-buttons'>
+                    <div className='button-finish'>Proceed to checkout</div>
+                    <div className='button-continue'>Continue shopping</div>
+                </div>
             </div>
         </div>
     )

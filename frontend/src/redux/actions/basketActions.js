@@ -8,7 +8,7 @@ const basketActions = {
         return async(dispatch, getState) => {
             const answer = await axios.get(`${urlBackend}/basket`,{headers: {Authorization: "Bearer "+token}})
             dispatch({type:'getProductsBasket', payload:answer.data.response.basket})
-            console.log(answer.data.response.basket)
+            console.log(answer)
             return answer.data.response.basket
         }
     },
