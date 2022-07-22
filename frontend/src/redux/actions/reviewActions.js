@@ -11,30 +11,27 @@ const reviewActions = {
                 return res
             }
     },
-    modifyComment: (comment, token) => {
+    modifyComment: (review) => {
+        const token = localStorage.getItem('token') 
         return async (dispatch, getState) => {
-            const res = await axios.put(`${urlBackend}/itinerary/comment`, { comment }, {
+            const res = await axios.put(`${urlBackend}/product/review`, { review }, {
                 headers: { 'Authorization': 'Bearer ' + token }
             })
             return res
         }
     },
-    deleteComment: (info, commentId, token) => {
+    deleteComment: (reviewId) => {
+        const token = localStorage.getItem('token') 
+        console.log('+++++', token)
         return async (dispatch, getState) => {
-            const res = await axios.post(`${urlBackend}/itinerary/comment/${commentId}`, {info}, {
-                headers: { 'Authorization': 'Bearer ' + token }
+            const res = await axios.post(`${urlBackend}/review/${reviewId}`, {}, {
+                headers: {'Authorization': `Bearer ${token}`}
             })
             return res
         }
+        
     },
-    replyComment: (comment,commentId, token) => {
-        return async (dispatch, getState) => {
-            const res = await axios.put(`${urlBackend}/itinerary/comment/${commentId}`, {comment}, {
-                headers: { 'Authorization': 'Bearer ' + token }
-            })
-            return res
-        }
-    }
+    
 
 }
 

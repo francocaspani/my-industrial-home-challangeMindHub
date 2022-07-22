@@ -6,6 +6,11 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from "react-redux";
 import reviewActions from '../redux/actions/reviewActions';
+import { Typography } from '@mui/material';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send'
+import ModifyDeleteReview from '../components/ModifyDeleteReview'
+import { Link as LinkRouter } from 'react-router-dom'
 
 const style = { // estilo para la apertura de la imagen del producto desde la card
     position: 'absolute',
@@ -18,27 +23,26 @@ const style = { // estilo para la apertura de la imagen del producto desde la ca
     p: 4,
 };
 
-export default function RatingReview() {
-    const user = useSelector(store => store.usersReducer.userData)
+export default function RatingReview({ product, handleReload }) {
+
     const [files, setFiles] = useState()
     const [rating, setRating] = useState(0)
     const dispatch = useDispatch()
     const token = localStorage.getItem('token')
+    const user = useSelector(store => store.usersReducer.userData)
 
     const [open, setOpen] = React.useState(false); // variables para el modal
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    console.log(rating)
-
-    const id = '62d6cf246b9ba7fd1f6c1478'
+    // console.log(rating)
 
     const handleReview = async (event) => {
-        console.log(files)
+        // console.log(files)
         event.preventDefault()
         const file = await files[0]
         const titleReview = await event.target[0].value
         const review = await event.target[1].value
-        const idProduct = id
+        const idProduct = product._id
 
         const formData = new FormData()
         formData.append('file', file)
@@ -47,85 +51,80 @@ export default function RatingReview() {
         formData.append('idProduct', idProduct)
         formData.append('rating', rating)
         console.log(formData)
-        const res = await dispatch(reviewActions.addReview(formData,token))
+        const res = await dispatch(reviewActions.addReview(formData, token))
         console.log(res)
-        
+        handleClose()
+        handleReload()
+
     }
 
+    const card = useSelector(store => store.productsReducer.product)
+    console.log(card)
+
+
     return (
-        <div className='reviewContainer'>
+        <Box className='reviewContainer'>
             <span className='titleReviewContainer'>
-                <p>Ratings and Reviews</p>
-                <span onClick={handleOpen}><p>Write a review</p></span>
+                <Typography>Ratings and Reviews</Typography>
+                <span onClick={handleOpen}><Typography>Write a review</Typography></span>
                 <Modal
                     open={open}
                     onClose={handleClose}
                 >
                     <Box sx={style} >
-                        <div>
+                        <Box>
                             <h1>White Your Review</h1>
-                            <h3>Nombre del producto</h3>
-                            <div className='ratingModal'>
-                                <p>Imagen del producto</p>
+                            <b><h3>{card.name}</h3></b>
+                            <Box className='ratingModal'>
+                                <div>
+                                    <img height={100} src={card.img} />
+                                </div>
+
                                 <Stack spacing={1}>
                                     <span className='ratingSelector'>
-                                        <p>OVERALL PRODUCT RATING *</p>
+                                        <Typography>Product rating</Typography>
                                         <Rating name="simple-controlled" value={rating} precision={0.5} size='large'
                                             onChange={(event, newValue) => setRating(newValue)}
                                         />
                                     </span>
 
                                 </Stack>
-                            </div>
-                            <div className='formBoxReview'>
-                                <p>Share your thoughts with others.</p>
+                            </Box>
+                            <Box className='formBoxReview'>
+                                <Typography>Share your thoughts with others.</Typography>
                                 <form className='formReview' onSubmit={handleReview}>
                                     <input type="text" placeholder='Review title*' required />
                                     <textarea name="review" id="review" cols="65" rows="10" placeholder='Leave your review here*' className='textarea' required>
                                     </textarea>
-                                    <p>Upload a photo of the product</p>
+                                    <Typography>Upload a photo of the product</Typography>
                                     <input type="file" onChange={(event) => setFiles(event.target.files)} />
                                     <button type='submit'>Submit Review</button>
                                 </form>
-                            </div>
-
-
-                        </div>
+                            </Box>
+                        </Box>
                     </Box>
                 </Modal>
-
             </span>
-
-            <div className='ratingBox'>
+            <Box className='ratingBox'>
                 <span className='ratingText'>
-                    <p>4.5 stars</p>
-                    <p>5 Reviews</p>
+                    <Typography>4.5 stars</Typography>
+                    <Typography>5 Reviews</Typography>
                 </span>
                 <Stack spacing={1}>
                     <Rating name="half-rating-read" defaultValue={4.5} precision={0.5} size='large' readOnly />
                 </Stack>
-            </div>
-
-            {/* Aca empieza el mapeo de cada review */}
-            <div className='everyReview'>
-                <div className='imgReview'>
-                    <p>Imagen cargada por el usuario del producto</p>
-                </div>
-                <div className='textReview'>
-                    <span className='ratingDateReview'>
-                        <Stack spacing={1}>
-                            <Rating name="half-rating-read" defaultValue={5} precision={0.5} readOnly />
-                        </Stack>
-                        <p>Fecha review</p>
-                    </span>
-
-                    <h2 className='titleReview'>Title review</h2>
-                    <p className='descriptionReview'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci consectetur dolores molestias cum necessitatibus dolorem tempore aut iste ut doloremque labore quasi sequi dolore ratione veniam, temporibus nemo iure reiciendis?</p>
-                </div>
-
-            </div>
-            {/* hasta aca el mapeo */}
-        <button onClick={handleOpen}>Write a review</button>
-        </div>
+            </Box>
+            {product?.reviews.map((item, index) => {
+                return (
+                    <ModifyDeleteReview item={item} handleReload={handleReload} />
+                )
+            })}
+            {user ?
+                <Button sx={{ marginLeft: '2rem', backgroundColor: '#4d4d4d' }} onClick={handleOpen} color="success" variant="contained" endIcon={<SendIcon />}>Write a review</Button>
+                : <Box>
+                    <Box color="success" variant="contained" sx={{borderRadius: '.5rem', color: 'white', marginTop: '2rem', backgroundColor: '#4d4d4d' }}>Initial session to comment</Box>
+                </Box>
+            }
+        </Box>
     )
 }

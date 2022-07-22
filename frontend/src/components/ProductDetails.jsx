@@ -9,154 +9,137 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
-import Carousel from 'react-grid-carousel'
+import Carousel from '../components/CarouselProduct'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import productActions from '../redux/actions/productActions';
 import basketActions from '../redux/actions/basketActions';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import RatingDetails from '../components/RatingReview'
 
 
+export default function Product(props) {
 
-export default function Product() {
+
+    const [reload, setReload] = useState(false)
+    const [card, setCard] = useState()
+
     const { id } = useParams()
     const dispatch = useDispatch()
     const [basket, setBasket] = useState(false)
     const user = useSelector(store => store.usersReducer.userData)
+
+
     useEffect(() => {
         dispatch(productActions.getOneProduct(id))
-    }, [id])
+            .then(res => setCard(res.data.response.product))
+    }, [id, reload])
+
 
     async function addBasket(e) {
-        console.log('hola')
         const productId = e.target.value;
         dispatch(basketActions.addToBasket(productId));
         console.log(productId)
         setBasket(!basket)
     }
-    // async function deleteBasket(e) {
-    //     console.log('chau')
-    //     const productId = e.target.value;
-    //     dispatch(basketActions.deleteBasketProduct(productId));
-    //     console.log(productId)
-    //     setBasket(!basket)
-    // }
-    // async function modifyBasket(e) {
-    //     e.preventDefault()
-    //     const newAmount = {
-    //         productId: e.target.id,
-    //         amount: e.target.value,
-    //     }
-    //     {console.log(typeof(e.target.value))}
-    //     dispatch(basketActions.modifyBasketProduct(newAmount))
-    //     setBasket(!basket)
-    // }
+
     const userBasket = useSelector(store => store.basketReducer.productsBasket)
     console.log(userBasket)
 
     useEffect(() => {
-        if(user) {
+        if (user) {
             dispatch(basketActions.getUserBasket())
         }
-      },[basket])
+    }, [basket])
 
-    const card = useSelector(store => store.productsReducer.product)
+
+    console.log(id)
+
+
+    const handleReload = () => {
+        setReload(!reload)
+    }
 
     return (
         <>
-            <Box key={card._id}>
+            <Box key={card?._id}>
 
-                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Box className='cards-product-details' sx={{ display: 'flex', justifyContent: 'center' }}>
 
-                    <Box sx={{ paddingTop: '8rem', marginRight: '10rem' }}>
-                        <Card sx={{ width: 500 }}>
+                    <Box sx={{ paddingTop: '8rem', margin: '1rem', }}>
+                        <Card>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
                                     height="500"
-                                    image={card.img}
+                                    image={card?.img}
                                     alt="product"
                                 />
                             </CardActionArea>
 
 
                         </Card>
-                        <Box sx={{ width: 500, marginTop: '2rem' }}>
-                            <Card>
+                        <Box sx={{ marginTop: '1rem' }}>
+                            <Card sx={{ height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <Typography variant="body2" color="text.secondary">
-                                    {card.size}
+                                    Sizes: {card?.size}
                                 </Typography>
                             </Card>
+                        </Box>
+                    </Box>
+
+
+
+                    <Box sx={{ display: 'flex', justifyConten: 'center', alignItems: 'center', flexDirection: 'column', paddingTop: '8rem', width: 500, margin: '1rem' }}>
+                        <Card sx={{ height: 500, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                            <Typography gutterBottom variant="h5" component={'div'}>
+                                {card?.name}
+                            </Typography>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                                <Typography sx={{ marginRight: '2rem' }}>Price: $ {card?.price} </Typography>
+                                <Stack sx={{ marginLeft: '2rem' }} spacing={1}>
+
+                                    <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+                                </Stack>
+                            </Box>
                             <Box>
-                                <Box sx={{ width: 500, marginTop: '2rem', marginBottom: '2rem' }}>
-                                    <Card sx={{ minHeight: '8rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
+                                <CardContent>
+
+                                    <Typography sx={{ marginTop: '2rem' }} variant="body2" color="text.secondary">
+                                        {card?.detail}
+                                    </Typography>
+                                </CardContent>
+                            </Box>
+                            <Box>
+                            <Button sx={{ width: '13rem', margin: '2rem', backgroundColor: '#4d4d4d', color: 'white' }} color="success" variant="contained" disableElevation>
+            <AddShoppingCartIcon />
+            ⠀⠀Add to cart
+        </Button>
+    </Box>
+        <Box>
+                            <Button sx={{ width: '13rem', backgroundColor: '#4d4d4d' }} color="success" variant="contained" disableElevation>
+            <VolunteerActivismIcon />
+            ⠀⠀
+            Add to favorite
+        </Button>
+    </Box>
+                        </Card >
+                    </Box >
+                </Box >
+                <Box>
+                                <Box className='box-review' sx={{ marginTop: '2rem', marginBottom: '2rem'}}>
+                                    <Card sx={{width: '50rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
                                         <Typography variant="body2" color="text.secondary">
-                                            Opinions
+                                        < RatingDetails product={card} handleReload={handleReload} />
                                         </Typography>
                                     </Card>
                                 </Box>
                             </Box>
-                        </Box>
-                    </Box>
-
-
-
-                    <Box sx={{ display: 'flex', justifyConten: 'center', alignItems: 'center', flexDirection: 'column', paddingTop: '13rem', width: 500, }}>
-                        <Typography gutterBottom variant="h5" component="div">
-                            {card.name}
-                        </Typography>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Typography sx={{ marginRight: '2rem' }}>Price: $ 120 </Typography>
-                            <Stack sx={{ marginLeft: '2rem' }} spacing={1}>
-                                <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-                            </Stack>
-                        </Box>
-                        <Box>
-                            <CardContent>
-
-                                <Typography variant="body2" color="text.secondary">
-                                    {card.detail}
-                                </Typography>
-                            </CardContent>
-                        </Box>
-                        <Box>
-                            <Button sx={{ width: '13rem', margin: '2rem', backgroundColor: '#7c5e49', color: 'white' }} value={card._id} onClick={addBasket} color="success" variant="contained" disableElevation>
-                                <AddShoppingCartIcon />
-                                ⠀⠀Add to cart
-                            </Button>
-                        </Box>
-                        <Box>
-                            <Button sx={{ width: '13rem', backgroundColor: '#7c5e49' }} value={card._id} variant="contained" disableElevation>
-                                <VolunteerActivismIcon />
-                                ⠀⠀
-                                Add to favorite
-                            </Button>
-                        </Box>
-                    </Box>
-
-
-
-                </Box>
-
                 <Box sx={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
-                    <Carousel cols={4} rows={1} gap={10} loop autoplay={5000} mobileBreakpoint={200}>
-
-                        <Carousel.Item>
-                            <img height='200rem' width="300rem" src="https://i.imgur.com/4HqEtE1.jpg" />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img height='200rem' width="300rem" src="https://i.imgur.com/1BELyvw.jpg" />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img height='200rem' width="300rem" src="https://i.imgur.com/VymuMhW.jpg" />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img height='200rem' width="300rem" src="https://i.imgur.com/UlPLPyf.jpg" />
-                        </Carousel.Item>
-                    </Carousel>
+                    <Carousel />
                 </Box>
-            </Box>
+            </Box >
         </>
     );
 }
