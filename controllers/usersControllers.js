@@ -89,6 +89,8 @@ const usersControllers = {
                             lastName: userExist.lastName,
                             email: userExist.email,
                             avatar: userExist.avatar,
+                            favourite: userExist.favourite,
+                            cart: userExist.cart,
                             from: from
                         }
                         const token = jwt.sign({...userData}, process.env.SECRET_KEY)
@@ -116,6 +118,8 @@ const usersControllers = {
                                 lastName: userExist.lastName,
                                 email: userExist.email,
                                 avatar: userExist.avatar,
+                                favourite: userExist.favourite,
+                                cart: userExist.cart,
                                 from: from
                             }
                             const token = jwt.sign({...userData}, process.env.SECRET_KEY)
