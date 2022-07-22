@@ -16,6 +16,8 @@ import "../styles/Card.css"
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import LocalGroceryStoreTwoToneIcon from '@mui/icons-material/LocalGroceryStoreTwoTone';
 import { Link as LinkRouter } from "react-router-dom"
+import usersActions from '../redux/actions/userActions';
+import { toast } from 'react-toastify';
 
 const style = { // estilo para la apertura de la imagen del producto desde la card
   position: 'absolute',
@@ -36,16 +38,37 @@ export default function MediaCard({ product }) {
   const [productModel, setProductmodel] = React.useState([1])
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const token = localStorage.getItem('token')
   const stock = [...Array(product.stock).keys()]
-
-
+  const dispatch = useDispatch()
+  const user = useSelector(store => store.usersReducer.userData)
   function selected(event) {
     //   console.log(event.target.value);
     setProductmodel(event.target.value);
   }
 
-  console.log(product)
+  const handleFavourite = async () => {
+
+    if (user) {
+      const res = await dispatch(usersActions.handleFavourites(product._id, token))
+      console.log(res)
+      toast(res.data.message, {
+        theme: "dark",
+        position: "bottom-left",
+        autoClose: 4000,
+      })
+    } else {
+      toast.error('Please log in to save this to your favourites', {
+        theme: "dark",
+        position: "bottom-left",
+        autoClose: 4000,
+      })
+    }
+
+
+
+  }
+
   return (
     <>
       <Card>
@@ -90,7 +113,7 @@ export default function MediaCard({ product }) {
                     </select>
 
                     <button className='buttonCarrito'>Go To Carrito</button>
-                    <button className='buttonCarrito'>Add To Favorite</button>
+                    <button className='buttonCarrito' onClick={handleFavourite}>Add To Favorite</button>
                   </Box>
                   <LinkRouter to={`/products/${product._id}`} >
                     <button className='buttonCarrito'>Go To Details</button>
@@ -101,7 +124,7 @@ export default function MediaCard({ product }) {
             </Modal>
             {/* Cierra el modal */}
 
-            <Button sx={{ size: "small", color: '#000000' }}> <FavoriteTwoToneIcon /></Button>
+            <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteTwoToneIcon /></Button>
             <Button sx={{ size: "small", color: '#000000' }}> <LocalGroceryStoreTwoToneIcon /></Button>
             {/* cierra botones */}
           </CardActions>

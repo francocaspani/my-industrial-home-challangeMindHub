@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function Favorites() {
 
 const user = useSelector(store => store.usersReducer.userData)
+
 console.log(user)
 
   return (
@@ -19,8 +20,8 @@ console.log(user)
             <div>precio</div>
             <div>90$</div>
           </div>
-          <button>Agregar al carritom</button>
-          <button>quitar de favoritos</button>
+          <button>Add to basket</button>
+          <button>Remove from favourites</button>
 
         </div>
       </div>

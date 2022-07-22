@@ -15,7 +15,7 @@ function Products() {
     ).then(res => setProducto(res.data.response.products))
   }, [])
 
-
+  
   return (
     <>
     <div className='ctnCard'>
