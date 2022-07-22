@@ -19,8 +19,9 @@ import Product from './components/ProductDetails';
 import Products from './pages/Products';
 import Basket from './pages/Basket';
 
-// export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
-export const urlBackend = 'http://localhost:4000/api'
+
+export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
+// export const urlBackend = 'http://localhost:4000/api'
 
 
 function App() {
@@ -62,10 +63,10 @@ function App() {
         <Route path='/signin' element={<SignIn/>} />
         <Route path='/signup' element={<SignUp/>} />
         <Route path='/policies' element={<Policies/>}/>
-        <Route path='/product' element={<Product/>} />
+        <Route path='/products/:id' element={<Product/>} />
         <Route path='/products' element={<Products/>} />
+        <Route path='/basket' element={<Basket />} />
       </Routes>
-        <Basket />
       <Footer />
       <ToastContainer />
     </div>

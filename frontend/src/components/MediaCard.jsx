@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import "../styles/Card.css"
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import LocalGroceryStoreTwoToneIcon from '@mui/icons-material/LocalGroceryStoreTwoTone';
+import { Link as LinkRouter } from "react-router-dom"
 
 const style = { // estilo para la apertura de la imagen del producto desde la card
   position: 'absolute',
@@ -54,16 +55,16 @@ export default function MediaCard({ product }) {
           image={product.img}
           alt="product image"
         />
-        <Typography component="div" sx={{width:"100%"}}>
-          <CardActions className='buttonsCards' sx={{justifyContent:"center"}} >
+        <Typography component="div" sx={{ width: "100%" }}>
+          <CardActions className='buttonsCards' sx={{ justifyContent: "center" }} >
 
             {/* BOTONES */}
-            <Button sx={{size:"small",color:'#000000'}} className='buttonModal' onClick={handleOpen}>Quickshop</Button>
-           {/* MODAL */}
+            <Button sx={{ size: "small", color: '#000000' }} className='buttonModal' onClick={handleOpen}>Quickshop</Button>
+            {/* MODAL */}
             <Modal
               open={open}
               onClose={handleClose}
-              >
+            >
               <Box sx={style} >
                 <img className='imageModal' src={product.img} alt={product.name} />
                 <Box sx={{ margin: "1rem", display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
@@ -79,36 +80,42 @@ export default function MediaCard({ product }) {
                   <Typography className='modalPrice' gutterBottom variant="p">
                     {product.detail}
                   </Typography>
-                  <Box sx={{ display: "flex", flexDirection:"row" }}>
+                  <Box sx={{ display: "flex", flexDirection: "row" }}>
 
                     <select className='selectModal' onChange={selected}>
 
                       {stock.map((stock, index) => (
                         <option key={index}>{stock + 1}</option>
-                        ))}
+                      ))}
                     </select>
 
                     <button className='buttonCarrito'>Go To Carrito</button>
                     <button className='buttonCarrito'>Add To Favorite</button>
                   </Box>
-                  <button className='buttonCarrito'>Go To Details</button>
+                  <LinkRouter to={`/products/${product._id}`} >
+                    <button className='buttonCarrito'>Go To Details</button>
+                  </LinkRouter>
+
                 </Box>
               </Box>
             </Modal>
             {/* Cierra el modal */}
-                        
-            <Button sx={{size:"small",color:'#000000'}}> <FavoriteTwoToneIcon/></Button>
-            <Button sx={{size:"small",color:'#000000'}}> <LocalGroceryStoreTwoToneIcon /></Button>
+
+            <Button sx={{ size: "small", color: '#000000' }}> <FavoriteTwoToneIcon /></Button>
+            <Button sx={{ size: "small", color: '#000000' }}> <LocalGroceryStoreTwoToneIcon /></Button>
             {/* cierra botones */}
           </CardActions>
-          <CardContent className='ctnContent' sx={{display:"flex",flexDirection:"column",fontSize:"0.9rem"}}>
-              <Typography sx={{fontSize:"1rem",display:"flex"}} gutterBottom variant="h4" component="div">
-                {product.name} {/*  name producto */}
-              </Typography>
-              <Typography sx={{fontSize:"1rem",display:"flex"}} gutterBottom variant="p">
-                    ${product.price}
-                  </Typography>
-            </CardContent>
+          <CardContent className='ctnContent' sx={{ display: "flex", flexDirection: "column", fontSize: "0.9rem" }}>
+            <Typography sx={{ fontSize: "1rem", display: "flex" }} gutterBottom variant="h4" component="div">
+              {product.name} {/*  name producto */}
+            </Typography>
+            <Typography sx={{ fontSize: "1rem", display: "flex" }} gutterBottom variant="p">
+              ${product.price}
+            </Typography>
+            <LinkRouter to={`/products/${product._id}`} >
+              <button className='buttonCarrito'>Go To Details</button>
+            </LinkRouter>
+          </CardContent>
         </Typography>
       </Card>
     </>
