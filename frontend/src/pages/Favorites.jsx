@@ -12,10 +12,11 @@ console.log(user)
     <>
     <div className='Cards'>
       <div className="card">
-
-        <div className='contentFavorite'>
+        {user ? user.favourite.map( product => {
+          return(
+            <div className='contentFavorite'>
           <img className='imgFavorites' src='https://www.hogarmania.com/archivos/201110/lampara-madera-xl-668x400x80xX.jpg' alt='foto'></img>
-          <div>Nombre</div>
+          <div>nombre</div>
           <div>
             <div>precio</div>
             <div>90$</div>
@@ -24,6 +25,14 @@ console.log(user)
           <button>Remove from favourites</button>
 
         </div>
+          )
+        }
+
+        )
+        
+        : <div><p>Nothing here</p></div>
+      }
+        
       </div>
     </div>
     
