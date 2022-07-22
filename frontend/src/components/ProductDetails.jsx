@@ -26,7 +26,7 @@ export default function Product(props) {
     const [basket, setBasket] = useState(false)
     const user = useSelector(store => store.usersReducer.userData)
     useEffect(() => {
-        dispatch(productActions.getOneProduct('62d6f360fbcc6f01de216dae'))
+        dispatch(productActions.getOneProduct('62d6fd0abfa1e631157543e8'))
     }, [id])
 
     async function addBasket(e) {
@@ -36,23 +36,23 @@ export default function Product(props) {
         console.log(productId)
         setBasket(!basket)
     }
-    async function deleteBasket(e) {
-        console.log('chau')
-        const productId = e.target.value;
-        dispatch(basketActions.deleteBasketProduct(productId));
-        console.log(productId)
-        setBasket(!basket)
-    }
-    async function modifyBasket(e) {
-        e.preventDefault()
-        const newAmount = {
-            productId: e.target.id,
-            amount: e.target.value,
-        }
-        {console.log(typeof(e.target.value))}
-        dispatch(basketActions.modifyBasketProduct(newAmount))
-        setBasket(!basket)
-    }
+    // async function deleteBasket(e) {
+    //     console.log('chau')
+    //     const productId = e.target.value;
+    //     dispatch(basketActions.deleteBasketProduct(productId));
+    //     console.log(productId)
+    //     setBasket(!basket)
+    // }
+    // async function modifyBasket(e) {
+    //     e.preventDefault()
+    //     const newAmount = {
+    //         productId: e.target.id,
+    //         amount: e.target.value,
+    //     }
+    //     {console.log(typeof(e.target.value))}
+    //     dispatch(basketActions.modifyBasketProduct(newAmount))
+    //     setBasket(!basket)
+    // }
     const userBasket = useSelector(store => store.basketReducer.productsBasket)
     console.log(userBasket)
 
@@ -128,13 +128,12 @@ export default function Product(props) {
                             </Button>
                         </Box>
                         <Box>
-                            <Button sx={{ width: '13rem', backgroundColor: '#7c5e49' }} value={card._id} onClick={deleteBasket} variant="contained" disableElevation>
+                            <Button sx={{ width: '13rem', backgroundColor: '#7c5e49' }} value={card._id} variant="contained" disableElevation>
                                 <VolunteerActivismIcon />
                                 ⠀⠀
                                 Add to favorite
                             </Button>
                         </Box>
-                        <Button id={card._id} value={32}  onClick={modifyBasket}>Change value</Button>
                     </Box>
 
 
