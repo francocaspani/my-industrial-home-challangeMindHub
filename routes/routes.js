@@ -15,7 +15,7 @@ Router.route('/ambients/:id')
 .get(getOneAmbient)
 
 const productControllers = require('../controllers/productControllers');
-const {getProducts, getOneProduct, addProduct, modifyProduct, removeProduct, readProduct} = productControllers
+const {getProducts, getOneProduct, addProduct, modifyProduct, removeProduct, readProduct, likeAndDislike /*likes*/} = productControllers
 
 Router.route('/products')
 .get(getProducts)
@@ -28,6 +28,9 @@ Router.route('/products/:id')
 
 Router.route('/productsByAmbient/:id')
 .get(readProduct)
+
+Router.route("/likes/:id")
+.put(passport.authenticate('jwt', {session: false}),likeAndDislike) //ruta likes
 
 // Router.route('/likes/:id')
 // .post(passport.authenticate('jwt',{ session: false}),handleLikes)

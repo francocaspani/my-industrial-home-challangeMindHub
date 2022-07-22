@@ -1,0 +1,78 @@
+.reviewContainer{
+    width: 70vw;
+    height: auto;
+    border: solid 2px black;
+    padding: .5rem;
+}
+.titleReviewContainer{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+.ratingBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+}
+.ratingText{
+    display: flex;
+    gap: 1rem;
+    margin-bottom: .5rem;
+}
+.everyReview{
+    display: flex;
+    width: 100%;
+    border-top: solid 1px black;
+}
+.imgReview{
+    width: 40%;
+    height: 10rem;
+    border-right: solid 1px black;
+}
+.textReview{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+.ratingDateReview{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1rem;
+}
+.descriptionReview{
+    text-align: left;
+}
+.titleReview{
+    text-align: left;
+    margin-bottom: .5rem;
+}
+.textarea{
+    resize: none;
+}
+.ratingModal{
+    display: flex;
+    height: 10rem;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: solid 2px black;;
+}
+.formBoxReview{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: .5rem;
+}
+.ratingSelector{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.formReview{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}

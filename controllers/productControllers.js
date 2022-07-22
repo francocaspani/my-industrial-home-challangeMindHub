@@ -19,7 +19,7 @@ const productControllers = {
         let error = null
         try {
             product = await Product.findOne({ _id: id })
-                .populate('ambient').populate('review.userId', { firstName: 1, lastName: 1, avatar: 1 })
+                // .populate('ambient').populate('review.userId', { firstName: 1, lastName: 1, avatar: 1 })
         } catch (err) { error = err }
         res.json({
             response: error ? 'ERROR' : { product },
@@ -28,7 +28,7 @@ const productControllers = {
         })
     },
     addProduct: async (req, res) => {
-        const { name, detail, img, price, size, hashtags } = req.body
+        const { name, detail, img, price, size, hashtags, stock } = req.body
         let product
         let error = null
         try {
@@ -38,7 +38,9 @@ const productControllers = {
                 img,
                 price,
                 size,
-                hashtags
+                hashtags,
+                stock,
+                likes
             }).save()
         } catch (err) { error = err }
         res.json({
@@ -88,6 +90,31 @@ const productControllers = {
             error: console.log(error)
         })
     },
+    likeAndDislike: async(req, res)=>{ 
+
+    const id=req.params.id
+    console.log(id);
+    const user= req.user.id
+    console.log(user);
+    await Product.findOne({_id:id})
+
+    .then(products=>{
+
+        if(products.likes.includes(user)){
+            Product.findOneAndUpdate({_id:id}, {$pull:{likes:user}},{new:true}) // si incluye y hay user sobre el like : quita y saca 
+            .then(response=>res.json({succes:true,response:response.likes})
+            ).catch((error)=>console.log(error))
+        }
+        else {
+            Product.findOneAndUpdate({_id:id}, {$push:{likes:user}},{new:true}) // si no, agrega like
+            .then(response=>res.json({succes:true,response:response.likes})
+            ).catch((error)=>console.log(error))
+        }
+    }).catch((error)=>({
+        success:false,
+        response:error
+    }))
+}
     // handleLikes: async (req, res) => {
     //     const idUser = req.user.id
     //     const idItinerary = req.params.id

@@ -7,6 +7,7 @@ const productActions = {
             try {
                 const res = await axios.get(`${urlBackend}/products`)
                 dispatch({ type: 'getProducts', payload: res.data.response.products })
+                return res
             } catch (error) {
                 console.log(error)
             }
@@ -35,6 +36,26 @@ const productActions = {
                 return res
             } catch (error) {
                 console.log(error)
+            }
+        }
+    },
+    likeAndDislike:(id)=>{
+        // console.log(id)
+        const token= localStorage.getItem("token")
+        console.log(token);
+        return async()=>{
+            try{
+                let res= await axios.put(`${urlBackend}/products/${id}`, {},
+                {
+                    headers:{
+                        "Authorization":"Bearer "+ token
+                    }
+                })
+                //console.log(res)
+                return res
+
+            } catch(error){
+               // console.log(error)
             }
         }
     }

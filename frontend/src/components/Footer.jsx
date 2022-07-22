@@ -10,24 +10,26 @@ import '../styles/Footer.css'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import InboxIcon from '@mui/icons-material/Inbox';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import {Link as LinkRouter} from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <div className='mainContainer'>
+    <div className='mainContainerFooter'>
         <div>
-            <p className='titleInput'>Newsletter</p>
-            <Input width='480px' type={'email'} clearable placeholder="example@gmail.com" color='default' />
+            <p className='titleInputFooter'>Newsletter</p>
+            <Input width='480px' type={'email'} clearable placeholder="example@gmail.com" color='default' className='inputSearchFooter' />
         </div>
-        <div className='containerInfo'>
-            <div className='everyContainer'>
-                <h5 className='everyTitle'>Company</h5>
+        <div className='containerInfoFooter'>
+            <div className='everyContainerFooter companyContainerFooter'>
+                <h5 className='everyTitleFooter'>Company</h5>
                 <div className="infoFooter">
-                    <a href='#'>About Us</a>
-                    <a href='#'>Join our team</a>
+                    <LinkRouter className='infoFooter' to={'/policies'}>
+                        <p href='#'>About Us</p>
+                    </LinkRouter>
                 </div>
             </div>
-            <div className='everyContainer'>
-                <h5 className='everyTitle'>Contact</h5>
+            <div className='everyContainerFooter contactContainer'>
+                <h5 className='everyTitleFooter'>Contact</h5>
                 <div className='infoContact'>
                     <LocationOnIcon/>
                     <p href='#'> </p>
@@ -41,13 +43,15 @@ const Footer = () => {
                     <p>222222222</p>
                 </div>
             </div>
-            <div className='everyContainer'>
-                <h5 className='everyTitle'>Policies</h5>
-                <div className='infoFooter'>
-                    <a href='#'>Your Rights</a>
-                    <a href='#'>About this Privacy policy</a>
-                    <a href='#'>How do we use your personal data</a>
-                    <a href='#'>Security and retention of your personal data</a>
+            <div className='everyContainerFooter'>
+                <h5 className='everyTitleFooter'>Policies</h5>
+                <div>
+                    <LinkRouter className='infoFooter' to={'/policies'}>
+                        <p>Your Rights</p>
+                        <p>About this Privacy policy</p>
+                        <p>How do we use your personal data</p>
+                        <p>Security and retention of your personal data</p>
+                    </LinkRouter>
                 </div>
             </div>
         </div>
@@ -55,11 +59,11 @@ const Footer = () => {
         <div className='containerFooter'>
             <p className='rights'>©️ My Industrial Home 2022</p>
             <div className='containerPayments'>
-                <img className='everyImage' src={Visa} alt='visa' />
-                <img className='everyImage' src={Paypal} alt='paypal'/>
-                <img className='everyImage' src={Mastercard} alt='mastercard'/>
+                <img className='everyImageFooter' src={Visa} alt='visa' />
+                <img className='everyImageFooter' src={Paypal} alt='paypal'/>
+                <img className='everyImageFooter' src={Mastercard} alt='mastercard'/>
             </div>
-            <div className='socialMedias'>
+            <div className='socialMediasFooter'>
                 <InstagramIcon className='icon' fontSize='large' sx={{color: "white"}}/>
                 <FacebookIcon className='icon' fontSize='large' sx={{color: "white"}}/>
                 <WhatsAppIcon className='whatsapp icon' fontSize='large' sx={{color: "white"}}/>
