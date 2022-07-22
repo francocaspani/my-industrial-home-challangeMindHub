@@ -1,5 +1,16 @@
 .main-container-basket {
     padding-top: 6rem;
+    display: flex;
+}
+
+.main-container-sub {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: white;
+    margin-top: 4rem;
+    width: 25%;
+    height: 15rem;
 }
 
 .container-basket {
@@ -39,4 +50,12 @@
 .amount {
     display: flex;
     justify-content: space-around;
+    width: 4rem;
+    align-items: center;
+}
+
+.container-total {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
 }

@@ -27,13 +27,26 @@ function Basket(props) {
 
     return (
         <div className="main-container-basket">
-            <h2>Basket</h2>
+            {/* <h2>Basket</h2> */}
             <div className='container-basket'>
                 {
                      basket && basket?.map(product => (
                        <BasketCard product={product} reload={reload}/>
                     ))
                 }
+            </div>
+            <div className='main-container-sub'>
+                <div className='container-subtotal'>
+                    <p>Subtotal</p>
+                    <p>234</p>
+                </div>
+                <div>Shipping</div>
+                <div className='container-total'>
+                    <h3>Total</h3>
+                    <p>234</p>
+                </div>
+                <div className='button-finish'>Proceed to checkout</div>
+                <div className='button-continue'>Continue shopping</div>
             </div>
         </div>
     )
