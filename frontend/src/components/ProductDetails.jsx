@@ -12,9 +12,10 @@ import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import Carousel from 'react-grid-carousel'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import productActions from '../redux/actions/productActions'
+import productActions from '../redux/actions/productActions';
+import basketActions from '../redux/actions/basketActions';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
@@ -22,16 +23,46 @@ export default function Product(props) {
 
     const { id } = useParams()
     const dispatch = useDispatch()
+    const [basket, setBasket] = useState(false)
+    const user = useSelector(store => store.usersReducer.userData)
     useEffect(() => {
-        dispatch(productActions.getOneProduct('62d6cf246b9ba7fd1f6c1478'))
+        dispatch(productActions.getOneProduct('62d6f360fbcc6f01de216dae'))
     }, [id])
-    console.log(id)
 
-    // const products = useSelector(store => store.productReducer.products)
-    // console.log(products)
+    async function addBasket(e) {
+        console.log('hola')
+        const productId = e.target.value;
+        dispatch(basketActions.addToBasket(productId));
+        console.log(productId)
+        setBasket(!basket)
+    }
+    async function deleteBasket(e) {
+        console.log('chau')
+        const productId = e.target.value;
+        dispatch(basketActions.deleteBasketProduct(productId));
+        console.log(productId)
+        setBasket(!basket)
+    }
+    async function modifyBasket(e) {
+        e.preventDefault()
+        const newAmount = {
+            productId: e.target.id,
+            amount: e.target.value,
+        }
+        {console.log(typeof(e.target.value))}
+        dispatch(basketActions.modifyBasketProduct(newAmount))
+        setBasket(!basket)
+    }
+    const userBasket = useSelector(store => store.basketReducer.productsBasket)
+    console.log(userBasket)
+
+    useEffect(() => {
+        if(user) {
+            dispatch(basketActions.getUserBasket())
+        }
+      },[basket])
 
     const card = useSelector(store => store.productsReducer.product)
-    console.log(card)
 
     return (
         <>
@@ -91,18 +122,19 @@ export default function Product(props) {
                             </CardContent>
                         </Box>
                         <Box>
-                            <Button sx={{ width: '13rem', margin: '2rem', backgroundColor: '#7c5e49', color: 'white' }} color="success" variant="contained" disableElevation>
+                            <Button sx={{ width: '13rem', margin: '2rem', backgroundColor: '#7c5e49', color: 'white' }} value={card._id} onClick={addBasket} color="success" variant="contained" disableElevation>
                                 <AddShoppingCartIcon />
                                 ⠀⠀Add to cart
                             </Button>
                         </Box>
                         <Box>
-                            <Button sx={{ width: '13rem', backgroundColor: '#7c5e49' }} variant="contained" disableElevation>
+                            <Button sx={{ width: '13rem', backgroundColor: '#7c5e49' }} value={card._id} onClick={deleteBasket} variant="contained" disableElevation>
                                 <VolunteerActivismIcon />
                                 ⠀⠀
                                 Add to favorite
                             </Button>
                         </Box>
+                        <Button id={card._id} value={32}  onClick={modifyBasket}>Change value</Button>
                     </Box>
 
 

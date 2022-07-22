@@ -17,9 +17,10 @@ import Favorites from "./pages/Favorites"
 import Policies from './pages/Policies';
 import Product from './components/ProductDetails';
 import Products from './pages/Products';
+import Basket from './pages/Basket';
 
-export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
-//export const urlBackend = 'http://localhost:4000/api'
+// export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
+export const urlBackend = 'http://localhost:4000/api'
 
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
         <Route path='/product' element={<Product/>} />
         <Route path='/products' element={<Products/>} />
       </Routes>
+        <Basket />
       <Footer />
       <ToastContainer />
     </div>

@@ -1,0 +1,39 @@
+.main-container-basket {
+    padding-top: 6rem;
+}
+
+.container-basket {
+    width: 60%;
+    margin: 4rem;
+    background-color: white;
+}
+
+.basket {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem 0;
+    align-items: center;
+}
+
+.basket-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.basket-amount {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.basket-total {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.amount {
+    display: flex;
+    justify-content: space-around;
+}
