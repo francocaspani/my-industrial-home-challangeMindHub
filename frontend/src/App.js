@@ -56,7 +56,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Routes location={location} key={location.pathname}>
+      {/* <Routes location={location} key={location.pathname}>
         <Route path='/home' element={<Index />} />
         <Route path='/' element={<Index />} />
         <Route path='/*' element={<Index />} />
@@ -64,7 +64,7 @@ function App() {
         <Route path='/signup' element={<SignUp/>} />
         <Route path='/policies' element={<Policies/>}/>
         <Route path='/product' element={<Product/>} />
-      </Routes>
+      </Routes> */}
         <Basket />
       <Footer />
       <ToastContainer />

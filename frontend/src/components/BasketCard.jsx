@@ -17,14 +17,14 @@ function BasketCard({product, reload}) {
         console.log(productId)
         reload()
     }
-    async function modifyBasket(e, id) {
-        // e.preventDefault()
-        if(e === 'less'){
-            setAmount(amount - 1)
-        } else if(e === 'plus'){setAmount(amount + 1)}
+    async function modifyBasket(e) {
+        e.preventDefault()
+        // if(e === 'less'){
+        //     setAmount(amount - 1)
+        // } else if(e === 'plus'){setAmount(amount + 1)}
         const newAmount = {
-            productId: id,
-            amount: amount,
+            productId: e.target.id,
+            amount: e.target.value,
         }
         {console.log(newAmount)}
         await dispatch(basketActions.modifyBasketProduct(newAmount))
@@ -42,14 +42,20 @@ function BasketCard({product, reload}) {
         <div className='basket-amount'>
             <p>Quantity</p>
             <div className='amount'>
-                <p id={product.productId._id} onClick={()=>modifyBasket('less', product.productId._id)} >-</p>
-                <p>{amount}</p>
-                <p id={product.productId._id} onClick={()=>modifyBasket('plus', product.productId._id)}>+</p>
+                <select>
+                    <option id={product.productId._id} onClick={modifyBasket} value='1'>1</option>
+                    <option id={product.productId._id} onClick={modifyBasket} value='2'>2</option>
+                    <option id={product.productId._id} onClick={modifyBasket} value='3'>3</option>
+                    <option id={product.productId._id} onClick={modifyBasket} value='4'>4</option>
+                </select>
+                {/* <p id={product.productId._id} onClick={()=>modifyBasket('less', product.productId._id)} >-</p> */}
+                <p>{product.amount}</p>
+                {/* <p id={product.productId._id} onClick={()=>modifyBasket('plus', product.productId._id)}>+</p> */}
             </div>
         </div>
         <div className='basket-total'>
             <p>Total</p>
-            <p>$ {amount * product.productId.price}</p>
+            <p>$ {product.amount * product.productId.price}</p>
         </div>
         <DeleteIcon onClick={deleteBasket}/>
     </div>
