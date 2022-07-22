@@ -17,12 +17,12 @@ function Index() {
     <CarouselRooms/>
     <CarouselNewCollection/>
     <BoxInformation/>
-    {productsBestSellers.map(product => {
+    {/* {productsBestSellers.map(product => {
       return(
         <CarouselBestSellers product={product}/>
       )
       
-    })}
+    })} */}
     
     </div>
   )
