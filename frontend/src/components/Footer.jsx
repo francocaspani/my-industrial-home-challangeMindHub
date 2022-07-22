@@ -15,9 +15,9 @@ import {Link as LinkRouter} from 'react-router-dom'
 const Footer = () => {
   return (
     <div className='mainContainerFooter'>
-        <div>
+        <div className='containerInputFooter'>
             <p className='titleInputFooter'>Newsletter</p>
-            <Input width='480px' type={'email'} clearable placeholder="example@gmail.com" color='default' className='inputSearchFooter' />
+            <Input width='480px' size='sm' type={'email'} clearable placeholder="example@gmail.com" color='default' className='inputSearchFooter' />
         </div>
         <div className='containerInfoFooter'>
             <div className='everyContainerFooter companyContainerFooter'>
