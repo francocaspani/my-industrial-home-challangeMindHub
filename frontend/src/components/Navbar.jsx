@@ -71,7 +71,7 @@ export default function Navbar() {
       </div>
       <div className='drawer'>
           {
-            (products.length < 21) ? products.map(product => (
+            (products?.length < 21) ? products.map(product => (
               <div className='search-product'>
                 <img alt='img-search' className='img-search' src={product.img} />
                 <p className='name-search'>{product.name}</p>
@@ -91,7 +91,7 @@ export default function Navbar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {[{to: '/', name:'Home'}, {to: '/', name:'Spaces'}, {to: '/', name:'Products'}, {to: '/', name:'Shop'}, {to: '/', name:'Favs'}].map((text, index) => (
+        {[{to: '/', name:'Home'}, {to: '/', name:'Spaces'}, {to: '/product', name:'Products'}, {to: '/', name:'Shop'}, {to: '/', name:'Favs'}].map((text, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton>
               <LinkRouter className='links' to={text.to}>

@@ -13,7 +13,7 @@ function Index() {
     <CarouselRooms/>
     <CarouselNewCollection/>
     <BoxInformation/>
-    <CarouselBestSellers/>
+    {/* <CarouselBestSellsers/> */}
     </div>
   )
 }
