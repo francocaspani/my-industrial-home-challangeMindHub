@@ -1,78 +1,136 @@
-.reviewContainer{
-    width: 70vw;
+.reviewContainer {
+    width: 40rem;
     height: auto;
     border: solid 2px black;
     padding: .5rem;
+    margin: 1rem;
 }
-.titleReviewContainer{
+
+.comments {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.comments2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleReviewContainer {
     display: flex;
     justify-content: space-between;
     padding: 1rem;
 }
-.ratingBox{
+
+.ratingBox {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 5rem;
 }
-.ratingText{
+
+.ratingText {
     display: flex;
     gap: 1rem;
     margin-bottom: .5rem;
 }
-.everyReview{
+
+.everyReview {
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     border-top: solid 1px black;
 }
-.imgReview{
+
+.imgReview {
     width: 40%;
     height: 10rem;
     border-right: solid 1px black;
 }
-.textReview{
+
+.textReview {
     display: flex;
     flex-direction: column;
     padding: 1rem;
 }
-.ratingDateReview{
+
+.ratingDateReview {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: 1rem;
 }
-.descriptionReview{
+
+.descriptionReview {
     text-align: left;
 }
-.titleReview{
+
+.titleReview {
     text-align: left;
     margin-bottom: .5rem;
 }
-.textarea{
+
+.textarea {
     resize: none;
 }
-.ratingModal{
+
+.ratingModal {
     display: flex;
     height: 10rem;
     justify-content: space-around;
     align-items: center;
-    border-bottom: solid 2px black;;
+    border-bottom: solid 2px black;
+    ;
 }
-.formBoxReview{
+
+.formBoxReview {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin-top: .5rem;
 }
-.ratingSelector{
+
+.ratingSelector {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-.formReview{
+
+.formReview {
     display: flex;
     flex-direction: column;
     gap: .5rem;
+}
+
+.box-review {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 940px) {
+    .box-review {
+        display: flex;
+        width: 50rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .box-review {
+        display: flex;
+        width: 40rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .box-review {
+        display: flex;
+        width: 30rem;
+    }
 }

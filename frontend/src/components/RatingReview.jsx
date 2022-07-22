@@ -6,6 +6,11 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useSelector, useDispatch } from "react-redux";
 import reviewActions from '../redux/actions/reviewActions';
+import { Typography } from '@mui/material';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import SendIcon from '@mui/icons-material/Send'
 
 const style = { // estilo para la apertura de la imagen del producto desde la card
     position: 'absolute',
@@ -18,22 +23,23 @@ const style = { // estilo para la apertura de la imagen del producto desde la ca
     p: 4,
 };
 
-export default function RatingReview() {
+export default function RatingReview({ product, handleReload }) {
     const user = useSelector(store => store.usersReducer.userData)
     const [files, setFiles] = useState()
     const [rating, setRating] = useState(0)
     const dispatch = useDispatch()
+    const [reload, setReload] = useState(false)
     const token = localStorage.getItem('token')
 
     const [open, setOpen] = React.useState(false); // variables para el modal
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    console.log(rating)
+    // console.log(rating)
 
     const id = '62d6cf246b9ba7fd1f6c1478'
 
     const handleReview = async (event) => {
-        console.log(files)
+        // console.log(files)
         event.preventDefault()
         const file = await files[0]
         const titleReview = await event.target[0].value
@@ -47,16 +53,42 @@ export default function RatingReview() {
         formData.append('idProduct', idProduct)
         formData.append('rating', rating)
         console.log(formData)
-        const res = await dispatch(reviewActions.addReview(formData,token))
+        const res = await dispatch(reviewActions.addReview(formData, token))
         console.log(res)
-        
+        handleClose()
+        handleReload()
+
     }
+
+    const reviews = [{
+
+    }]
+
+    async function handleModify(comment, token) {
+        // eslint-disable-next-line
+        const res = await dispatch(reviewActions.modifyComment(comment, token))
+        setReload(!reload)
+        console.log(res)
+    }
+
+
+    async function handleDelete(info, commentId, token) {
+        await dispatch(reviewActions.deleteComment(info, commentId, token))
+            .then(product.getOneProduct)
+        // console.log(id)
+    }
+
+
+
+    const card = useSelector(store => store.productsReducer.product)
+    console.log(card)
+
 
     return (
         <div className='reviewContainer'>
             <span className='titleReviewContainer'>
-                <p>Ratings and Reviews</p>
-                <span onClick={handleOpen}><p>Write a review</p></span>
+                <Typography>Ratings and Reviews</Typography>
+                <span onClick={handleOpen}><Typography>Write a review</Typography></span>
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -64,12 +96,15 @@ export default function RatingReview() {
                     <Box sx={style} >
                         <div>
                             <h1>White Your Review</h1>
-                            <h3>Nombre del producto</h3>
+                            <b><h3>{card.name}</h3></b>
                             <div className='ratingModal'>
-                                <p>Imagen del producto</p>
+                                <div>
+                                    <img height={100} src={card.img} />
+                                </div>
+                                
                                 <Stack spacing={1}>
                                     <span className='ratingSelector'>
-                                        <p>OVERALL PRODUCT RATING *</p>
+                                        <Typography>Product rating</Typography>
                                         <Rating name="simple-controlled" value={rating} precision={0.5} size='large'
                                             onChange={(event, newValue) => setRating(newValue)}
                                         />
@@ -78,12 +113,12 @@ export default function RatingReview() {
                                 </Stack>
                             </div>
                             <div className='formBoxReview'>
-                                <p>Share your thoughts with others.</p>
+                                <Typography>Share your thoughts with others.</Typography>
                                 <form className='formReview' onSubmit={handleReview}>
                                     <input type="text" placeholder='Review title*' required />
                                     <textarea name="review" id="review" cols="65" rows="10" placeholder='Leave your review here*' className='textarea' required>
                                     </textarea>
-                                    <p>Upload a photo of the product</p>
+                                    <Typography>Upload a photo of the product</Typography>
                                     <input type="file" onChange={(event) => setFiles(event.target.files)} />
                                     <button type='submit'>Submit Review</button>
                                 </form>
@@ -106,26 +141,54 @@ export default function RatingReview() {
                 </Stack>
             </div>
 
-            {/* Aca empieza el mapeo de cada review */}
-            <div className='everyReview'>
-                <div className='imgReview'>
-                    <p>Imagen cargada por el usuario del producto</p>
-                </div>
-                <div className='textReview'>
-                    <span className='ratingDateReview'>
-                        <Stack spacing={1}>
-                            <Rating name="half-rating-read" defaultValue={5} precision={0.5} readOnly />
-                        </Stack>
-                        <p>Fecha review</p>
-                    </span>
+            {/* Aca empieza el mapeo de cada review */}´
 
-                    <h2 className='titleReview'>Title review</h2>
-                    <p className='descriptionReview'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci consectetur dolores molestias cum necessitatibus dolorem tempore aut iste ut doloremque labore quasi sequi dolore ratione veniam, temporibus nemo iure reiciendis?</p>
-                </div>
+            {/* {console.log("+´+´+´+´+ ", reviews)} */}
 
-            </div>
+            {product?.reviews.map((item, index) => {
+                return (
+
+
+                    <div key={index} className='everyReview'>
+                        <div className='imgReview'>
+                            <img height={100} src={item.img} alt='image' />
+                        </div>
+                        <div className='textReview'>
+                            <span className='ratingDateReview'>
+                                <Stack spacing={1}>
+                                    <Rating name="half-rating-read" defaultValue={item.rating} precision={0.5} readOnly />
+                                </Stack>
+                                <p>Fecha review</p>
+                            </span>
+
+                            {/* {user && user.id === item.userId._id ? */}
+                            <div className='comments'>
+                                <h2 suppressContentEditableWarning={true} contentEditable className='titleReview'>{item.titleReview}</h2>
+                                <p suppressContentEditableWarning={true} contentEditable className='descriptionReview'>{item.review}</p>
+                                <div className='comments2'>
+
+
+                                    <Button onClick={() => handleModify(item._id)} sx={{ margin: '.2rem' }} variant="outlined" color="success">
+                                        <EditIcon />
+                                    </Button>
+                                    <Button onClick={() => handleDelete(item._id)} sx={{ margin: '.2rem' }} variant="outlined" color="error">
+                                        <DeleteIcon />
+                                    </Button>
+                                </div>
+
+
+                            </div>
+                            {/* : <div> </div>} */}
+                        </div>
+
+
+                    </div>
+                )
+            })}
+
             {/* hasta aca el mapeo */}
-        <button onClick={handleOpen}>Write a review</button>
+
+            <Button sx={{ marginLeft: '2rem',backgroundColor: '#4d4d4d' }} onClick={handleOpen} variant="contained" endIcon={<SendIcon />}>Write a review</Button>
         </div>
     )
 }

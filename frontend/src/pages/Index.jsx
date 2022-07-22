@@ -2,7 +2,7 @@ import React from 'react'
 import CarouselRooms from "../components/CarouselRooms"
 import CarouselNewCollection from "../components/CarouselNewCollection"
 import BoxInformation from "../components/BoxInformation"
-import CarouselBestSellers from "../components/CarouselBestSellers"
+// import CarouselBestSellers from "../components/CarouselBestSellers"
 import "../App.css"
 
 function Index() {
@@ -13,7 +13,7 @@ function Index() {
     <CarouselRooms/>
     <CarouselNewCollection/>
     <BoxInformation/>
-    <CarouselBestSellers/>
+    {/* <CarouselBestSellers/> */}
     </div>
   )
 }
