@@ -192,6 +192,8 @@ const usersControllers = {
                         lastName: req.user.lastName,
                         email: req.user.email,
                         avatar: req.user.avatar,
+                        favourite: req.user.favourite,
+                        cart: req.user.cart,
                         from:'token'}},
                 message:'Welcome back '+ req.user.firstName
             })

@@ -60,7 +60,7 @@ Router.route('/product/review')
 .post(passport.authenticate('jwt',{ session: false}),addReview)
 .put(passport.authenticate('jwt',{ session: false}),modifyReview)
 
-Router.route('/product/review/:id')
+Router.route('/review/:id')
 .post(passport.authenticate('jwt',{ session: false}),deleteReview)
 
 
