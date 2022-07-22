@@ -19,14 +19,13 @@ import { useEffect, useState } from 'react';
 
 
 
-export default function Product(props) {
-
+export default function Product() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const [basket, setBasket] = useState(false)
     const user = useSelector(store => store.usersReducer.userData)
     useEffect(() => {
-        dispatch(productActions.getOneProduct('62d6fd0abfa1e631157543e8'))
+        dispatch(productActions.getOneProduct(id))
     }, [id])
 
     async function addBasket(e) {

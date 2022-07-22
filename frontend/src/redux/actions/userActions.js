@@ -61,7 +61,15 @@ const usersActions = {
 
             return res
         }
+    },
+    handleFavourites: (idProduct, token) => {
+        return async (dispatch, getState) => {
+            const res = await axios.post(`${urlBackend}/favourites/${idProduct}`, { },{
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+        }
     }
+    
 }
 
 export default usersActions
