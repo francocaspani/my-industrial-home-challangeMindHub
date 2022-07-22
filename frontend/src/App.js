@@ -49,10 +49,6 @@ function App() {
     }
   }, [])
   
-  // useEffect(()=>{
-  //   dispatch(productActions.getProducts()) 
-  //   // eslint-disable-next-line 
-  // },[])
 
   return (
     <div className="App">

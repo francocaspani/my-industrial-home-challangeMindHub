@@ -6,13 +6,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { useDispatch, useSelector } from 'react-redux';
+import '../styles/bestSeller.css'
 
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
 
-export default function CarouselBestSellers() {
-    return (
+export default function CarouselBestSellers({ product }) {
+
+  return (
     <div>
       <Swiper
         spaceBetween={30}
@@ -28,8 +31,16 @@ export default function CarouselBestSellers() {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
+        {product.extraImg.map(img => {
+          return(
+            <SwiperSlide>
+            <img className="img2" src={img} alt="" />
+          </SwiperSlide>
+          )
+          
+        })}
+
       </Swiper>
     </div>
-    );
+  );
 }

@@ -3,9 +3,13 @@ import CarouselRooms from "../components/CarouselRooms"
 import CarouselNewCollection from "../components/CarouselNewCollection"
 import BoxInformation from "../components/BoxInformation"
 import CarouselBestSellers from "../components/CarouselBestSellers"
+import { useDispatch, useSelector } from 'react-redux';
 import "../App.css"
 
 function Index() {
+  const products = useSelector(store => store.productsReducer.products)
+  const productsBestSellers = products.filter(produc => produc.extraImg.length > 0)
+  console.log(productsBestSellers)
 
   return (
     <div className='containerIndex'>
@@ -13,7 +17,13 @@ function Index() {
     <CarouselRooms/>
     <CarouselNewCollection/>
     <BoxInformation/>
-    {/* <CarouselBestSellers/> */}
+    {productsBestSellers.map(product => {
+      return(
+        <CarouselBestSellers product={product}/>
+      )
+      
+    })}
+    
     </div>
   )
 }
