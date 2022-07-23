@@ -16,7 +16,6 @@ import Checkbox from '@mui/material/Checkbox';
 import "../styles/products.css"
 
 function Products() {
-
   const [basket, setBasket] = useState(false)
   let check = []
   let checkBoxSelected = []
@@ -61,6 +60,7 @@ function Products() {
   }
 
   const reload = () => { setBasket(!basket) }
+
 
   return (
     <>

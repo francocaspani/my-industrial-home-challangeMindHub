@@ -25,7 +25,8 @@
 
 .imgFavorites {
     height: 100px;
-    width: 200px;
+    width: 100px;
+    object-fit: cover;
 }
 
 .contentFavorite {

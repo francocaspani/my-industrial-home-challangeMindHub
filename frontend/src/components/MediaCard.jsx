@@ -65,6 +65,15 @@ export default function MediaCard({ product, reload, keys }) {
         autoClose: 4000,
       })
     }
+
+    if (localStorage.getItem('token') !== null) {
+      const token = localStorage.getItem('token')
+  
+      const verifyToken = async () => {
+        const res = await dispatch(usersActions.verifyToken(token))
+      }
+      verifyToken()
+    }
   }
 
   async function addBasket() {

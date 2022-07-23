@@ -52,7 +52,6 @@ export default function Navbar() {
   async function deleteBasket(id) {
     const productId = id;
     await dispatch(basketActions.deleteBasketProduct(productId));
-    console.log(productId)
     setBasketReload(!basketReload)
   }
 
@@ -261,7 +260,7 @@ export default function Navbar() {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
+          <Badge badgeContent={user?.favourite.length} color="error">
             <FavoriteIcon />
           </Badge>
         </IconButton>
@@ -370,7 +369,7 @@ export default function Navbar() {
                   aria-label="show 17 new notifications"
                   color="inherit"
                 >
-                  <Badge badgeContent={17} color="error">
+                  <Badge badgeContent={user?.favourite.length} color="error">
                     <FavoriteIcon />
                   </Badge>
                 </IconButton>
