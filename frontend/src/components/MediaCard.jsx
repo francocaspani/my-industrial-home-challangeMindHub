@@ -12,7 +12,7 @@ import Modal from '@mui/material/Modal';
 import productActions from '../redux/actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
-import "../styles/Card.css"
+import "../styles/products.css"
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import LocalGroceryStoreTwoToneIcon from '@mui/icons-material/LocalGroceryStoreTwoTone';
 import { Link as LinkRouter } from "react-router-dom"
@@ -33,7 +33,8 @@ const style = { // estilo para la apertura de la imagen del producto desde la ca
   p: 4,
 };
 
-export default function MediaCard({ product, reload }) {
+export default function MediaCard({ product, reload, keys }) {
+
   const [open, setOpen] = React.useState(false); // variables para el modal
   const [productModel, setProductmodel] = React.useState(1)
   const handleOpen = () => setOpen(true);
@@ -77,7 +78,8 @@ export default function MediaCard({ product, reload }) {
 
   return (
     <>
-      <Card>
+    
+      <Card key={keys}>
         <CardMedia
           component="img"
           height="320"
@@ -88,8 +90,8 @@ export default function MediaCard({ product, reload }) {
           <CardActions className='buttonsCards' sx={{ justifyContent: "center" }} >
 
             {/* BOTONES */}
-            <Button sx={{ size: "small", color: '#000000' }} className='buttonModal' onClick={handleOpen}>Quickshop</Button>
-            {/* MODAL */}
+            <Button sx={{size:"small",color:'#000000'}} onClick={handleOpen}>Quickshop</Button>
+           {/* MODAL */}
             <Modal
               open={open}
               onClose={handleClose}
