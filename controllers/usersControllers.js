@@ -73,7 +73,7 @@ const usersControllers = {
         const { email, password, from } = req.body.loggedUser
         console.log(req.body.loggedUser)
         try {
-            const userExist = await User.findOne({ email })
+            const userExist = await User.findOne({ email }).populate('favourite')
             if (!userExist) {
                 res.json({
                     success: false,
