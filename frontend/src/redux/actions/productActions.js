@@ -38,6 +38,11 @@ const productActions = {
                 console.log(error)
             }
         }
+    },
+    filterProductByRoom:(checkBoxSelected)=>{
+        return (dispatch,getState) =>{
+            dispatch({type:"filterProductByRoom", payload:checkBoxSelected})
+        }
     }
 }
 

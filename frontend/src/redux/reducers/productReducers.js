@@ -2,7 +2,8 @@ const initialState = {
     products:[],
     productsFiltered: [],
     product:[],
-    productsByAmbient: []
+    productsByAmbient: [],
+    productfilteredbyroom: []
 }
 
 const productsReducer = (state = initialState, action) => {
@@ -11,7 +12,8 @@ const productsReducer = (state = initialState, action) => {
             return{
                 ...state,
                 products: action.payload,
-                productsFiltered: action.payload
+                productsFiltered: action.payload,
+                productfilteredbyroom: action.payload
             }
         case 'filterProductsByName':
             const filtered = state.products.filter(products => products.name.toLowerCase().includes(action.payload.trim().toLowerCase()))
@@ -29,6 +31,17 @@ const productsReducer = (state = initialState, action) => {
                 ...state,
                 productsByAmbient: action.payload
             }
+        case "filterProductByRoom":
+
+            const filtercheck =state.products.filter(product => action.payload.includes( product.hashtags[0]))
+            
+            console.log(action.payload)
+            console.log(filtercheck)
+            return{
+                ...state,
+                productfilteredbyroom:filtercheck
+            }
+        
         default:
             return state
     }
