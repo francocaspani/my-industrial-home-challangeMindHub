@@ -8,6 +8,7 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.1",
     "@nextui-org/react": "^1.0.0-beta.9",
+    "@paypal/react-paypal-js": "^7.8.1",
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
