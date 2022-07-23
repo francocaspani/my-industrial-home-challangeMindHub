@@ -44,6 +44,17 @@ const productActions = {
         return (dispatch,getState) =>{
             dispatch({type:"filterProductByRoom", payload:checkBoxSelected})
         }
+    },
+    addProduct: (productData) => {
+        return async (dispatch, getState) => {
+            try {
+                const res = await axios.post(`${urlBackend}/products`,  productData )
+                dispatch({ type:'addProduct', payload:res.data.response.product })
+                return res
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
 }
 
