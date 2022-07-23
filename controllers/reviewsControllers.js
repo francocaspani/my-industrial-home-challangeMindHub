@@ -37,9 +37,11 @@ const reviewsControllers = {
         }
     },
     modifyReview: async (req, res) => {
-        const { reviewId, review, rating } = req.body.review
+        const { reviewId, review, titleReview, rating } = req.body.review        
+        
         try {
-            updatedReview = await Product.findOneAndUpdate({ "reviews._id": reviewId }, { $set: { "reviews.$.review": review, "review.$.date": Date.now(), "reviews.$.rating": rating } }, { new: true })
+            const updatedReview = await Product.findOneAndUpdate({ "reviews._id": reviewId }, { $set: { "reviews.$.review": review, "review.$.date": Date.now(), "reviews.$.titleReview": titleReview, "reviews.$.rating": rating } }, { new: true })
+            console.log(updatedReview)
             res.json({
                 success: true,
                 response: { updatedReview },

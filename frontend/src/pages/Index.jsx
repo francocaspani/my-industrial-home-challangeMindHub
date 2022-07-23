@@ -3,6 +3,7 @@ import CarouselRooms from "../components/CarouselRooms"
 import CarouselNewCollection from "../components/CarouselNewCollection"
 import BoxInformation from "../components/BoxInformation"
 import CarouselBestSellers from "../components/CarouselBestSellers"
+import { useDispatch, useSelector } from 'react-redux';
 import "../App.css"
 
 import { useSelector } from "react-redux";

@@ -23,6 +23,7 @@ const productActions = {
             try {
                 const res = await axios.get(`${urlBackend}/products/${id}`)
                 dispatch({ type: 'getOneProduct', payload: res.data.response.product })
+                return res
             } catch (error) {
                 console.log(error)
             }

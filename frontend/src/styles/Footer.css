@@ -6,6 +6,11 @@
 .mainContainerFooter{
     min-height: 30vh; /*para 1024 */
     background-color: #4D4D4D;
+    padding: 1rem 0;
+}
+
+.containerInputFooter{
+    padding-bottom: 1rem;
 }
 
 .titleInputFooter{
@@ -17,6 +22,7 @@
 
 .everyTitleFooter{
     font-size: 1.3rem;
+    padding-bottom: 1rem;
 }
 
 .containerInfoFooter{
@@ -127,5 +133,8 @@
     }
     .containerPayments{
         padding: .6rem 0;
+    }
+    .nextui-c-iwmZdB{
+        width: 80%;
     }
 }
