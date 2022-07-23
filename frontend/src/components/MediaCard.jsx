@@ -11,13 +11,14 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import productActions from '../redux/actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "../styles/Card.css"
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import LocalGroceryStoreTwoToneIcon from '@mui/icons-material/LocalGroceryStoreTwoTone';
 import { Link as LinkRouter } from "react-router-dom"
 import usersActions from '../redux/actions/userActions';
 import { toast } from 'react-toastify';
+import basketActions from '../redux/actions/basketActions';
 
 const style = { // estilo para la apertura de la imagen del producto desde la card
   position: 'absolute',
@@ -32,10 +33,9 @@ const style = { // estilo para la apertura de la imagen del producto desde la ca
   p: 4,
 };
 
-export default function MediaCard({ product }) {
-
+export default function MediaCard({ product, reload }) {
   const [open, setOpen] = React.useState(false); // variables para el modal
-  const [productModel, setProductmodel] = React.useState([1])
+  const [productModel, setProductmodel] = React.useState(1)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const token = localStorage.getItem('token')
@@ -43,7 +43,7 @@ export default function MediaCard({ product }) {
   const dispatch = useDispatch()
   const user = useSelector(store => store.usersReducer.userData)
   function selected(event) {
-    //   console.log(event.target.value);
+       console.log(event.target.value);
     setProductmodel(event.target.value);
   }
 
@@ -65,6 +65,15 @@ export default function MediaCard({ product }) {
       })
     }
   }
+
+  async function addBasket() {
+    const productToAdd = {
+        productId : product._id,
+        amount : productModel
+    }
+    dispatch(basketActions.addToBasket(productToAdd));
+    reload()
+}
 
   return (
     <>
@@ -109,8 +118,8 @@ export default function MediaCard({ product }) {
                       ))}
                     </select>
 
-                    <button className='buttonCarrito'>Go To Carrito</button>
-                    <button className='buttonCarrito' onClick={handleFavourite}>Add To Favorite</button>
+                    <button className='buttonCarrito' onClick={addBasket}>Add to basket</button>
+                    <button className='buttonCarrito' onClick={handleFavourite}>Add To Favourites</button>
                   </Box>
                   <LinkRouter to={`/products/${product._id}`} >
                     <button className='buttonCarrito'>Go To Details</button>
@@ -122,7 +131,7 @@ export default function MediaCard({ product }) {
             {/* Cierra el modal */}
 
             <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteTwoToneIcon /></Button>
-            <Button sx={{ size: "small", color: '#000000' }}> <LocalGroceryStoreTwoToneIcon /></Button>
+            <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreTwoToneIcon /></Button>
             {/* cierra botones */}
           </CardActions>
           <CardContent className='ctnContent' sx={{ display: "flex", flexDirection: "column", fontSize: "0.9rem" }}>

@@ -69,7 +69,7 @@ Router.route('/basket')
 .get(passport.authenticate('jwt', {session: false}), getUserBasket)
 .put(passport.authenticate('jwt', {session: false}), modifyBasketProduct)
 
-Router.route("/basket/:id")
+Router.route("/deletebasket/:id")
 .delete(passport.authenticate('jwt', {session: false}), deleteBasketProduct)
 // .get(passport.authenticate('jwt', {session: false}), getProduct)
 

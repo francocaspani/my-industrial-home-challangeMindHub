@@ -8,8 +8,8 @@ import "../App.css"
 
 function Index() {
   const products = useSelector(store => store.productsReducer.products)
-  const productsBestSellers = products.filter(produc => produc.extraImg.length > 0)
-  console.log(productsBestSellers)
+  //const productsBestSellers = products.filter(produc => produc.extraImg.length > 0)
+  //console.log(productsBestSellers)
 
   return (
     <div className='containerIndex'>

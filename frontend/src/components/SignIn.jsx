@@ -20,7 +20,6 @@ function SignIn() {
         }
 
         const res = await dispatch(usersActions.logInUser(loggedUser))
-        console.log(res)
 
         toast(res.data.message, {
             theme: "dark",

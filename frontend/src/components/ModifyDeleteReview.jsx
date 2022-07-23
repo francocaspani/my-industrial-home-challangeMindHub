@@ -52,7 +52,7 @@ export default function ModifyDeleteReview({ item, handleReload }) {
 
             <Box className='textReview'>
                 <span className='ratingDateReview'>
-                    {user && user.id == item.userId ?
+                    {user && user.id === item.userId ?
                         <Stack spacing={1}>
                             <Rating   onChange={(event, newValue)=> setRating(newValue)} name="simple-controlled" value={item.rating} precision={0.5} />
                         </Stack>
@@ -66,7 +66,6 @@ export default function ModifyDeleteReview({ item, handleReload }) {
                     <Typography>Fecha review</Typography>
                 </span>
 
-                {console.log("++++++", user)}
                 
                 {user && user.id == item.userId ?
                     <Box className='comments'>

@@ -38,14 +38,17 @@ export default function Product(props) {
 
 
     async function addBasket(e) {
-        const productId = e.target.value;
-        dispatch(basketActions.addToBasket(productId));
-        console.log(productId)
+        const product = {
+            productId : id,
+            amount : 1
+
+        }
+        dispatch(basketActions.addToBasket(product));
         setBasket(!basket)
     }
 
-    const userBasket = useSelector(store => store.basketReducer.productsBasket)
-    console.log(userBasket)
+    // const userBasket = useSelector(store => store.basketReducer.productsBasket)
+    // console.log(userBasket)
 
     useEffect(() => {
         if (user) {
@@ -53,8 +56,6 @@ export default function Product(props) {
         }
     }, [basket])
 
-
-    console.log(id)
 
 
     const handleReload = () => {
@@ -112,7 +113,7 @@ export default function Product(props) {
                                 </CardContent>
                             </Box>
                             <Box>
-                            <Button sx={{ width: '13rem', margin: '2rem', backgroundColor: '#4d4d4d', color: 'white' }} color="success" variant="contained" disableElevation>
+                            <Button sx={{ width: '13rem', margin: '2rem', backgroundColor: '#4d4d4d', color: 'white' }} color="success" variant="contained" onClick={addBasket} disableElevation>
             <AddShoppingCartIcon />
             ⠀⠀Add to cart
         </Button>

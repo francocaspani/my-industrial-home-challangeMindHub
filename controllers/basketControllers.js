@@ -74,7 +74,7 @@ const basketControllers = {
         let error = null
         try {
             basket = await Basket.find({userId:userId, buyState:state})
-                .populate("productId", {name:1, price:1, img:1})
+                .populate("productId", {name:1, price:1, img:1, stock:1})
                 .populate("userId", {email:1, firstName:1})
                 //console.log('BASKET BASKET BASKET BASKET BASKET BASKET BASKET BASKET')
                 //console.log(basket)
@@ -113,14 +113,11 @@ const basketControllers = {
     // },
     
     addToBasket: async (req,res) => {
-        const {productId} = req.body
-        console.log(productId + ' averrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
+        const {productId, amount} = req.body.product
         const userId = req.user.id
-        // const date = {booking: new Date()}
-        const amount = 1
+        const date = {booking: new Date()}
         const buyState ="toBuy"
-        // const user = req.user._id
-        console.log(amount,buyState)
+
         try {
             const newProduct = await new Basket ({productId,userId,amount,buyState}).save()
             res.json({success: true,
@@ -138,9 +135,8 @@ const basketControllers = {
     deleteBasketProduct: async (req,res) => {
         const idProduct = req.params.id
         console.log(idProduct)
-        // const user = req.user.id
         try {
-            await Basket.findOneAndDelete({id:idProduct})
+            await Basket.findOneAndDelete({_id:idProduct})
             res.json({success: true,
                 message: "Product deleted successfully."})
         }
@@ -152,11 +148,11 @@ const basketControllers = {
     },
 
     modifyBasketProduct: async (req,res) => {
-        const {productId,amount} = req.body
+        const {productId,amount} = req.body.toModify
         console.log(amount)
         const user = req.user._id
         try {
-            const modifyProductBasket = await Basket.findOneAndUpdate({'id': productId}, {$set:{ 'amount': amount }}, {new: true})
+            const modifyProductBasket = await Basket.findOneAndUpdate({'_id': productId}, {$set:{ 'amount': amount }}, {new: true})
             res.json({success: true,
                 response: {modifyProductBasket},
                 message: "Product modified successfully"})

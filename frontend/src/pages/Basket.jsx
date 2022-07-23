@@ -1,26 +1,29 @@
-import React, {useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import basketActions from '../redux/actions/basketActions'
 import BasketCard from '../components/BasketCard'
 import "../styles/basket.css"
-import {Link as LinkRouter } from 'react-router-dom'
+import { Link as LinkRouter } from 'react-router-dom'
 
 function Basket(props) {
 
-    const [basketReload, setBasketReload] = useState(null)
-    const [basket , setBasket] = useState([])
+    const [basketReload, setBasketReload] = useState(false)
     const dispatch = useDispatch();
     const user = useSelector(store => store.usersReducer.userData)
-    // const userBasket = useSelector(store => store.basketReducer.productsBasket)
+    const basket = useSelector(store => store.basketReducer.productsBasket)
 
-    const reload = ()=>{setBasketReload(!basketReload)}
 
     useEffect(() => {
-        if(user) {
-            dispatch(basketActions.getUserBasket()).then(res=>setBasket(res))
+        if (user) {
+            dispatch(basketActions.getUserBasket())
         }
-      },[basketReload])
-      console.log(basket)
+    }, [basketReload, user])
+
+
+    const reload = () => { setBasketReload(!basketReload) }
+
+
+
     //   let prices;
     //   useEffect(()=>{
     //     if(basket) {
@@ -31,7 +34,7 @@ function Basket(props) {
     // // console.log(userBasket)
     // console.log(basket.length)
 
-    
+
     // console.log(prices)
     // let totalBasket = 0;
     // function addTotal() {
@@ -46,16 +49,16 @@ function Basket(props) {
 
     return (
         <div className="main-container-basket">
-            {/* <h2>Basket</h2> */}
+            <h2>Basket</h2>
             {
-                 basket?.length !== 0 ?
-            (<div className='container-basket'>
-                {
-                     basket?.map(product => (
-                       <BasketCard product={product} reload={reload}/>
-                    ))
-                }
-            </div>) : (<div className='container-basket'><p className='empty-basket'>Your basket is empty.</p></div>)
+                basket?.length !== 0 ?
+                    (<div className='container-basket'>
+                        {
+                            basket?.map(product => (
+                                <BasketCard product={product} reload={reload} />
+                            ))
+                        }
+                    </div>) : (<div className='container-basket'><p className='empty-basket'>Your basket is empty.</p></div>)
             }
             <div className='main-container-sub'>
                 <div className='container-subtotal'>

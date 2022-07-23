@@ -42,7 +42,6 @@ const usersActions = {
                 .then(user => {
                     if (user.data.success) {
                         dispatch({ type: 'logInUser', payload: user.data })
-                        console.log(user)
                         return user
                     } else {
                         localStorage.removeItem('token')

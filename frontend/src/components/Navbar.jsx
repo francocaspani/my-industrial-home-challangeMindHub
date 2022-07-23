@@ -36,26 +36,25 @@ import basketActions from '../redux/actions/basketActions';
 export default function Navbar() {
 
   const [basketReload, setBasketReload] = useState(null)
-  const [basket , setBasket] = useState([])
+  //const [basket, setBasket] = useState([])
   const dispatch = useDispatch();
   const user = useSelector(store => store.usersReducer.userData)
-  // const userBasket = useSelector(store => store.basketReducer.productsBasket)
+  const basket = useSelector(store => store.basketReducer.productsBasket)
 
   // const reload = ()=>{setBasketReload(!basketReload)}
 
   useEffect(() => {
-      if(user) {
-          dispatch(basketActions.getUserBasket()).then(res=>setBasket(res))
-      }
-    },[basketReload])
+    if (user) {
+      dispatch(basketActions.getUserBasket())
+    }
+  }, [basketReload, user])
 
-  async function deleteBasket(e) {
-    console.log('chau')
-    const productId = e.target.value;
-    dispatch(basketActions.deleteBasketProduct(productId));
+  async function deleteBasket(id) {
+    const productId = id;
+    await dispatch(basketActions.deleteBasketProduct(productId));
     console.log(productId)
     setBasketReload(!basketReload)
-}
+  }
 
   const [search, setSearch] = React.useState(null);
 
@@ -120,28 +119,28 @@ export default function Navbar() {
                 <p className='name-drawer'>{product.productId.name}</p>
                 <p className='price-drawer'>$ {product.productId.price}</p>
               </div>
-              <DeleteIcon onClick={deleteBasket}/> 
+              <DeleteIcon onClick={()=> deleteBasket(product._id)} />
             </div>
           ))
-          
-          : <p></p>
+
+            : <p></p>
         }
         {
-          (basket?.length !== 0) ? 
+          (basket?.length !== 0) ?
             (<div className='container-total-drawer'>
               <p>Total:</p>
               <p>$234</p>
             </div>
-          ) : <p className='empty'>Empty basket</p>
+            ) : <p className='empty'>Empty basket</p>
         }
         {
-          (basket?.length !== 0) ? 
-            ( <div className='container-buttons'>
-                <div className='button-finish-drawer'>Proceed to checkout</div>
-              </div>
-          ) : <p className='empty'></p>
+          (basket?.length !== 0) ?
+            (<div className='container-buttons'>
+              <div className='button-finish-drawer'>Proceed to checkout</div>
+            </div>
+            ) : <p className='empty'></p>
         }
-        
+
       </div>
     </Box>
   )
