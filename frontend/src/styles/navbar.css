@@ -67,6 +67,52 @@
     flex-wrap: wrap;
 }
 
+.drawer-basket {
+    display: flex;
+    flex-direction: column;
+}
+
+.drawer-product {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 1rem auto;
+}
+
+.img-drawer {
+    width: 3rem;
+}
+
+.button-finish-drawer {
+    width: 80%;
+    margin: .5rem auto;
+    padding: .5rem;
+    background-color: rgb(223, 220, 220);
+    text-align: center;
+}
+
+.empty {
+    text-align: center;
+    font-size: 1.1rem;
+    margin: 2rem auto;
+}
+
+.container-total-drawer {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 1rem auto;
+}
+
+.name-drawer, .price-drawer {
+    text-align: center;
+    padding: .2rem;
+}
+
 @media(max-width: 900px) {
     .logo {
         width: 5rem;

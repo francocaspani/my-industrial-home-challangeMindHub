@@ -7,8 +7,8 @@ import SignIn from '../src/components/SignIn'
 import SignUp from '../src/components/SignUp'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ambientActions from '../src/redux/actions/ambientActions'
-import productActions from './redux/actions/productActions'
+import ambientActions from '../src/redux/actions/ambientActions';
+import productActions from './redux/actions/productActions';
 import usersActions from './redux/actions/userActions';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,12 +21,13 @@ import Basket from './pages/Basket';
 
 
 export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
-// export const urlBackend = 'http://localhost:4000/api'
+//export const urlBackend = 'http://localhost:4000/api'
 
 
 function App() {
   const location = useLocation()
   const dispatch = useDispatch()
+  const user = useSelector(store => store.usersReducer.userData)
 
   useEffect(() => {
     dispatch(ambientActions.getAmbients())

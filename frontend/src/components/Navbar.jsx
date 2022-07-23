@@ -5,6 +5,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
@@ -28,12 +29,33 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import '../styles/navbar.css'
 import { Link as LinkRouter } from "react-router-dom"
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import productActions from '../redux/actions/productActions';
+import basketActions from '../redux/actions/basketActions';
 
 export default function Navbar() {
 
-  const dispatch = useDispatch()
+  const [basketReload, setBasketReload] = useState(null)
+  const [basket , setBasket] = useState([])
+  const dispatch = useDispatch();
+  const user = useSelector(store => store.usersReducer.userData)
+  // const userBasket = useSelector(store => store.basketReducer.productsBasket)
+
+  // const reload = ()=>{setBasketReload(!basketReload)}
+
+  useEffect(() => {
+      if(user) {
+          dispatch(basketActions.getUserBasket()).then(res=>setBasket(res))
+      }
+    },[basketReload])
+
+  async function deleteBasket(e) {
+    console.log('chau')
+    const productId = e.target.value;
+    dispatch(basketActions.deleteBasketProduct(productId));
+    console.log(productId)
+    setBasketReload(!basketReload)
+}
 
   const [search, setSearch] = React.useState(null);
 
@@ -70,7 +92,7 @@ export default function Navbar() {
       </div>
       <div className='drawer'>
         {
-          (products?.length < 21) ? products.map(product => (
+          (products?.length < 21) ? products?.map(product => (
             <div className='search-product'>
               <img alt='img-search' className='img-search' src={product.img} />
               <p className='name-search'>{product.name}</p>
@@ -78,6 +100,48 @@ export default function Navbar() {
             </div>
           )) : <p></p>
         }
+      </div>
+    </Box>
+  )
+
+  const basketDrawer = (anchor) => (
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+    // onClick={toggleDrawer(anchor, false)}
+    // onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <div className='drawer-basket'>
+        {
+          (basket && basket.length !== 0) ? basket.map(product => (
+            <div className='drawer-product'>
+              <img alt='img-drawer' className='img-drawer' src={product.productId.img} />
+              <div>
+                <p className='name-drawer'>{product.productId.name}</p>
+                <p className='price-drawer'>$ {product.productId.price}</p>
+              </div>
+              <DeleteIcon onClick={deleteBasket}/> 
+            </div>
+          ))
+          
+          : <p></p>
+        }
+        {
+          (basket?.length !== 0) ? 
+            (<div className='container-total-drawer'>
+              <p>Total:</p>
+              <p>$234</p>
+            </div>
+          ) : <p className='empty'>Empty basket</p>
+        }
+        {
+          (basket?.length !== 0) ? 
+            ( <div className='container-buttons'>
+                <div className='button-finish-drawer'>Proceed to checkout</div>
+              </div>
+          ) : <p className='empty'></p>
+        }
+        
       </div>
     </Box>
   )
@@ -272,6 +336,20 @@ export default function Navbar() {
                 </React.Fragment>
               ))}
             </div>
+            <div>
+              {['right'].map((anchor) => (
+                <React.Fragment key={anchor}>
+                  <Button sx={{ display: 'none' }} onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                  <Drawer
+                    anchor={anchor}
+                    open={state[anchor]}
+                    onClose={toggleDrawer(anchor, false)}
+                  >
+                    {basketDrawer(anchor)}
+                  </Drawer>
+                </React.Fragment>
+              ))}
+            </div>
           </Box>
           <Box className='title'>
             <img alt='logo' className='logo' src='https://media.discordapp.net/attachments/998343174818889748/999050414328647870/MY-INDUSTRIAL-HOME-black.png' />
@@ -279,11 +357,12 @@ export default function Navbar() {
           <Box className='icons'>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                <Badge badgeContent={4} color="error">
+              <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={toggleDrawer('right', true)}>
+                <Badge badgeContent={basket.length} color="error">
                   <LinkRouter to={'/basket'}>
                     <ShoppingCartIcon />
                   </LinkRouter>
+
                 </Badge>
               </IconButton>
               <LinkRouter to={"/Favorites"} >

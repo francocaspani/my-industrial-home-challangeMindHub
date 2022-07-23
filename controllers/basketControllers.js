@@ -152,15 +152,11 @@ const basketControllers = {
     },
 
     modifyBasketProduct: async (req,res) => {
-        //console.log('REQ BODY REQ BODY REQ BODY REQ BODY REQ BODY')
-        //console.log(req.body)
         const {productId,amount} = req.body
         console.log(amount)
         const user = req.user._id
         try {
             const modifyProductBasket = await Basket.findOneAndUpdate({'id': productId}, {$set:{ 'amount': amount }}, {new: true})
-                //console.log('MODIFYYYYYYYYYYYYYYYYYYYYYYYYYYYY')
-                //console.log(modifyBasket)
             res.json({success: true,
                 response: {modifyProductBasket},
                 message: "Product modified successfully"})

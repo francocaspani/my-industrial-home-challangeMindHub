@@ -64,9 +64,6 @@ export default function MediaCard({ product }) {
         autoClose: 4000,
       })
     }
-
-
-
   }
 
   return (
