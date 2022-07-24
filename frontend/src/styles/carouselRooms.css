@@ -72,7 +72,7 @@ body {
   margin-left: 10rem;
 }
 
-.imageRoom{
+.imageCarouselRoom{
   height: 25rem;
   width: 100%;
   object-fit: cover !important; 
@@ -82,13 +82,13 @@ body {
   color: rgb(60, 60, 66) !important ;
   
 } 
-.swiper-button-prev,.swiper-button-next{
+.swiper-button-next:after, .swiper-button-prev:after{
   font-size: 1.5rem !important;
 }
 .swiper-pagination-bullet{
 background-color: rgb(23, 23, 24) !important
 }
-.roomName {
+.carouselRoomName {
   height: 100%;
   width: 100%;
   display: flex;
@@ -99,7 +99,7 @@ background-color: rgb(23, 23, 24) !important
   font-size: large;
   
 }
-.roomName p{
+.carouselRoomName  p{
   background-color: rgba(3, 3, 3, 0.39);
   width: 100%;
   height: 15%;

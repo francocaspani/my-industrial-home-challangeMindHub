@@ -1,0 +1,295 @@
+*{
+    box-sizing: border-box; 
+    padding: 0;
+    margin: 0;
+}
+.containerAllRooms{
+    width: 100%;
+    min-height: 80vh;
+    padding-top: 6rem;
+}
+.container_room{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+
+    
+}
+
+.containerTitleRooms{
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+.containerTitleRooms p{
+    width: 100%;
+    margin-left: 10rem;
+}
+.roomName{
+    height: 5%;
+    width: 100%; 
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+.roomName p{
+    background-color: rgba(3, 3, 3, 0.39);
+    width: 100%;
+    height: 15%;
+}
+.containerRoomProducts{
+width: 80%;
+
+}
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.40);
+    margin-top: 3rem;
+    backdrop-filter: blur(1px);
+    margin-bottom: 5rem;
+   
+}
+
+.main-image {
+    z-index: 1;
+    width: 100%;
+    margin-top: 1rem;
+    height: 100%;
+    object-fit: cover;
+    background-position: center;
+}
+
+.container-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.container-cards h1 {
+    color: white;
+}
+.main-title {
+    font-size: 30px;
+    line-height: 1;
+    color: #ffffff;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.pin {
+    background: #fff;
+    color: #000000;
+    width: 10px;
+    height: 10px;
+    z-index: 2;
+    position: absolute;
+    border-radius: 100%;
+    cursor: pointer;
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0.4);
+    animation: pulse 2s infinite;
+}
+
+.pin-wrapper {
+    position: absolute;
+}
+
+.pin-wrapper:hover .card {
+    opacity: 1;
+    visibility: visible;
+    margin-top: -50px;
+}
+
+.card {
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transition: ease 0.3s all;
+    flex-direction: row;
+    border-radius: .5rem;
+    box-shadow: 1px 1px 7px 3px rgba(0, 0, 0, 0.4);
+    background: #fff;
+    color: #000000;
+    z-index: 3;
+    gap: 1rem;
+    position: absolute;
+    cursor: pointer;
+    padding: 5px;
+    width: 250px;
+    height: 130px;
+    margin-left: -100px;
+    margin-top: -30px;
+}
+
+.card-image {
+    width: 120px;
+    height: 120px;
+    border-radius: .5rem;
+}
+
+.card-title {
+    padding-top: 10px;
+    font-size: 22px;
+    line-height: 1.2;
+}
+
+.card-button {
+    color: #000000;
+    text-transform: uppercase;
+    border: 1px solid #000000;
+    text-decoration: none;
+    padding: 8px 10px;
+    display: inline-block;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8);
+    }
+
+    50% {
+        box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+.custom-btn {
+    margin: 1rem;
+    width: auto;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+  }
+.btn-12 {
+    position: relative;
+    right: 20px;
+    bottom: 20px;
+    border: none;
+    box-shadow: none;
+    width: 280px;
+    height: 40px;
+    line-height: 42px;
+    -webkit-perspective: 230px;
+    perspective: 230px;
+}
+
+.btn-12 span {
+    background: linear-gradient(0deg, rgb(88, 88, 88) 0%, rgb(0, 25, 50) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 280px;
+    height: 40px;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+    border-radius: 5px;
+    margin: 0;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+.btn-12 span:nth-child(1) {
+    box-shadow:
+        -7px -7px 20px 0px #fff9,
+        -4px -4px 5px 0px #fff9,
+        7px 7px 20px 0px #0002,
+        4px 4px 5px 0px #0001;
+    -webkit-transform: rotateX(90deg);
+    -moz-transform: rotateX(90deg);
+    transform: rotateX(90deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+}
+
+.btn-12 span:nth-child(2) {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+}
+
+.btn-12:hover span:nth-child(1) {
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+}
+
+.btn-12:hover span:nth-child(2) {
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+    color: transparent;
+    -webkit-transform: rotateX(-90deg);
+    -moz-transform: rotateX(-90deg);
+    transform: rotateX(-90deg);
+}
+
+@media screen and (max-width:425px) {
+    .main-wrapper {
+        margin: 0
+    }
+
+}
+.descriptionRoom{
+    width: 90%; 
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: flex-start;
+ }
+ .descriptionRoom p{
+     font-size: 1.2rem;
+     display: flex;
+     justify-content: flex-start !important;
+     text-align: start;
+     text-align: justify;
+ }

@@ -15,7 +15,7 @@ import {useSelector} from "react-redux";
 // import ambientActions from "../redux/actions/ambientActions";
 
 export default function CarouselRooms() {
-  const ambient= useSelector((store) => store.ambientsReducer.ambients)
+  const allAmbients= useSelector((store) => store.ambientsReducer.ambients)
   
   return (
     <div className="containerCarouselRooms">
@@ -36,9 +36,9 @@ export default function CarouselRooms() {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        {ambient.map(eachambient =>
-          <SwiperSlide className='imageRoom' key={eachambient._id} style={{ backgroundImage: `url("${eachambient.img}")`, backgroundSize: "cover" }}>
-            <div className="roomName">
+        {allAmbients.map(eachambient =>
+          <SwiperSlide className='imageCarouselRoom' key={eachambient._id} style={{ backgroundImage: `url("${eachambient.img}")`, backgroundSize: "cover" }}>
+            <div className="carouselRoomName">
               <p>{eachambient.name}</p>
             </div>
           </SwiperSlide>
