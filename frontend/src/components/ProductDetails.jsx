@@ -26,6 +26,7 @@ export default function Product(props) {
     const token = localStorage.getItem('token')
     const [reload, setReload] = useState(false)
     const [card, setCard] = useState()
+    const [magia, setMagia] = useState(0)
 
     const { id } = useParams()
     const dispatch = useDispatch()
@@ -36,6 +37,8 @@ export default function Product(props) {
     useEffect(() => {
         dispatch(productActions.getOneProduct(id))
             .then(res => setCard(res.data.response.product))
+
+
     }, [id, reload])
 
 
@@ -94,6 +97,20 @@ export default function Product(props) {
     }
 
 
+
+    async function ratingProduct() {
+        let prodRating;
+        const ratings = await card?.reviews.map(rev => rev.rating);
+        let sumRating = 0;
+        for (let i = 0; i < ratings.length; i++) {
+            sumRating = ratings[i] + sumRating
+        }
+        prodRating = sumRating / (card.reviews.length)
+        return prodRating;
+    }
+    ratingProduct().then(res => setMagia(res))
+    console.log(magia)
+
     return (
         <>
             <Box key={card?._id}>
@@ -133,7 +150,7 @@ export default function Product(props) {
                                 <Typography sx={{ marginRight: '2rem' }}>Price: $ {card?.price} </Typography>
                                 <Stack sx={{ marginLeft: '2rem' }} spacing={1}>
 
-                                    <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+                                    <Rating name="half-rating-read" value={magia} precision={0.5} readOnly />
                                 </Stack>
                             </Box>
                             <Box>

@@ -56,14 +56,12 @@ export default function MediaCard({ product, reload, keys }) {
   useEffect(()=> {
     setBasketReload(!basketReload)
     },[])
-    console.log(basket)
 
   function selected(event) {
        console.log(event.target.value);
     setProductmodel(event.target.value);
   }
   const basketIds = basket.map(prod => prod.productId._id);
-  console.log(basketIds)
 
   const handleFavourite = async () => {
 
