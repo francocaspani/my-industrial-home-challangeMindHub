@@ -14,7 +14,7 @@ export default function Room({ eachRoom }) {
                     {eachRoom.idProduct.map(item => (
                         <div key={item._id} className="pin-wrapper" style={{ left: `${item.left}%`, bottom: `${item.bottom}%` }}>
                             <div className="pin">
-                                <div className="card">
+                                <div className="cardRoom">
                                     <img src={item.img} alt={item.name} className='card-image' />
                                     <div>
                                         <div className="card-title">{item.name}</div>

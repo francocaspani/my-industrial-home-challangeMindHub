@@ -73,7 +73,7 @@ const usersControllers = {
         const { email, password, from } = req.body.loggedUser
         console.log(req.body.loggedUser)
         try {
-            const userExist = await User.findOne({ email })
+            const userExist = await User.findOne({ email }).populate('favourite')
             if (!userExist) {
                 res.json({
                     success: false,
@@ -89,6 +89,7 @@ const usersControllers = {
                             lastName: userExist.lastName,
                             email: userExist.email,
                             avatar: userExist.avatar,
+                            favourite: userExist.favourite,
                             from: from
                         }
                         const token = jwt.sign({...userData}, process.env.SECRET_KEY)
@@ -116,6 +117,7 @@ const usersControllers = {
                                 lastName: userExist.lastName,
                                 email: userExist.email,
                                 avatar: userExist.avatar,
+                                favourite: userExist.favourite,
                                 from: from
                             }
                             const token = jwt.sign({...userData}, process.env.SECRET_KEY)
@@ -188,6 +190,7 @@ const usersControllers = {
                         lastName: req.user.lastName,
                         email: req.user.email,
                         avatar: req.user.avatar,
+                        favourite: req.user.favourite,
                         from:'token'}},
                 message:'Welcome back '+ req.user.firstName
             })

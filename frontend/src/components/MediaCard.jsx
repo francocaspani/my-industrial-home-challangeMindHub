@@ -44,8 +44,6 @@ export default function MediaCard({ product, reload, keys }) {
   const stock = [...Array(product.stock).keys()]
   const dispatch = useDispatch()
   const user = useSelector(store => store.usersReducer.userData)
-
-  const [basketReload, setBasketReload] = useState(false)
   const basket = useSelector(store => store.basketReducer.productsBasket)
 
   useEffect(() => {
@@ -53,12 +51,10 @@ export default function MediaCard({ product, reload, keys }) {
       dispatch(basketActions.getUserBasket())
     }
   }, [user])
-  useEffect(()=> {
-    setBasketReload(!basketReload)
-    },[])
+
 
   function selected(event) {
-       console.log(event.target.value);
+    console.log(event.target.value);
     setProductmodel(event.target.value);
   }
   const basketIds = basket.map(prod => prod.productId._id);
@@ -83,7 +79,7 @@ export default function MediaCard({ product, reload, keys }) {
 
     if (localStorage.getItem('token') !== null) {
       const token = localStorage.getItem('token')
-  
+
       const verifyToken = async () => {
         const res = await dispatch(usersActions.verifyToken(token))
       }
@@ -93,24 +89,24 @@ export default function MediaCard({ product, reload, keys }) {
 
   async function addBasket() {
     const productToAdd = {
-        productId : product._id,
-        amount : productModel
+      productId: product._id,
+      amount: productModel
     }
     dispatch(basketActions.addToBasket(productToAdd));
     reload()
-}
-function basketAlert() {
-  // if (res) {
+  }
+  function basketAlert() {
+    // if (res) {
     toast('This product is already in the basket', {
       theme: "dark",
       position: "bottom-left",
       autoClose: 4000,
-  })
-// }
-}
+    })
+    // }
+  }
   return (
     <>
-    
+
       <Card key={keys}>
         <CardMedia
           component="img"
@@ -122,8 +118,8 @@ function basketAlert() {
           <CardActions className='buttonsCards' sx={{ justifyContent: "center" }} >
 
             {/* BOTONES */}
-            <Button sx={{size:"small",color:'#000000'}} onClick={handleOpen}>Quickshop</Button>
-           {/* MODAL */}
+            <Button sx={{ size: "small", color: '#000000' }} onClick={handleOpen}>Quickshop</Button>
+            {/* MODAL */}
             <Modal
               open={open}
               onClose={handleClose}
@@ -152,11 +148,11 @@ function basketAlert() {
                       ))}
                     </select>
 
-                  {(basketIds.includes(product._id)) ? (
-                    <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
-                    ):(
-                    <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreTwoToneIcon /></Button>
-                  )}
+                    {(basketIds.includes(product._id)) ? (
+                      <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
+                    ) : (
+                      <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreTwoToneIcon /></Button>
+                    )}
                     {/* <button className='buttonCarrito' onClick={addBasket}>Add to basket</button> */}
                     <button className='buttonCarrito' onClick={handleFavourite}>Add To Favourites</button>
                   </Box>
@@ -172,7 +168,7 @@ function basketAlert() {
             <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteTwoToneIcon /></Button>
             {(basketIds.includes(product._id)) ? (
               <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
-              ):(
+            ) : (
               <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreTwoToneIcon /></Button>
             )}
             {/* cierra botones */}

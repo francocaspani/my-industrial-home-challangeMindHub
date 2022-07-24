@@ -17,9 +17,7 @@ import "../styles/products.css"
 
 function Products() {
   const [basket, setBasket] = useState(false)
-  let check = []
-  let checkBoxSelected = []
-  const [productFilter, setproductFilter] = useState([])
+  const [productFilter, setproductFilter] = useState()
   const dispatch = useDispatch()
   const user = useSelector(store => store.usersReducer.userData)
 
@@ -29,34 +27,17 @@ function Products() {
     }
   }, [basket])
 
-  // useEffect(() => {
-  //   dispatch(productActions.filterProductByRoom(productFilter)
-  //   )
-  // }, [productFilter])
+  useEffect(() => {
+    dispatch(productActions.filterProductByRoom(productFilter)
+    )
+  }, [productFilter])
 
   const allProduct = useSelector(store => store.productsReducer.products)
 
   const producto = useSelector(store => store.productsReducer.productfilteredbyroom)
 
-  console.log(producto)
-
-  // let checkBoxSelected = []
-
-  const handlenRoomfilter = (event) => {
-    console.log(event)
-    if (event.target.checked) {
-      checkBoxSelected.push(event.target.value)
-
-    } else {
-      const index = checkBoxSelected.indexOf(event.target.value)
-      checkBoxSelected.splice(index, 1)
-
-
-      // checkBoxSelected.filter(check => check !== event.target.value)
-      setproductFilter(checkBoxSelected)
-    }
-    const res = dispatch(productActions.filterProductByRoom(checkBoxSelected))
-    console.log(checkBoxSelected)
+  const handlenRoomfilter = async (event) => {
+    setproductFilter(event)
   }
 
   const reload = () => { setBasket(!basket) }

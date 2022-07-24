@@ -1,15 +1,17 @@
 const initialState = {
-    products:[],
+    products: [],
     productsFiltered: [],
-    product:[],
+    product: [],
     productsByAmbient: [],
     productfilteredbyroom: []
 }
 
+let checkBoxSelected = []
+
 const productsReducer = (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case 'getProducts':
-            return{
+            return {
                 ...state,
                 products: action.payload,
                 productsFiltered: action.payload,
@@ -19,29 +21,33 @@ const productsReducer = (state = initialState, action) => {
             const filtered = state.products.filter(products => products.name.toLowerCase().includes(action.payload.trim().toLowerCase()))
             return {
                 ...state,
-                productsFiltered : filtered
+                productsFiltered: filtered
             }
         case 'getOneProduct':
-            return{
+            return {
                 ...state,
                 product: action.payload
             }
         case 'getProductsByAmbient':
-            return{
+            return {
                 ...state,
                 productsByAmbient: action.payload
             }
         case "filterProductByRoom":
-
-            const filtercheck =state.products.filter(product => action.payload.includes( product.hashtags[0]))
-            
-            console.log(action.payload)
-            console.log(filtercheck)
-            return{
-                ...state,
-                productfilteredbyroom:filtercheck
+            if (action.payload) {
+                if (action.payload.target.checked) {
+                    checkBoxSelected.push(action.payload.target.value)
+                } else {
+                    const index = checkBoxSelected.indexOf(action.payload.target.value)
+                    checkBoxSelected.splice(index, 1)
+                }
             }
-        
+            const filtercheck = state.products.filter(product => checkBoxSelected.includes(product.hashtags[0]))
+            return {
+                ...state,
+                productfilteredbyroom: filtercheck
+            }
+
         default:
             return state
     }
