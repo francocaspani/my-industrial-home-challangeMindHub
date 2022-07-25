@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Input } from "@nextui-org/react";
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -10,14 +10,34 @@ import '../styles/Footer.css'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import InboxIcon from '@mui/icons-material/Inbox';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import {Link as LinkRouter} from 'react-router-dom'
+import {Link as LinkRouter} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import usersActions from '../redux/actions/userActions';
 
 const Footer = () => {
+
+    const dispatch = useDispatch();
+    const [email, setEmail] = useState();
+    const [reload, setReload] = useState(false);
+
+    function sendNewsletter() {
+        dispatch(usersActions.sendNewsletter(email))
+        setEmail("")
+    };
+
+    const keyDownHandler = event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        sendNewsletter();
+        setReload(!reload)
+      }
+    };
+
   return (
     <div className='mainContainerFooter'>
         <div className='containerInputFooter'>
             <p className='titleInputFooter'>Newsletter</p>
-            <Input width='480px' size='sm' type={'email'} clearable placeholder="example@gmail.com" color='default' className='inputSearchFooter' />
+            <Input width='480px' size='sm' onChange={(e)=>setEmail(e.target.value)} onKeyDown={keyDownHandler} type={'email'} clearable placeholder="example@gmail.com" color='default' className='inputSearchFooter' />
         </div>
         <div className='containerInfoFooter'>
             <div className='everyContainerFooter companyContainerFooter'>

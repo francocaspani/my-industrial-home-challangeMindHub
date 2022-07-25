@@ -30,18 +30,18 @@ function SignUp() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [paices, setpaices] = useState(null);
+    const [countries, setCountries] = useState(null);
     const [selectedCountry, setSelectedCountry] = useState()
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     useEffect(() => {
         axios.get("https://restcountries.com/v3.1/all").then((response) => {
-            setpaices(response.data);
+            setCountries(response.data);
         });
     }, []);
 
-    const paicesOrdenados = paices?.map((pais) => pais.name.common).sort();
+    const sortedCountries = countries?.map((pais) => pais.name.common).sort();
 
     const handleSelect = (event) => {
         setSelectedCountry(event.target.value)
@@ -95,7 +95,7 @@ function SignUp() {
                                     <Box sx={style} >
 
                                         <select onChange={handleSelect} className='select-modal' name="country" id="country">
-                                            {paicesOrdenados?.map((everycountry, index) => <option key={index} value={everycountry}>{everycountry}</option>)}
+                                            {sortedCountries?.map((everycountry, index) => <option key={index} value={everycountry}>{everycountry}</option>)}
                                         </select>
                                         {/* {selectedCountry && <span><GoogleSignUp country={selectedCountry} /></span>
                                         } */}
@@ -119,7 +119,7 @@ function SignUp() {
                             <div className="container-input">
                                 <select className="country-select">
                                     <option className="option">Country</option>
-                                    {paicesOrdenados?.map((pais, id) => (
+                                    {sortedCountries?.map((pais, id) => (
                                         <option className="option" key={id} value={pais}>
                                             {pais}
                                         </option>
