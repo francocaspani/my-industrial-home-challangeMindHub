@@ -10,7 +10,7 @@ import "../App.css"
 
 function Index() {
   const products = useSelector((store) => store.productsReducer.products)
-  const productsBestSellers = products.filter(eachProduct => eachProduct.extraImg.length > 0)
+  // const productsBestSellers = products.filter(eachProduct => eachProduct.extraImg.length > 0)
   // console.log(productsBestSellers)
   return (
     <div className='containerIndex'>
@@ -22,11 +22,11 @@ function Index() {
         <p>Best Sellers</p>
       </div>
       <div className='containerIndexcarouselBestSellers'>
-        {productsBestSellers.map((product, index) => {
+        {/* {productsBestSellers.map((product, index) => {
           return (
             <CarouselBestSellers product={product} key={index} />
           )
-        })}
+        })} */}
       </div>
 
     </div>
