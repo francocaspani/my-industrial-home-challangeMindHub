@@ -18,7 +18,8 @@ const validator = (req, res, next) => {
         from: joi.string(),
         country: joi.string(),
         lastName: joi.any(),
-        avatar: joi.string()
+        avatar: joi.string(),
+        isAdmin: joi.boolean()
     })
 
     const validation = schema.validate(req.body.userData, { abortEarly: false })
