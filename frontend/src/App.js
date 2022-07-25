@@ -16,12 +16,13 @@ import { toast } from 'react-toastify';
 import Favorites from "./pages/Favorites"
 import Policies from './pages/Policies';
 import Product from './components/ProductDetails';
+import Rooms from './pages/Rooms';
 import Products from './pages/Products';
 import Basket from './pages/Basket';
+import Admin from './pages/Admin';
 
-
-// export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
-export const urlBackend = 'http://localhost:4000/api'
+export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
+// export const urlBackend = 'http://localhost:4000/api'
 
 
 function App() {
@@ -58,15 +59,18 @@ function App() {
       <Navbar />
       <Routes location={location} key={location.pathname}>
         <Route path='/home' element={<Index />} />
-        <Route path='/Favorites' element={<Favorites />} />
+        <Route path='/Favorites' element={<Favorites/>} />
         <Route path='/' element={<Index />} />
         <Route path='/*' element={<Index />} />
         <Route path='/signin' element={<SignIn/>} />
         <Route path='/signup' element={<SignUp/>} />
         <Route path='/policies' element={<Policies/>}/>
+        <Route path='/product' element={<Product/>} />
+        <Route path='/spaces/:id' element={<Rooms/>} />
         <Route path='/products/:id' element={<Product/>} />
         <Route path='/products' element={<Products/>} />
         <Route path='/basket' element={<Basket />} />
+        <Route path='/admin' element={<Admin />} />
       </Routes>
       <Footer />
       <ToastContainer />

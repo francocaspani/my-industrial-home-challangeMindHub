@@ -22,34 +22,30 @@ function Basket(props) {
 
     const reload = () => { setBasketReload(!basketReload) }
 
+    console.log(basket)
 
 
-    //   let prices;
-    //   useEffect(()=>{
-    //     if(basket) {
-    //         console.log(basket)
-    //         prices = basket?.map(product => product.productId.price) 
-    //     }
-    //   },[basket])
-    // // console.log(userBasket)
-    // console.log(basket.length)
+    let subtotals = []
+    if (basket) {
+        (basket?.map(product => {
+            subtotals.push(product.productId.price * product.amount)
+        }))
+    }
 
 
-    // console.log(prices)
-    // let totalBasket = 0;
-    // function addTotal() {
-    //     for(let i=0; i < prices; i++){
-    //       totalBasket = prices + totalBasket;
-    //     }
-    //     return totalBasket;
-    // }
-    // addTotal()
-    // console.log(totalBasket)
-    // const basketload = useSelector(store => store.addToBasket())
+    let subTotalBasket = 0;
+    function addTotal() {
+        for (let i = 0; i < subtotals.length; i++) {
+            subTotalBasket = subtotals[i] + subTotalBasket;
+        }
+        return subTotalBasket;
+    }
+    addTotal()
+    let shipping = (basket.length !== 0) ? 15 : 0;
+    let totalBasket = shipping + subTotalBasket;
 
     return (
         <div className="main-container-basket">
-            <h2>Basket</h2>
             {
                 basket?.length !== 0 ?
                     (<div className='container-basket'>
@@ -63,16 +59,23 @@ function Basket(props) {
             <div className='main-container-sub'>
                 <div className='container-subtotal'>
                     <p>Subtotal:</p>
-                    <p>$234</p>
+                    <p>${subTotalBasket}</p>
                 </div>
-                <div className='container-shipping'>Shipping</div>
+                <div className='container-subtotal'>
+                    <p>Shipping:</p>
+                    <p>${shipping}</p>
+                </div>
                 <div className='container-total'>
                     <p>Total:</p>
-                    <p>$234</p>
+                    <p>{totalBasket}</p>
                 </div>
                 <div className='container-buttons'>
-                    <div className='button-finish'>Proceed to checkout</div>
-                    <div className='button-continue'>Continue shopping</div>
+                    <LinkRouter to='' className='linkRouter'>
+                        <div className='button-continue'>Proceed to checkout</div>
+                    </LinkRouter>
+                    <LinkRouter to='/products' className='linkRouter'>
+                        <div className='button-continue'>Continue shopping</div>
+                    </LinkRouter>
                 </div>
             </div>
         </div>

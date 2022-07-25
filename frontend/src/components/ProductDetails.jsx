@@ -17,13 +17,16 @@ import basketActions from '../redux/actions/basketActions';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import RatingDetails from '../components/RatingReview'
+import usersActions from '../redux/actions/userActions';
+import { toast } from 'react-toastify';
 
 
 export default function Product(props) {
 
-
+    const token = localStorage.getItem('token')
     const [reload, setReload] = useState(false)
     const [card, setCard] = useState()
+    const [magia, setMagia] = useState(0)
 
     const { id } = useParams()
     const dispatch = useDispatch()
@@ -34,13 +37,15 @@ export default function Product(props) {
     useEffect(() => {
         dispatch(productActions.getOneProduct(id))
             .then(res => setCard(res.data.response.product))
+
+
     }, [id, reload])
 
 
     async function addBasket(e) {
         const product = {
-            productId : id,
-            amount : 1
+            productId: id,
+            amount: 1
 
         }
         dispatch(basketActions.addToBasket(product));
@@ -61,6 +66,50 @@ export default function Product(props) {
     const handleReload = () => {
         setReload(!reload)
     }
+
+    const handleFavourite = async () => {
+
+        if (user) {
+            const res = await dispatch(usersActions.handleFavourites(id, token))
+            console.log(res)
+            toast(res.data.message, {
+                theme: "dark",
+                position: "bottom-left",
+                autoClose: 4000,
+            })
+
+        } else {
+            toast.error('Please log in to save this to your favourites', {
+                theme: "dark",
+                position: "bottom-left",
+                autoClose: 4000,
+            })
+        }
+
+        if (localStorage.getItem('token') !== null) {
+            const token = localStorage.getItem('token')
+
+            const verifyToken = async () => {
+                const res = await dispatch(usersActions.verifyToken(token))
+            }
+            verifyToken()
+        }
+    }
+
+
+
+    async function ratingProduct() {
+        let prodRating;
+        const ratings = await card?.reviews.map(rev => rev.rating);
+        let sumRating = 0;
+        for (let i = 0; i < ratings.length; i++) {
+            sumRating = ratings[i] + sumRating
+        }
+        prodRating = sumRating / (card.reviews.length)
+        return prodRating;
+    }
+    ratingProduct().then(res => setMagia(res))
+    console.log(magia)
 
     return (
         <>
@@ -101,7 +150,7 @@ export default function Product(props) {
                                 <Typography sx={{ marginRight: '2rem' }}>Price: $ {card?.price} </Typography>
                                 <Stack sx={{ marginLeft: '2rem' }} spacing={1}>
 
-                                    <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+                                    <Rating name="half-rating-read" value={magia} precision={0.5} readOnly />
                                 </Stack>
                             </Box>
                             <Box>
@@ -113,30 +162,30 @@ export default function Product(props) {
                                 </CardContent>
                             </Box>
                             <Box>
-                            <Button sx={{ width: '13rem', margin: '2rem', backgroundColor: '#4d4d4d', color: 'white' }} color="success" variant="contained" onClick={addBasket} disableElevation>
-            <AddShoppingCartIcon />
-            ⠀⠀Add to cart
-        </Button>
-    </Box>
-        <Box>
-                            <Button sx={{ width: '13rem', backgroundColor: '#4d4d4d' }} color="success" variant="contained" disableElevation>
-            <VolunteerActivismIcon />
-            ⠀⠀
-            Add to favorite
-        </Button>
-    </Box>
+                                <Button sx={{ width: '13rem', margin: '2rem', backgroundColor: '#4d4d4d', color: 'white' }} color="success" variant="contained" onClick={addBasket} disableElevation>
+                                    <AddShoppingCartIcon />
+                                    ⠀⠀Add to cart
+                                </Button>
+                            </Box>
+                            <Box>
+                                <Button sx={{ width: '13rem', backgroundColor: '#4d4d4d' }} color="success" onClick={handleFavourite} variant="contained" disableElevation>
+                                    <VolunteerActivismIcon />
+                                    ⠀⠀
+                                    Add to favorite
+                                </Button>
+                            </Box>
                         </Card >
                     </Box >
                 </Box >
                 <Box>
-                                <Box className='box-review' sx={{ marginTop: '2rem', marginBottom: '2rem'}}>
-                                    <Card sx={{width: '50rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
-                                        <Typography variant="body2" color="text.secondary">
-                                        < RatingDetails product={card} handleReload={handleReload} />
-                                        </Typography>
-                                    </Card>
-                                </Box>
-                            </Box>
+                    <Box className='box-review' sx={{ marginTop: '2rem', marginBottom: '2rem' }}>
+                        <Card sx={{ width: '50rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
+                            <Typography variant="body2" color="text.secondary">
+                                < RatingDetails product={card} handleReload={handleReload} />
+                            </Typography>
+                        </Card>
+                    </Box>
+                </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
                     <CarouselProduct />
                 </Box>

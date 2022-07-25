@@ -1,0 +1,11 @@
+.form-admin{
+    padding-top: 27.1vh;
+    padding-bottom: 12vh;
+}
+.ambient-select {
+    width: 20rem;
+    padding: .3rem;
+    border: none;
+    border-bottom: solid 1px black;
+    background-color: transparent;
+}

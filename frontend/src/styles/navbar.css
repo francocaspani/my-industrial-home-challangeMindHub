@@ -113,6 +113,11 @@
     padding: .2rem;
 }
 
+.linkRouter {
+    text-decoration: none;
+    color: black;
+}
+
 @media(max-width: 900px) {
     .logo {
         width: 5rem;

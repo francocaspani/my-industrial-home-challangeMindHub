@@ -41,6 +41,23 @@ export default function Navbar() {
   const user = useSelector(store => store.usersReducer.userData)
   const basket = useSelector(store => store.basketReducer.productsBasket)
 
+  let subtotals = []
+  if(basket) {
+      (basket && basket?.map(product => {
+          subtotals.push(product.productId.price * product.amount)
+      }))
+  }
+
+
+let subTotalBasket = 0;
+function addTotal() {
+  for(let i=0; i < subtotals.length; i++){
+    subTotalBasket = subtotals[i] + subTotalBasket;
+  }
+  return subTotalBasket;
+}
+addTotal()
+
   // const reload = ()=>{setBasketReload(!basketReload)}
 
   useEffect(() => {
@@ -52,7 +69,6 @@ export default function Navbar() {
   async function deleteBasket(id) {
     const productId = id;
     await dispatch(basketActions.deleteBasketProduct(productId));
-    console.log(productId)
     setBasketReload(!basketReload)
   }
 
@@ -63,7 +79,8 @@ export default function Navbar() {
     setSearch(search)
   }, [search])
 
-  const products = useSelector(store => store.productsReducer.productsFiltered)
+  const productsFiltered = useSelector(store => store.productsReducer.productsFiltered)
+  const products = useSelector(store => store.productsReducer.products)
 
   const [state, setState] = React.useState({
     top: false,
@@ -91,12 +108,14 @@ export default function Navbar() {
       </div>
       <div className='drawer'>
         {
-          (products?.length < 21) ? products?.map(product => (
-            <div className='search-product'>
-              <img alt='img-search' className='img-search' src={product.img} />
-              <p className='name-search'>{product.name}</p>
-              <p className='price-search'>$ {product.price}</p>
-            </div>
+          (productsFiltered?.length < products.length) ? productsFiltered?.map(product => (
+            <LinkRouter to={`/products/${product._id}`} className='linkRouter'>
+              <div className='search-product' onClick={toggleDrawer(anchor, false)}>
+                <img alt='img-search' className='img-search' src={product.img} />
+                <p className='name-search'>{product.name}</p>
+                <p className='price-search'>$ {product.price}</p>
+              </div>
+            </LinkRouter>
           )) : <p></p>
         }
       </div>
@@ -117,7 +136,7 @@ export default function Navbar() {
               <img alt='img-drawer' className='img-drawer' src={product.productId.img} />
               <div>
                 <p className='name-drawer'>{product.productId.name}</p>
-                <p className='price-drawer'>$ {product.productId.price}</p>
+                <p className='price-drawer'>$ {product.productId.price} x {product.amount}</p>
               </div>
               <DeleteIcon onClick={()=> deleteBasket(product._id)} />
             </div>
@@ -126,17 +145,22 @@ export default function Navbar() {
             : <p></p>
         }
         {
-          (basket?.length !== 0) ?
+          (basket.length !== 0) ?
             (<div className='container-total-drawer'>
               <p>Total:</p>
-              <p>$234</p>
+              <p>${subTotalBasket}</p>
             </div>
             ) : <p className='empty'>Empty basket</p>
         }
         {
-          (basket?.length !== 0) ?
+          (basket.length !== 0) ?
             (<div className='container-buttons'>
-              <div className='button-finish-drawer'>Proceed to checkout</div>
+              <LinkRouter to='/basket' className='linkRouter' onClick={toggleDrawer(anchor, false)}>
+                <div className='button-finish-drawer'>Proceed to checkout</div>
+              </LinkRouter>
+              <LinkRouter to='/products' className='linkRouter' onClick={toggleDrawer(anchor, false)}>
+                <div className='button-finish-drawer'>Continue shopping</div>
+              </LinkRouter>
             </div>
             ) : <p className='empty'></p>
         }
@@ -153,7 +177,7 @@ export default function Navbar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {[{ to: '/', name: 'Home' }, { to: '/', name: 'Spaces' }, { to: '/products', name: 'Products' }, { to: '/', name: 'Shop' }, { to: '/Favorites', name: 'Favs' }].map((text, index) => (
+        {[{ to: '/', name: 'Home' }, { to: '/', name: 'Spaces' }, { to: '/products', name: 'Products' }, { to: '/basket', name: 'Basket' }, { to: '/Favorites', name: 'Favs' }].map((text, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton>
               <LinkRouter className='links' to={text.to}>
@@ -250,10 +274,9 @@ export default function Navbar() {
             <LinkRouter to={'/basket'}>
               <ShoppingCartIcon />
             </LinkRouter>
-
           </Badge>
         </IconButton>
-        <p>Shop</p>
+        <p>Basket</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -261,7 +284,7 @@ export default function Navbar() {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
+          <Badge badgeContent={user?.favourite.length} color="error">
             <FavoriteIcon />
           </Badge>
         </IconButton>
@@ -358,10 +381,7 @@ export default function Navbar() {
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={toggleDrawer('right', true)}>
                 <Badge badgeContent={basket.length} color="error">
-                  <LinkRouter to={'/basket'}>
                     <ShoppingCartIcon />
-                  </LinkRouter>
-
                 </Badge>
               </IconButton>
               <LinkRouter to={"/Favorites"} >
@@ -370,7 +390,7 @@ export default function Navbar() {
                   aria-label="show 17 new notifications"
                   color="inherit"
                 >
-                  <Badge badgeContent={17} color="error">
+                  <Badge badgeContent={user?.favourite.length} color="error">
                     <FavoriteIcon />
                   </Badge>
                 </IconButton>
