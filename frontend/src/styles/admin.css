@@ -1,0 +1,53 @@
+.form-admin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15.1vh;
+    padding-bottom: 5vh;
+}
+.ambient-select {
+    width: 20rem;
+    padding: .3rem;
+    border: none;
+    border-bottom: solid 1px black;
+    background-color: transparent;
+}
+.ctnCardAdmin{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.cardAdmin{
+    width: 20%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 3.3px black;
+    margin: 1rem;
+    padding: 1rem;
+}
+.cardimgAdmin{
+    width: 100%;
+    height: 20rem;
+}
+.cardtittleAdmin{
+    padding: 1rem;
+}
+
+.labelAdmin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #8f9091;
+}
+.formAdminDelete{
+    padding-top: 2vh !important;
+}
+.labelAdminHashtags{
+    font-size: 1rem;
+}

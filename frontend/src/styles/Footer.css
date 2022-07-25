@@ -3,48 +3,52 @@
 *{
     font-family: 'Asap Condensed', sans-serif;
 }
-.mainContainer{
-    height: 35vh;
+.mainContainerFooter{
+    min-height: 30vh; /*para 1024 */
     background-color: #4D4D4D;
+    padding: 1rem 0;
 }
 
-.titleInput{
+.containerInputFooter{
+    padding-bottom: 1rem;
+}
+
+.titleInputFooter{
     color: white;
     font-size: 1.3rem;
-    margin: 0 0 1rem 0;
-    padding: 15px;
+    margin: 0 0 .5rem 0;
+    padding-top: .5rem;
 }
 
-.everyTitle{
+.everyTitleFooter{
     font-size: 1.3rem;
+    padding-bottom: 1rem;
 }
 
-.containerInfo{
+.containerInfoFooter{
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    margin: 1rem 0;
 }
 
 .containerFooter p {
     color: white;
 }
 
-.everyContainer{
-    /* background-color: rgba(44, 35, 30, 0.873); */
+.everyContainerFooter{
     width: 14rem;   /* o  23% o 24vw */
-    height: 10rem;  /* o 28vh */
     border-radius: 5%;
+    padding-top: 10px;
 }
 
 .containerFooter{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin-top: 1rem;
+    padding-top: 10px;
+    flex-wrap: wrap
 }
 
-.everyImage{
+.everyImageFooter{
     margin: 0 .5rem;
 }
 
@@ -60,7 +64,7 @@
     flex-grow: 1;
 }
 
-.socialMedias{
+.socialMediasFooter{
     flex-grow: 1.1;
 }
 
@@ -68,10 +72,10 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    text-decoration: none;
 }
 
-.infoFooter a {
-    text-decoration: none;
+.infoFooter p {
     color: white;
     padding: .3rem;
 }
@@ -85,4 +89,52 @@
 
 .containerPayments img{
     color: white;
+}
+
+.companyContainerFooter{
+    height: 5rem !important;
+}
+
+.contactContainer{
+    height: 7rem;
+}
+
+.inputSearchFooter{
+    align-self: center;
+}
+
+@media (max-width: 860px){
+    .inputSearchFooter{
+        width: 360px;
+        align-self: center;
+    }
+    
+
+    .mainContainerFooter{
+        min-height: 35vh;
+    }
+}
+
+@media (max-width: 600px){
+    .containerInfoFooter{
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 500px){
+    .inputSearchFooter{
+        width: 240px;
+        align-self: center;
+    }
+    .containerFooter{
+        flex-direction: column-reverse;
+        margin-top: 1rem;
+    }
+    .containerPayments{
+        padding: .6rem 0;
+    }
+    .nextui-c-iwmZdB{
+        width: 80%;
+    }
 }

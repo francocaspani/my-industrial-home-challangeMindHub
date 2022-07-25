@@ -34,6 +34,19 @@ const usersActions = {
             dispatch({ type: 'logOutUser', payload: null })
         }
     },
+    sendNewsletter: (email) => {
+        console.log(email)
+        return async (dispatch, getState) => {
+            try {
+                const res = await axios.post(`${urlBackend}/confirmation/${email}`)
+                dispatch({ type: 'newsletter', payload: res.data })
+                console.log(res)
+                return res
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    },
     verifyToken: (token) => {
         return async (dispatch, getState) => {
             const res = await axios.get(`${urlBackend}/auth/verifytoken`, {
@@ -42,7 +55,6 @@ const usersActions = {
                 .then(user => {
                     if (user.data.success) {
                         dispatch({ type: 'logInUser', payload: user.data })
-                        console.log(user)
                         return user
                     } else {
                         localStorage.removeItem('token')
@@ -61,7 +73,16 @@ const usersActions = {
 
             return res
         }
+    },
+    handleFavourites: (idProduct, token) => {
+        return async (dispatch, getState) => {
+            const res = await axios.post(`${urlBackend}/favourite/${idProduct}`, { },{
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+        return res
+        }
     }
+    
 }
 
 export default usersActions

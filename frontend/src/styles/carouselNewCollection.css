@@ -1,0 +1,120 @@
+*{
+    box-sizing: border-box; 
+    padding: 0;
+    margin: 0;
+}
+#app { height: 100% }
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+/* .swiper {
+  width: 100%;
+  height: 100%;
+} */
+.containerCarouselNewCollection{
+    width: 100% !important;
+    height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-position: center; 
+}
+.containerSwiperNewCollection{
+    width: 93%;
+    height: 80%;
+}
+
+.titleCaruselNewCollection{
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: left;
+}
+.titleCaruselNewCollection p{
+    width: 100%;
+    margin-left: 10rem;
+}
+.imageproduct{
+  height: 15rem;
+  width: 15% !important;
+  /* object-fit: cover; 
+  background-position: center;  */
+ 
+}
+.containerProductImageName{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    font-size: medium;
+    margin: none;
+    /* color: black; */
+    cursor: pointer;
+    border-radius: 0.3rem;
+}
+.containerProductImageName p{
+    background-color: rgba(3, 3, 3, 0.39);
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-grow: 1;
+  }
+  /* .imageproduct:hover{
+    color: rgba(0, 0, 0, 0.397);
+  } */
+  /* .name_priceCarouselNC{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 2rem;
+  } */
+  .imageCarouselNewCollection{
+    height: 90% !important;
+    width: 100% !important;
+    object-fit: cover;
+  }

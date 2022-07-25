@@ -33,7 +33,7 @@ Router.route('/productsByAmbient/:id')
 // .post(passport.authenticate('jwt',{ session: false}),handleLikes)
 
 const usersControllers = require('../controllers/usersControllers');
-const {signUpUser, logInUser, getUsers, verifyEmail, verifyToken, handleFavourites} = usersControllers
+const {signUpUser, logInUser, getUsers, verifyEmail, verifyToken, newsletterConfirmation, handleFavourites} = usersControllers
 
 Router.route('/auth/signup')
 .post(validator,signUpUser)
@@ -46,6 +46,9 @@ Router.route('/auth/users')
 
 Router.route('/verify/:uniqueString')
 .get(verifyEmail)
+
+Router.route('/confirmation/:email')
+.post(newsletterConfirmation)
 
 Router.route('/auth/verifytoken')
 .get(passport.authenticate('jwt',{ session: false}), verifyToken)
@@ -62,6 +65,33 @@ Router.route('/product/review')
 
 Router.route('/review/:id')
 .post(passport.authenticate('jwt',{ session: false}),deleteReview)
+
+const basketControllers = require('../controllers/basketControllers');
+const {addToBasket, getUserBasket, deleteBasketProduct, modifyBasketProduct,modifyState, modifyStock} = basketControllers
+
+
+Router.route('/basket')
+.post(passport.authenticate('jwt',{ session: false}),addToBasket)
+.get(passport.authenticate('jwt', {session: false}), getUserBasket)
+.put(passport.authenticate('jwt', {session: false}), modifyBasketProduct)
+
+Router.route("/deletebasket/:id")
+.delete(passport.authenticate('jwt', {session: false}), deleteBasketProduct)
+// .get(passport.authenticate('jwt', {session: false}), getProduct)
+
+
+// Router.route('/deliveredBasket')
+// .get(passport.authenticate('jwt', {session: false}), getDelivered)  
+
+// Router.route('/shipBasket')
+// .get(passport.authenticate('jwt', {session: false}), getShip)    
+
+Router.route('/hola')
+.put(passport.authenticate('jwt', {session: false}), modifyState)
+// .get(getOld)
+
+Router.route('/modifyStock/:sku')
+.put(passport.authenticate('jwt', {session: false}), modifyStock)
 
 
 module.exports = Router

@@ -42,7 +42,7 @@ const sendEmail = async (email, uniqueString, firstName) => {
     const htmlToSend = template(replacements)
 
     let mailOptions = {
-        from: 'francocaspani.dev@gmail.com',
+        from: 'myindustrialh@gmail.com',
         to: email,
         subject: `Hello ${firstName}!`,
         html: htmlToSend

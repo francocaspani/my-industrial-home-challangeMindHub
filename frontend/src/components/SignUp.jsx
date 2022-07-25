@@ -30,18 +30,18 @@ function SignUp() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [paices, setpaices] = useState(null);
+    const [countries, setCountries] = useState(null);
     const [selectedCountry, setSelectedCountry] = useState()
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     useEffect(() => {
         axios.get("https://restcountries.com/v3.1/all").then((response) => {
-            setpaices(response.data);
+            setCountries(response.data);
         });
     }, []);
 
-    const paicesOrdenados = paices?.map((pais) => pais.name.common).sort();
+    const sortedCountries = countries?.map((pais) => pais.name.common).sort();
 
     const handleSelect = (event) => {
         setSelectedCountry(event.target.value)
@@ -55,6 +55,7 @@ function SignUp() {
             email: event.target[2].value,
             password: event.target[4].value,
             country: event.target[3].value,
+            isAdmin:false,
             from: 'propietary-signup'
         }
         const res = await dispatch(usersActions.signUpUser(userData))
@@ -78,9 +79,9 @@ function SignUp() {
 
     return (
         <div className='main-sign'>
-            <img className='img-sign' src='https://img.freepik.com/fotos-premium/loft-estilo-industrial-balcon-interior-3d-render_269031-362.jpg?w=2000' />
+            <img alt='img-sign' className='img-sign' src='https://img.freepik.com/fotos-premium/loft-estilo-industrial-balcon-interior-3d-render_269031-362.jpg?w=2000' />
             <div className='container-form'>
-                <img className='logo-sign' src='https://cdn.discordapp.com/attachments/998343174818889748/998786396615622846/MY-INDUSTRIAL-HOME.png' />
+                <img alt='img-sign' className='logo-sign' src='https://cdn.discordapp.com/attachments/998343174818889748/998786396615622846/MY-INDUSTRIAL-HOME.png' />
                 <div className="container-sign">
                     <div className="form">
                         <form onSubmit={handleSubmit}>
@@ -94,7 +95,7 @@ function SignUp() {
                                     <Box sx={style} >
 
                                         <select onChange={handleSelect} className='select-modal' name="country" id="country">
-                                            {paicesOrdenados?.map((everycountry, index) => <option key={index} value={everycountry}>{everycountry}</option>)}
+                                            {sortedCountries?.map((everycountry, index) => <option key={index} value={everycountry}>{everycountry}</option>)}
                                         </select>
                                         {/* {selectedCountry && <span><GoogleSignUp country={selectedCountry} /></span>
                                         } */}
@@ -118,7 +119,7 @@ function SignUp() {
                             <div className="container-input">
                                 <select className="country-select">
                                     <option className="option">Country</option>
-                                    {paicesOrdenados?.map((pais, id) => (
+                                    {sortedCountries?.map((pais, id) => (
                                         <option className="option" key={id} value={pais}>
                                             {pais}
                                         </option>

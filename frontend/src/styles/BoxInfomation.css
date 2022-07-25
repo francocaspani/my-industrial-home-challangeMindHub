@@ -1,0 +1,45 @@
+*{
+    box-sizing: border-box; 
+    padding: 0;
+    margin: 0;
+}
+
+.containerBoxInfomation{
+    width: 100%;
+    height:12rem;
+    background-color: black;
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.autorenewIcon, .localShippingIcon, .lockIcon{
+    color: white;
+    width: 3rem !important;
+    height: 3rem !important;
+    margin-bottom: 1rem;
+}
+.containerAutorenewIcon, .containerlocalShippingIcon, .containerLockIcon{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.containertxtLocalShippingIcon{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* margin-top: 0.5rem; */
+}
+.txtautorenewIcon, .txtlocalShippingIcon, .txtlockIcon{
+    color: white !important;
+    text-decoration: none;
+}
+.containerlocalShippingIcon{
+    margin-top: 1.5rem;
+   
+    
+}
+
