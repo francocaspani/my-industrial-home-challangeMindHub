@@ -6,9 +6,13 @@
     justify-content: center;
     align-items: center;
    }
-   .css-bhp9pd-MuiPaper-root-MuiCard-root {
-       width: 20rem !important;
-       height: 31rem !important;
+   .textDecoration{
+    text-decoration: none !important;
+   }
+   /*CAMBIO EL NOMBRE PARA QUE NO HAYA CONFLICTO CON EL DETAILS*/
+   .cardProduts {
+       width: 19% !important;
+       height: 91% !important;
        display: flex !important;
        flex-direction: column !important;
        align-items: center !important;

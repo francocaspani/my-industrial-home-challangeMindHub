@@ -63,8 +63,14 @@ const productActions = {
                 {console.log(res)}
                 return res
             }
-        
     },
+    modifyProduct: (id,productData) => {
+        return async (dispatch, getState) => {
+            const res = await axios.put(`${urlBackend}/products/${id}`,productData )
+            dispatch({type: "modifyProduct", payload: res.data.response.product})
+            return res
+        }
+    }
 }
 
 export default productActions

@@ -5,14 +5,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import productActions from '../redux/actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import "../styles/products.css"
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import LocalGroceryStoreTwoToneIcon from '@mui/icons-material/LocalGroceryStoreTwoTone';
@@ -107,7 +105,7 @@ export default function MediaCard({ product, reload, keys }) {
   return (
     <>
 
-      <Card key={keys}>
+      <Card className='cardProduts' key={keys}>
         <CardMedia
           component="img"
           height="320"
@@ -180,7 +178,7 @@ export default function MediaCard({ product, reload, keys }) {
             <Typography sx={{ fontSize: "1rem", display: "flex" }} gutterBottom variant="p">
               ${product.price}
             </Typography>
-            <LinkRouter to={`/products/${product._id}`} >
+            <LinkRouter style={{textDecoration:"none"}} to={`/products/${product._id}`} >
               <button className='buttonCarrito'>Go To Details</button>
             </LinkRouter>
           </CardContent>
