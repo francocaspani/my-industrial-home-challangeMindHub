@@ -33,7 +33,7 @@ Router.route('/productsByAmbient/:id')
 // .post(passport.authenticate('jwt',{ session: false}),handleLikes)
 
 const usersControllers = require('../controllers/usersControllers');
-const {signUpUser, logInUser, getUsers, verifyEmail, verifyToken} = usersControllers
+const {signUpUser, logInUser, getUsers, verifyEmail, verifyToken, newsletterConfirmation} = usersControllers
 
 Router.route('/auth/signup')
 .post(validator,signUpUser)
@@ -46,6 +46,9 @@ Router.route('/auth/users')
 
 Router.route('/verify/:uniqueString')
 .get(verifyEmail)
+
+Router.route('/confirmation/:email')
+.post(newsletterConfirmation)
 
 Router.route('/auth/verifytoken')
 .get(passport.authenticate('jwt',{ session: false}), verifyToken)

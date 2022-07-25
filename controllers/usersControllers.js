@@ -2,6 +2,7 @@ const User = require('../models/user')
 const bcryptjs = require('bcryptjs')
 const crypto = require('crypto')
 const sendEmail = require('./sendEmail')
+const sendNewsletter = require('./sendNewsletter')
 const jwt = require('jsonwebtoken')
 
 
@@ -165,6 +166,22 @@ const usersControllers = {
             success: error ? false : true,
             error: error
         })
+    },
+    newsletterConfirmation: async (req, res) => {
+        const email = req.params.email
+        console.log('averrrrrrrrrrrrrrrrrrrrrrrrrrrr' + email)
+        await sendNewsletter(email)
+        if(email) {
+            res.json({
+                success: true,
+                message: 'Hi, now our newsletters are starting to arrive!'
+            })
+        } else {
+            res.json({
+                success: false,
+                message: `We had problems to send you ours newsletters!`,
+            })
+        }
     },
     verifyEmail: async (req, res) => {
         const { uniqueString } = req.params

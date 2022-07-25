@@ -34,6 +34,19 @@ const usersActions = {
             dispatch({ type: 'logOutUser', payload: null })
         }
     },
+    sendNewsletter: (email) => {
+        console.log(email)
+        return async (dispatch, getState) => {
+            try {
+                const res = await axios.post(`${urlBackend}/confirmation/${email}`)
+                dispatch({ type: 'newsletter', payload: res.data })
+                console.log(res)
+                return res
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    },
     verifyToken: (token) => {
         return async (dispatch, getState) => {
             const res = await axios.get(`${urlBackend}/auth/verifytoken`, {
