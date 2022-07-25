@@ -4,6 +4,8 @@ import basketActions from '../redux/actions/basketActions'
 import BasketCard from '../components/BasketCard'
 import "../styles/basket.css"
 import { Link as LinkRouter } from 'react-router-dom'
+import {PayPalScriptProvider, PayPalButtons} from '@paypal/react-paypal-js'
+import PayPal from '../components/PayForm/PayPal'
 
 function Basket(props) {
 
@@ -73,6 +75,7 @@ function Basket(props) {
                     <LinkRouter to='' className='linkRouter'>
                         <div className='button-continue'>Proceed to checkout</div>
                     </LinkRouter>
+                    <PayPal total={totalBasket} shipping={shipping} subTotal={subTotalBasket}/>
                     <LinkRouter to='/products' className='linkRouter'>
                         <div className='button-continue'>Continue shopping</div>
                     </LinkRouter>

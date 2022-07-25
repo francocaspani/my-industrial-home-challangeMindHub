@@ -21,8 +21,8 @@ import Products from './pages/Products';
 import Basket from './pages/Basket';
 import Admin from './pages/Admin';
 
-export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
-// export const urlBackend = 'http://localhost:4000/api'
+// export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
+export const urlBackend = 'http://localhost:4000/api'
 
 
 function App() {

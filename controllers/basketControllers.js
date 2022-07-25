@@ -1,4 +1,5 @@
 const Basket = require('../models/basket')
+const Product = require('../models/product')
 
 const basketControllers = {
 
@@ -167,16 +168,43 @@ const basketControllers = {
     modifyState: async (req,res) => {
         console.log('REQ BODY REQ BODY REQ BODY REQ BODY REQ BODY')
         console.log(req.body)
-        const {productId,buyState} = req.body
-        const user = req.user._id
+        const {sku,buyState} = req.body
+        console.log(sku)
+        const user = req.user.id
         try {
             const modifyBasket = await Basket
-            .findOneAndUpdate({"_id": productId}, {$set:{
+            .findOneAndUpdate({"_id": sku}, {$set:{
                 "buyState": buyState}}, {new: true})
+                .populate("productId", {stock:1})
                 console.log('MODIFYYYYYYYYYYYYYYYYYYYYYYYYYYYY')
                 console.log(modifyBasket)
             res.json({success: true,
                 response: {modifyBasket},
+                message: "done!"})
+        }
+        catch (error) {
+            console.log(error)
+            res.json({ success: true,
+                message: "We couldn't modify the state producr, please try again!" })
+        }
+    },
+
+    modifyStock: async (req,res) => {
+        console.log('REQ BODY REQ BODY REQ BODY REQ BODY REQ BODY')
+        console.log(req.body)
+        const sku = req.params.sku
+        console.log(sku)
+        const user = req.user.id
+        try {
+            const modifyStock = await Basket.find({"_id": sku}).populate("productId")
+            console.log("dsadsadsadsadsa",modifyStock[0].productId)
+            const stock = modifyStock[0].productId.stock - modifyStock[0].amount
+
+            const productNewStock = await Product.findOneAndUpdate({"_id":modifyStock[0].productId._id},{$set:{
+                "stock": stock}}, {new: true})
+            console.log("fran y su logica",modifyStock, productNewStock)
+            res.json({success: true,
+                response: {modifyStock},
                 message: "done!"})
         }
         catch (error) {
