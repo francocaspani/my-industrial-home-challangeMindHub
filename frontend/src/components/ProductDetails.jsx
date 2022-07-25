@@ -9,7 +9,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
-import Carousel from '../components/CarouselProduct'
+import CarouselProduct from '../components/CarouselProduct'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import productActions from '../redux/actions/productActions';
@@ -138,7 +138,7 @@ export default function Product(props) {
                                 </Box>
                             </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
-                    <Carousel />
+                    <CarouselProduct />
                 </Box>
             </Box >
         </>
