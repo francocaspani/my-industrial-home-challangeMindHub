@@ -8,10 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 
-export default function PayPal() {
+export default function PayPal(props) {
     //const [{basket},dispatch] = useStateValue(); //traemos la info de nuestro carrito de compra
     const [success, setSuccess] = useState(false);
     const [orderID, setOrderID] = useState(false);
+    const [reload, setReload] = useState(false)
     const [ErrorMessage, setErrorMessage] = useState("");
     const [basketReload, setBasketReload] = useState(false)
     const dispatch = useDispatch()
@@ -20,10 +21,14 @@ export default function PayPal() {
         if (user) {
             dispatch(basketActions.getUserBasket())
         }
-    }, [basketReload, user])
+    }, [basketReload, user,reload])
 
     const basket = useSelector(store => store.basketReducer.productsBasket)
     console.log(basket)
+    let total = props.total
+    console.log(props.subTotal)
+    console.log(props.shipping)
+
 
     // console.log(1, orderID);
     // console.log(2, success);
@@ -41,110 +46,77 @@ export default function PayPal() {
         intent: "capture", //Estableco el metodos este autoriza la operacion y captura los fondos
 
     };
-    
+
     const createOrder = (data, actions) => {
         //Creo la orden de con los datos, esta puede ser general o con detalle de items
         console.log(data)
         return actions.order.create({
-            // purchase_units: [
-            //     basket.map(prod => {
-                    
-            //     })
-            //     {
-            //         description: "items",
-            //         amount: {
-            //             value: "200",
+            //     purchase_units: [
+
+            //         {
+            //             description: "items",
+            //             amount: {
+            //                 value: total,
+            //             },
+
             //         },
 
-            //     },
+
+            //     ],
+            // })
 
 
-            // ],
-        //})
-        //}
-
-         purchase_units: [{
-                    reference_id: "PUHF",
-                    description: "Sporting Goods",
-                    custom_id: "CUST-HighFashions",
-                    soft_descriptor: "HighFashions",
-                    amount: {
-                        currency_code: "USD",
-                        value: "230.00",
-                        breakdown: {
-                            item_total: {
-                                currency_code: "USD",
-                                value: "180.00"
-                            },
-                            shipping: {
-                                currency_code: "USD",
-                                value: "30.00"
-                            },
-                            handling: {
-                                currency_code: "USD",
-                                value: "10.00"
-                            },
-                            tax_total: {
-                                currency_code: "USD",
-                                value: "20.00"
-                            },
-                            shipping_discount: {
-                                currency_code: "USD",
-                                value: "10"
-                            }
-                        }
-                    },
-                    items: [{
-                        
-                        name: "T-Shirt",
-                        description: "Green XL",
-                        sku: "sku01",
-                        unit_amount: {
-                             currency_code: "USD",
-                             value: "90.00"
-                        },
-                        tax: {
+            purchase_units: [{
+                description: "Deco Home",
+                amount: {
+                    currency_code: "USD",
+                    value: `${total}`,
+                    breakdown: {
+                        item_total: {
                             currency_code: "USD",
-                            value: "10.00"
+                            value: `${props.subTotal}`
                         },
-                        quantity: "1",
-                        category: "PHYSICAL_GOODS"
-                    },
-                        {
-                        name: "Shoes",
-                        description: "Running, Size 10.5",
-                        sku: "sku02",
-                        unit_amount: {
-                             currency_code: "USD",
-                             value: "45.00"
-                        },
-                        tax: {
+                        shipping: {
                             currency_code: "USD",
-                            value: "5.00"
-                        },
-                        quantity: "2",
-                        category: "PHYSICAL_GOODS"
-                    }
-                    ],
-                    shipping: {
-                        method: "United States Postal Service",
-                        address: {
-                            name: {
-                                full_name: "John",
-                                surname: "Doe"
-                            },
-                            address_line_1: "123 Townsend St",
-                            address_line_2: "Floor 6",
-                            admin_area_2: "San Francisco",
-                            admin_area_1: "CA",
-                            postal_code: "94107",
-                            country_code: "US"
+                            value: `${props.shipping}`
                         }
                     }
-                }]
-                
+                },
+                items: basket.map((eachProduct) => {
+                    console.log(eachProduct.productId.name)
+                    console.log(eachProduct.productId.price)
+                    console.log(eachProduct.amount)
+                    return ({
+                        name: eachProduct.productId.name,
+                        unit_amount: {
+                            currency_code: "USD",
+                            value: `${eachProduct.productId.price}`
+                        },
+                        sku: eachProduct._id,
+                        quantity: `${eachProduct.amount}`,
+                    })
+                }),
+                shipping: {
+                    method: "United States Postal Service",
+                    address: {
+                        name: {
+                            full_name: `${user.firstName}`,
+                            surname: `${user.lastName}`
+                        },
+                        address_line_1: "123 Townsend St",
+                        address_line_2: "Floor 6",
+                        admin_area_2: "San Francisco",
+                        admin_area_1: "CA",
+                        postal_code: "94107",
+                        country_code: "US"
+                    }
+                }
+            }]
+
         });
     };
+
+
     const onApprove = (data, actions) => { //recibo el resultado de mi operacion
         console.log(data)
         return actions.order.capture()
@@ -156,8 +128,16 @@ export default function PayPal() {
                 alert('Transaction ' + transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
                 console.log(details)
                 setOrderID(transaction.id)
+                // modifyState()
+                
+                details && details.purchase_units[0].items.map(bougth => {                    
+                    dispatch(basketActions.modifyState(bougth.sku, "bought"))                   
+                    dispatch(basketActions.modifyStock(bougth.sku))
+                })
+                setReload(!reload)
             });
     };
+
     const onCancel = (data) => {
         console.log('You have cancelled the payment!', data);
     }

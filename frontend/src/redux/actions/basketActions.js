@@ -62,17 +62,31 @@ const basketActions = {
         }
     },
 
-    // modifyState: (commentData) => {
-    //     //console.log(commentData)
-    //     const token = localStorage.getItem('token')
-    //     return async (dispatch, getState) => {
-    //         const answer = await axios.put(urlMrWines+`api/buyBasket`,{...commentData},
-    //         {headers: {Authorization: "Bearer "+token}})
-    //     dispatch({type: 'message', payload: {view: true, message: answer.data.message, success: answer.data.success}})
-    //     console.log(answer.data.response)
-    //     return answer.data.response
-    //     }
-    // }
+    modifyState: (sku, buyState) => {
+        console.log(sku)
+        console.log(buyState)
+        const token = localStorage.getItem('token')
+        return async (dispatch, getState) => {
+            const answer = await axios.put(`${urlBackend}/hola`,{sku, buyState},
+            {headers: {Authorization: "Bearer "+token}})
+            console.log(answer)
+        dispatch({type: 'message', payload: {view: true, message: answer.data.message, success: answer.data.success}})
+        console.log(answer.data.response)
+        return answer.data.response
+        }
+    },
+
+    modifyStock: (sku) =>{
+        const token = localStorage.getItem('token')
+        return async (dispatch, getState) => {
+            const answer = await axios.put(`${urlBackend}/modifyStock/${sku}`,{},
+            {headers: {Authorization: "Bearer "+token}})
+            console.log(answer)
+        dispatch({type: 'message', payload: {view: true, message: answer.data.message, success: answer.data.success}})
+        console.log(answer.data.response)
+        return answer.data.response
+        }
+    }
 
 }
 
