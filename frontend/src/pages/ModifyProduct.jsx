@@ -3,6 +3,9 @@ import { useEffect } from 'react'
 import productActions from '../redux/actions/productActions'
 import { useDispatch } from 'react-redux'
 import { useParams } from "react-router-dom"
+import "../styles/admin.css"
+
+
 
 export default function ModifyProduct() {
     const { id } = useParams() 
@@ -46,7 +49,7 @@ useEffect(() => {
     <>
     {product &&
    <>
-    <form onSubmit={handleSubmit} className="form-admin modifyFormAdmin">
+    <form onSubmit={handleSubmit} className="form-admin">
                 <div className="container-input">
                 <label className='labelAdmin' name="Name">Name
                     <input placeholder='name' type="text" id="name" className="" defaultValue={product.name} />

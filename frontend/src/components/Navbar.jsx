@@ -28,13 +28,15 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import '../styles/navbar.css'
-import { Link as LinkRouter } from "react-router-dom"
+import { Link as LinkRouter, useNavigate } from "react-router-dom"
 import { useEffect, useState } from 'react';
 import productActions from '../redux/actions/productActions';
 import basketActions from '../redux/actions/basketActions';
+import usersActions from '../redux/actions/userActions';
 
 export default function Navbar() {
 
+  // const navigate = useNavigate()
   const [basketReload, setBasketReload] = useState(null)
   //const [basket, setBasket] = useState([])
   const dispatch = useDispatch();
@@ -42,21 +44,20 @@ export default function Navbar() {
   const basket = useSelector(store => store.basketReducer.productsBasket)
 
   let subtotals = []
-  if(basket) {
-      (basket && basket?.map(product => {
-          subtotals.push(product.productId.price * product.amount)
-      }))
+  if (basket) {
+    (basket && basket?.map(product => {
+      subtotals.push(product.productId.price * product.amount)
+    }))
   }
 
-
-let subTotalBasket = 0;
-function addTotal() {
-  for(let i=0; i < subtotals.length; i++){
-    subTotalBasket = subtotals[i] + subTotalBasket;
+  let subTotalBasket = 0;
+  function addTotal() {
+    for (let i = 0; i < subtotals.length; i++) {
+      subTotalBasket = subtotals[i] + subTotalBasket;
+    }
+    return subTotalBasket;
   }
-  return subTotalBasket;
-}
-addTotal()
+  addTotal()
 
   // const reload = ()=>{setBasketReload(!basketReload)}
 
@@ -138,7 +139,7 @@ addTotal()
                 <p className='name-drawer'>{product.productId.name}</p>
                 <p className='price-drawer'>$ {product.productId.price} x {product.amount}</p>
               </div>
-              <DeleteIcon onClick={()=> deleteBasket(product._id)} />
+              <DeleteIcon onClick={() => deleteBasket(product._id)} />
             </div>
           ))
 
@@ -189,15 +190,46 @@ addTotal()
       </List>
       <Divider />
       <List>
-        {[{ to: '/signin', name: 'Log-in' }, { to: '/signup', name: 'Sign-up' }].map((text, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton>
-              <LinkRouter className='links' to={text.to}>
-                <ListItemText primary={text.name} />
-              </LinkRouter>
-            </ListItemButton>
-          </ListItem>
-        ))}
+
+        {!user ?
+          
+            <div>
+              {[{ to: '/signin', name: 'Log-in' }, { to: '/signup', name: 'Sign-up' }].map((text, index) => (
+                <ListItem key={index} disablePadding>
+                  <ListItemButton>
+                    <LinkRouter className='links' to={text.to}>
+                      <ListItemText primary={text.name} />
+                    </LinkRouter>
+                  </ListItemButton>
+                </ListItem>))}
+            </div>
+          
+          :
+          <>
+            <div>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <LinkRouter className='links' to="/index" onClick={() => {
+                    dispatch(usersActions.logOutUser())
+                  }}>
+                    <ListItemText sx={{textDecoration:"none"}} primary="Log out" />
+                  </LinkRouter>
+                </ListItemButton>
+              </ListItem>
+            </div>
+            {user.isAdmin ? 
+              <div>
+                  <LinkRouter className='links' to="/admin">
+                  <ListItemButton>
+                    <ListItemText sx={{textDecoration:"none"}} primary="Admin" />
+                  </ListItemButton>
+                  </LinkRouter>
+              </div>
+              :
+                <></>
+              }
+            </>
+        }
       </List>
     </Box>
   );
@@ -228,6 +260,9 @@ addTotal()
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
+      sx={{
+        top:"50px",
+      }}
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: 'top',
@@ -242,12 +277,37 @@ addTotal()
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <LinkRouter className='links' to='/signin'>
-        <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
-      </LinkRouter>
-      <LinkRouter className='links' to='/signup'>
-        <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
-      </LinkRouter>
+
+      {/* {console.log(user)} */}
+      {!user ?
+        <div>
+            <LinkRouter className='links' to='/signin'>
+              <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
+            </LinkRouter>
+            <LinkRouter className='links' to='/signup'>
+              <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
+            </LinkRouter>
+          </div> 
+        :
+        <>
+        <LinkRouter className='links' to="/index" onClick={() => {dispatch(usersActions.logOutUser())}}>
+            <MenuItem>
+              <Typography textAlign="center">Log Out</Typography>
+            </MenuItem>
+          </LinkRouter>
+          {user.isAdmin ? 
+        <div>
+            <LinkRouter className='links'  to="/admin">
+              <MenuItem>
+                <Typography textAlign="center">Admin</Typography>
+              </MenuItem>
+            </LinkRouter>
+        </div>
+        :
+          <></>
+        }
+          </>
+          }
     </Menu>
   );
 
@@ -381,7 +441,7 @@ addTotal()
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={toggleDrawer('right', true)}>
                 <Badge badgeContent={basket.length} color="error">
-                    <ShoppingCartIcon />
+                  <ShoppingCartIcon />
                 </Badge>
               </IconButton>
               <LinkRouter to={"/Favorites"} >

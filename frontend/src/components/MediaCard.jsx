@@ -172,11 +172,11 @@ export default function MediaCard({ product, reload, keys }) {
             {/* cierra botones */}
           </CardActions>
           <CardContent className='ctnContent' sx={{ display: "flex", flexDirection: "column", fontSize: "0.9rem" }}>
-            <Typography sx={{ fontSize: "1rem", display: "flex" }} gutterBottom variant="h4" component="div">
+            <Typography sx={{ fontSize: "1.5rem", display: "flex" }} gutterBottom variant="h4" component="div">
               {product.name} {/*  name producto */}
             </Typography>
-            <Typography sx={{ fontSize: "1rem", display: "flex" }} gutterBottom variant="p">
-              ${product.price}
+            <Typography sx={{ fontSize: "1.2rem", display: "flex" }} gutterBottom variant="p">
+              ${product.price} USD
             </Typography>
             <LinkRouter style={{textDecoration:"none"}} to={`/products/${product._id}`} >
               <button className='buttonCarrito'>Go To Details</button>

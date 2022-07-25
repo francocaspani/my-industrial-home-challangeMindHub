@@ -1,10 +1,10 @@
 import React from 'react'
 import productActions from '../redux/actions/productActions'
 import { useDispatch, useSelector } from 'react-redux'
-import {useEffect } from 'react'
-import "../styles/admin.css"
+import { useEffect } from 'react'
 import { Link as LinkRouter } from "react-router-dom"
 import EditIcon from '@mui/icons-material/Edit';
+import "../styles/admin.css"
 
 export default function Admin() {
 
@@ -15,7 +15,7 @@ export default function Admin() {
     const [reload, setReload] = React.useState(false)
 
     useEffect(() => {
-        dispatch(productActions.getProducts()) 
+        dispatch(productActions.getProducts())
         // eslint-disable-next-line
     }, [reload])
 
@@ -23,7 +23,7 @@ export default function Admin() {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        
+
 
         // console.log(event)
         const productData = {
@@ -52,27 +52,39 @@ export default function Admin() {
 
     return (
         <>
-        <div>
-            <form onSubmit={handleSubmit} className="form-admin">
-                <div className="container-input">
-                    <input placeholder='name' type="text" id="name" className="" />
-                </div>
-                <div className="container-input">
-                    <input placeholder='detail' type="text" id="detail" className="" />
-                </div>
-                <div className="container-input">
-                    <input placeholder='img' type="text" id="img" className="" />
-                </div>
-                <div className="container-input">
-                    <input placeholder='price' type="price" id="price" className="" />
-                </div>
-                <div className="container-input">
-                    <input placeholder='size' type="size" id="size" className="" />
-                </div>
-                <div className="container-input">
-                    <input placeholder='stock' type="stock" id="stock" className="" />
-                </div>
-                {/* <div className="container-input">
+            <div>
+                <form onSubmit={handleSubmit} className="form-admin">
+                    <div className="container-input">
+                    <h2 className='labelAdmin'>Indicate the Name of the Product
+                        <input placeholder='name' type="text" id="name" className="" />
+                    </h2>
+                    </div>
+                    <div className="container-input">
+                    <h2 className='labelAdmin'>Indicate the product detail
+                        <input placeholder='detail' type="text" id="detail" className="" />
+                    </h2>
+                    </div>
+                    <div className="container-input">
+                    <h2 className='labelAdmin'>Indicate the link of the image
+                        <input placeholder='img' type="text" id="img" className="" />
+                    </h2>
+                    </div>
+                    <div className="container-input">
+                    <h2 className='labelAdmin'>Indicate the price of the product
+                        <input placeholder='price' type="price" id="price" className="" />
+                    </h2>
+                    </div>
+                    <div className="container-input">
+                    <h2 className='labelAdmin'>Please indicate product size
+                        <input placeholder='size' type="size" id="size" className="" />
+                    </h2>
+                    </div>
+                    <div className="container-input">
+                    <h2 className='labelAdmin'>Indicate the stock
+                        <input placeholder='stock' type="stock" id="stock" className="" />
+                    </h2>
+                    </div>
+                    {/* <div className="container-input">
                     <select className="country-select">
                         <option className="option">Ambient</option>
                         {ambients.map((ambient, key) => (
@@ -82,45 +94,50 @@ export default function Admin() {
                         ))}
                     </select>
                 </div> */}
-                <div className="container-input">
-                    <input placeholder='hashtags' type="hashtags" id="hashtags" className="" />
-                </div>
-                <button type="submit" className="submit" value="submit">
-                    Add your product
-                </button>
-            </form>
+                    <div className="container-input">
+                        <h2 className='labelAdmin'>Hashtags </h2>
+                            <label className='labelAdmin labelAdminHashtags' name="Hashtags">Añade el primer hashtag como ambiente
+                            <input placeholder='hashtags(separar con comas)' type="hashtags" id="hashtags" className="" />
+                            </label>
+                    </div>
+                    <button type="submit" className="submit" value="submit">
+                        Add your product
+                    </button>
+                </form>
 
-            <form onSubmit={handleDelete} className="form-admin">
-                <div className="container-input">
-                    <select className="country-select">
-                        <option className="option">Product</option>
-                        {products.map((product, key) => (
-                            <option className="option" key={key} value={product._id}>
-                                {product.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <button type="submit" className="submit" value="submit">
-                    Delete Your Product
-                </button>
-            </form>
-        </div>
+                <form onSubmit={handleDelete} className="form-admin formAdminDelete">
+                    <div className="container-input">
+                    <label className='labelAdmin' name="Hashtags">Select the Product to delete
+                        <select className="country-select">
+                            <option className="option">Product</option>
+                            {products.map((product, key) => (
+                                <option className="option" key={key} value={product._id}>
+                                    {product.name}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+                    </div>
+                    <button type="submit" className="submit" value="submit">
+                        Delete Your Product
+                    </button>
+                </form>
+            </div>
 
             <div className='ctnCardAdmin' >
-            {products.map((product,key) => (
-            <>
-            <div className='cardAdmin' key={key}>
-                <img className='cardimgAdmin' src={product.img} alt="" />
-                <h1 className='cardtittleAdmin'>{product.name}</h1>
-                <LinkRouter to={`/ModifyProduct/${product._id}`} >
-                    <button><EditIcon/></button>
-                </LinkRouter>
-            </div>
-            </>
-    ))
-}
-        </div >
+                {products.map((product, key) => (
+                    <>
+                        <div className='cardAdmin' key={key}>
+                            <img className='cardimgAdmin' src={product.img} alt="" />
+                            <h1 className='cardtittleAdmin'>{product.name}</h1>
+                            <LinkRouter to={`/ModifyProduct/${product._id}`} >
+                                <button><EditIcon /></button>
+                            </LinkRouter>
+                        </div>
+                    </>
+                ))
+                }
+            </div >
         </>
     )
 }

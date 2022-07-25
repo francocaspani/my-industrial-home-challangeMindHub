@@ -26,7 +26,7 @@ export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
 // export const urlBackend = 'http://localhost:4000/api'
 
 
-function App() {
+function App(props) {
   const location = useLocation()
   const dispatch = useDispatch()
   const user = useSelector(store => store.usersReducer.userData)
@@ -54,7 +54,7 @@ function App() {
     }
   }, [])
   
-
+  // console.log(user?)
   return (
     <div className="App">
       <Navbar />
@@ -71,9 +71,10 @@ function App() {
         <Route path='/products/:id' element={<Product/>} />
         <Route path='/products' element={<Products/>} />
         <Route path='/basket' element={<Basket />} />
-        <Route path='/admin' element={<Admin />} />
-        <Route path='/ModifyProduct/:id' element={<ModifyProduct/>} />
-
+        {/* <Route path='/admin' element={<Admin />} /> */}
+        {/* <Route path='/ModifyProduct/:id' element={<ModifyProduct/>} /> */}
+        {user?.isAdmin && <Route path='/admin' element={<Admin/>}/>}
+       {user?.isAdmin && <Route path='/ModifyProduct/:id' element={<ModifyProduct/>}/>}
       </Routes>
       <Footer />
       <ToastContainer />

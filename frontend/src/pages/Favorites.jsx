@@ -5,6 +5,8 @@ import basketActions from '../redux/actions/basketActions';
 import {useState, useEffect} from 'react'
 import { toast } from 'react-toastify';
 import usersActions from '../redux/actions/userActions';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Favorites() {
   const [basket, setBasket] = useState(false)
@@ -66,20 +68,15 @@ const handleFavourite = async (id) => {
               <div>{product.name}</div>
               <div>{product.price}$</div>
               <div>Stock: {product.stock}</div>
-              <button onClick={()=> addBasket(product._id)}>Add to basket</button>
-              <button onClick={()=> handleFavourite(product._id) }>Remove from favourites</button>
-
+              <button onClick={()=> addBasket(product._id)}><ShoppingCartIcon/></button>
+              <button onClick={()=> handleFavourite(product._id) }><DeleteIcon/></button>
             </div>
           )
         }
-
         )
-
           : <div><p>Nothing here</p></div>
         }
-
       </div>
-
     </>
   )
 }

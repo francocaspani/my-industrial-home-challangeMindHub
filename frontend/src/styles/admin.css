@@ -1,6 +1,10 @@
 .form-admin{
-    padding-top: 27.1vh;
-    padding-bottom: 12vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15.1vh;
+    padding-bottom: 5vh;
 }
 .ambient-select {
     width: 20rem;
@@ -41,9 +45,9 @@
     align-items: center;
     background-color: #8f9091;
 }
-.modifyFormAdmin{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.formAdminDelete{
+    padding-top: 2vh !important;
+}
+.labelAdminHashtags{
+    font-size: 1rem;
 }

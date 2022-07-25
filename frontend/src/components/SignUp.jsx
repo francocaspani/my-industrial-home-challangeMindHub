@@ -55,6 +55,7 @@ function SignUp() {
             email: event.target[2].value,
             password: event.target[4].value,
             country: event.target[3].value,
+            isAdmin:false,
             from: 'propietary-signup'
         }
         const res = await dispatch(usersActions.signUpUser(userData))
