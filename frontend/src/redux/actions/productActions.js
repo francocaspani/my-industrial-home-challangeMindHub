@@ -70,6 +70,11 @@ const productActions = {
             dispatch({type: "modifyProduct", payload: res.data.response.product})
             return res
         }
+    },
+    getRating: (reviews) => {
+        return (dispatch, getState) => {
+            dispatch({type: 'getRating' , payload: reviews})
+        }
     }
 }
 

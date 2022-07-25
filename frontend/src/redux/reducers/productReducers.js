@@ -3,7 +3,8 @@ const initialState = {
     productsFiltered: [],
     product: [],
     productsByAmbient: [],
-    productfilteredbyroom: []
+    productfilteredbyroom: [],
+    rating: 0
 }
 
 let checkBoxSelected = []
@@ -46,6 +47,18 @@ const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productfilteredbyroom: filtercheck
+            }
+        case 'getRating':
+            let prodRating;
+            const ratings = action.payload.map(rev => rev.rating);
+            let sumRating = 0;
+            for (let i = 0; i < ratings.length; i++) {
+                sumRating = ratings[i] + sumRating
+            }
+            prodRating = sumRating / (action.payload.length)
+            return {
+                ...state,
+                rating: prodRating
             }
 
         default:

@@ -23,7 +23,7 @@ const style = { // estilo para la apertura de la imagen del producto desde la ca
     p: 4,
 };
 
-export default function RatingReview({ product, handleReload }) {
+export default function RatingReview({ product, handleReload, ratingProduct }) {
 
     const [files, setFiles] = useState()
     const [rating, setRating] = useState(0)
@@ -106,11 +106,11 @@ export default function RatingReview({ product, handleReload }) {
             </span>
             <Box className='ratingBox'>
                 <span className='ratingText'>
-                    <Typography>4.5 stars</Typography>
-                    <Typography>5 Reviews</Typography>
+                    <Typography>{ratingProduct} stars</Typography>
+                    <Typography>{product?.reviews.length} Reviews</Typography>
                 </span>
                 <Stack spacing={1}>
-                    <Rating name="half-rating-read" defaultValue={4.5} precision={0.5} size='large' readOnly />
+                    <Rating name="half-rating-read" value={ratingProduct} precision={0.5} size='large' readOnly />
                 </Stack>
             </Box>
             {product?.reviews.map((item, index) => {

@@ -75,8 +75,6 @@ function App(props) {
         <Route path='/products/:id' element={<Product/>} />
         <Route path='/products' element={<Products/>} />
         <Route path='/basket' element={<Basket />} />
-        {/* <Route path='/admin' element={<Admin />} /> */}
-        {/* <Route path='/ModifyProduct/:id' element={<ModifyProduct/>} /> */}
         {user?.isAdmin && <Route path='/admin' element={<Admin/>}/>}
        {user?.isAdmin && <Route path='/ModifyProduct/:id' element={<ModifyProduct/>}/>}
       </Routes>

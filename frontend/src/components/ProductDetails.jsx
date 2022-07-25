@@ -16,7 +16,7 @@ import productActions from '../redux/actions/productActions';
 import basketActions from '../redux/actions/basketActions';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import RatingDetails from '../components/RatingReview'
+import RatingReview from '../components/RatingReview'
 import usersActions from '../redux/actions/userActions';
 import { toast } from 'react-toastify';
 import '../styles/productDetails.css'
@@ -33,7 +33,7 @@ export default function Product(props) {
     const dispatch = useDispatch()
     const [basket, setBasket] = useState(false)
     const user = useSelector(store => store.usersReducer.userData)
-
+    const rating = useSelector(store => store.productsReducer.rating)
 
     useEffect(() => {
         dispatch(productActions.getOneProduct(id))
@@ -42,7 +42,14 @@ export default function Product(props) {
 
     }, [id, reload])
 
+    useEffect(() => {
+        if (card){
+            dispatch(productActions.getRating(card.reviews))
+        }
+        
+    }, [card])
 
+    console.log(card)
     async function addBasket(e) {
         const product = {
             productId: id,
@@ -99,22 +106,22 @@ export default function Product(props) {
 
 
 
-    async function ratingProduct() {
-        let prodRating;
-        const ratings = await card?.reviews.map(rev => rev.rating);
-        let sumRating = 0;
-        for (let i = 0; i < ratings.length; i++) {
-            sumRating = ratings[i] + sumRating
-        }
-        prodRating = sumRating / (card.reviews.length)
-        return prodRating;
-    }
-    ratingProduct().then(res => setMagia(res))
-    console.log(magia)
+    // async function ratingProduct() {
+    //     let prodRating;
+    //     const ratings = await card?.reviews.map(rev => rev.rating);
+    //     let sumRating = 0;
+    //     for (let i = 0; i < ratings.length; i++) {
+    //         sumRating = ratings[i] + sumRating
+    //     }
+    //     prodRating = sumRating / (card.reviews.length)
+    //     return prodRating;
+    // }
+    // ratingProduct().then(res => setMagia(res))
+    // console.log(magia)
 
     return (
         <>
-        
+
             <Box key={card?._id}>
 
                 <Box className='cards-product-details' sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -133,7 +140,7 @@ export default function Product(props) {
 
                         </Card>
                         <Box sx={{ marginTop: '1rem' }}>
-                            <Card sx={{ height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                            <Card sx={{ height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <Typography variant="body2" color="text.secondary">
                                     Sizes: {card?.size}
                                 </Typography>
@@ -152,7 +159,7 @@ export default function Product(props) {
                                 <Typography sx={{ marginRight: '2rem' }}>Price: $ {card?.price} </Typography>
                                 <Stack sx={{ marginLeft: '2rem' }} spacing={1}>
 
-                                    <Rating name="half-rating-read" value={magia} precision={0.5} readOnly />
+                                    <Rating name="half-rating-read" value={rating} precision={0.5} readOnly />
                                 </Stack>
                             </Box>
                             <Box>
@@ -183,7 +190,7 @@ export default function Product(props) {
                     <Box className='box-review' sx={{ marginTop: '2rem', marginBottom: '2rem' }}>
                         <Card sx={{ width: '50rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
                             <Typography variant="body2" color="text.secondary">
-                                < RatingDetails product={card} handleReload={handleReload} />
+                                < RatingReview product={card} ratingProduct={rating} handleReload={handleReload} />
                             </Typography>
                         </Card>
                     </Box>
