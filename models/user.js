@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
     uniqueString: {type:String, required:true},
     verification: {type:Boolean, required:true},
     favourite: [{ type: mongoose.Types.ObjectId, ref: 'product' }],
-    cart: [{ type: mongoose.Types.ObjectId, ref: 'product' }]
+    cart: [{ type: mongoose.Types.ObjectId, ref: 'product' }],
+    isAdmin: {type: Boolean, required:true}
 })
 
 const User = mongoose.model('user', userSchema)

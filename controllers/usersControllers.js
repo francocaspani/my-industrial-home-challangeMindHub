@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken')
 
 const usersControllers = {
     signUpUser: async (req, res) => {
-        let { firstName, lastName, email, password, country, from } = req.body.userData
+        let { firstName, lastName, email, password, country, from, isAdmin } = req.body.userData
         try {
             const userExist = await User.findOne({ email })
             const verification = false
@@ -41,7 +41,8 @@ const usersControllers = {
                     country,
                     from: [from],
                     verification,
-                    uniqueString
+                    uniqueString,
+                    isAdmin
                 })
                 if (from !== 'propietary-signup') {
                     newUser.verification = true
@@ -90,8 +91,8 @@ const usersControllers = {
                             email: userExist.email,
                             avatar: userExist.avatar,
                             favourite: userExist.favourite,
-                            cart: userExist.cart,
-                            from: from
+                            from: from,
+                            isAdmin: userExist.isAdmin
                         }
                         const token = jwt.sign({...userData}, process.env.SECRET_KEY)
                         res.json({
@@ -119,8 +120,8 @@ const usersControllers = {
                                 email: userExist.email,
                                 avatar: userExist.avatar,
                                 favourite: userExist.favourite,
-                                cart: userExist.cart,
-                                from: from
+                                from: from,
+                                isAdmin: userExist.isAdmin
                             }
                             const token = jwt.sign({...userData}, process.env.SECRET_KEY)
                             res.json({
@@ -193,7 +194,7 @@ const usersControllers = {
                         email: req.user.email,
                         avatar: req.user.avatar,
                         favourite: req.user.favourite,
-                        cart: req.user.cart,
+                        isAdmin: req.user.isAdmin,
                         from:'token'}},
                 message:'Welcome back '+ req.user.firstName
             })
