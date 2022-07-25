@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Link as LinkRouter } from "react-router-dom";
 
 // Import Swiper styles
 import "swiper/css";
@@ -11,7 +12,8 @@ import "swiper/css/navigation";
 import {Pagination, Navigation } from "swiper";
 import "../styles/carouselBestSellers.css";
 
-export default function CarouselBestSellers({ product }) {
+
+export default function CarouselBestSellers({product}) { 
     return (
         <div className="containerCarouselBestSellers">
             <Swiper
@@ -29,12 +31,19 @@ export default function CarouselBestSellers({ product }) {
                 className="containerSwiperBestSellers"
             >
                 {product.extraImg.map(eachproduct =>
-                    <SwiperSlide className='imageproductBestSellers' key={eachproduct._id} >
+                <div>
+              
+                    <SwiperSlide className='imageproductBestSellers'  key={product._id}>  
                         <div className="productNameBestSellers">
-                            <img src={eachproduct} alt={eachproduct.name} />
-                            <p>{eachproduct.name}</p>
+                            <LinkRouter  to={`/products/${product._id}`}  >
+                            <img className="imageBestSellers" src={eachproduct} alt={product.name} />
+                            </LinkRouter>
+                            <p>{product.name}</p>
                         </div>
+                       
                     </SwiperSlide>
+                
+                </div>
                 )}
             </Swiper>
         </div>

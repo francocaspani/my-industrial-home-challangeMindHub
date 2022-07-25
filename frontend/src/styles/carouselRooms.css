@@ -44,6 +44,7 @@ body {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+  border-radius: 0.4rem !important;
 }
 
 .swiper-slide img {
@@ -55,6 +56,7 @@ body {
 }
 .containerCarouselRooms{
   width: 100%;
+  border-radius: 0.4rem;
 }
 
 .titleCaruselRooms{
@@ -65,7 +67,6 @@ body {
   display: flex;
   justify-content: center;
   text-align: left;
- 
 }
 .titleCaruselRooms p{
   width: 100%;
@@ -77,16 +78,17 @@ body {
   width: 100%;
   object-fit: cover !important; 
   background-position: center !important; 
+  border-radius: 0.4rem;
 }
 .swiper-button-prev,.swiper-button-next, .swiper-pagination-bullet, .swiper-pagination-bullet-active, .swiper-pagination-horizontal{
-  color: rgb(60, 60, 66) !important ;
+  color:  rgba(39, 39, 41, 0.63) !important ;
   
 } 
 .swiper-button-next:after, .swiper-button-prev:after{
   font-size: 1.5rem !important;
 }
 .swiper-pagination-bullet{
-background-color: rgb(23, 23, 24) !important
+background-color: rgba(97, 97, 102, 0.466) !important;
 }
 .carouselRoomName {
   height: 100%;
@@ -96,8 +98,7 @@ background-color: rgb(23, 23, 24) !important
   justify-content: flex-start;
   align-items: center;
   color: rgb(255, 255, 255);
-  font-size: large;
-  
+  font-size: large;  
 }
 .carouselRoomName  p{
   background-color: rgba(3, 3, 3, 0.39);
@@ -106,4 +107,5 @@ background-color: rgb(23, 23, 24) !important
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 0.4rem !important;
 }

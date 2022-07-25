@@ -12,7 +12,7 @@
 
 .container_room {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
     margin-bottom: 2rem;
@@ -33,21 +33,19 @@
     width: 100%;
     margin-left: 10rem;
 }
-
-.roomName {
-    height: 5%;
+.general_description{
     width: 100%;
-    font-size: 1.5rem;
+    height: 4rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
+    justify-content: flex-start;
+    text-align: left;
+    margin-top: 1rem;
+    font-size: 1rem; 
+    line-height: 1.5
 }
-
-.roomName p {
-    background-color: rgba(3, 3, 3, 0.39);
-    width: 100%;
-    height: 15%;
+.general_description p {
+    width: 60%;
+    margin-left: 4.3rem;
 }
 
 .containerRoomProducts {
@@ -81,6 +79,7 @@
     height: 100%;
     object-fit: cover;
     background-position: center;
+    border-radius: 0.4rem;
 }
 
 .container-cards {
@@ -129,48 +128,64 @@
 
 .cardRoom {
     display: flex;
+    justify-content: center;
+    align-items: center;
     opacity: 0;
     visibility: hidden;
     transition: ease 0.3s all;
-    flex-direction: row;
-    border-radius: .5rem;
+    /* flex-direction: row; */
+    border-radius: .4rem;
     box-shadow: 1px 1px 7px 3px rgba(0, 0, 0, 0.4);
-    background: #fff;
-    color: #000000;
+    /* background: #fff; */
+    /* color: #000000; */
+     background: black;
+     color: white;
     z-index: 3;
     gap: 1rem;
     position: absolute;
     cursor: pointer;
-    padding: 5px;
-    width: 250px;
-    height: 130px;
+    padding: 7px;
+    width: 135px;
+    height: 70px;
     margin-left: -100px;
     margin-top: -30px;
 }
 
-.card-image {
+/* .card-image {
     width: 120px;
     height: 120px;
     border-radius: .5rem;
-}
+} */
 
 .card-title {
     padding-top: 10px;
     font-size: 22px;
     line-height: 1.2;
+    font-size: 1rem;
+    display: flex;
+    gap: 0.5rem;
 }
 
-.card-button {
-    color: #000000;
+
+.details-icon{
+    text-decoration: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.knowMore{
+    color: white !important;
+    text-decoration: none !important;
+    font-size: 12px;
+}
+.card-icon{
+    color: white !important;
     text-transform: uppercase;
-    border: 1px solid #000000;
-    text-decoration: none;
-    padding: 8px 10px;
-    display: inline-block;
-    border-radius: 5px;
-    margin-top: 10px;
-    font-size: 14px;
+    font-size: 20px !important;
     cursor: pointer;
+    text-transform: uppercase;
 }
 
 @keyframes pulse {
@@ -288,7 +303,32 @@
     }
 
 }
+.container_name_description{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    width: 30%;
+    height: 20rem;
+    padding: 2rem;
 
+}
+.roomName {
+    height: 5%;
+    width: 100%;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin-bottom: 1rem;
+}
+
+.roomName p {
+    background-color: rgba(3, 3, 3, 0.39);
+    width: 100%;
+    height: 15%;
+}
 .descriptionRoom {
     width: 90%;
     margin-bottom: 2rem;
@@ -302,4 +342,5 @@
     justify-content: flex-start !important;
     text-align: start;
     text-align: justify;
+    line-height: 1.5
 }

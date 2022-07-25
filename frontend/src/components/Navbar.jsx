@@ -177,7 +177,7 @@ addTotal()
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {[{ to: '/', name: 'Home' }, { to: '/', name: 'Spaces' }, { to: '/products', name: 'Products' }, { to: '/basket', name: 'Basket' }, { to: '/Favorites', name: 'Favs' }].map((text, index) => (
+        {[{ to: '/', name: 'Home' }, { to: '/spaces', name: 'Spaces' }, { to: '/products', name: 'Products' }, { to: '/basket', name: 'Basket' }, { to: '/Favorites', name: 'Favs' }].map((text, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton>
               <LinkRouter className='links' to={text.to}>

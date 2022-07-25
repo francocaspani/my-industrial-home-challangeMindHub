@@ -13,6 +13,7 @@ import "../styles/carouselRooms.css";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import {useSelector} from "react-redux";
 // import ambientActions from "../redux/actions/ambientActions";
+import { Link as LinkRouter } from "react-router-dom";
 
 export default function CarouselRooms() {
   const allAmbients= useSelector((store) => store.ambientsReducer.ambients)
@@ -37,11 +38,15 @@ export default function CarouselRooms() {
         className="mySwiper"
       >
         {allAmbients.map(eachambient =>
+        
           <SwiperSlide className='imageCarouselRoom' key={eachambient._id} style={{ backgroundImage: `url("${eachambient.img}")`, backgroundSize: "cover" }}>
+             <LinkRouter to= "/spaces" innerRef={eachambient._id}  >
             <div className="carouselRoomName">
               <p>{eachambient.name}</p>
             </div>
+            </LinkRouter>
           </SwiperSlide>
+
         )}
       </Swiper>
     </div>
