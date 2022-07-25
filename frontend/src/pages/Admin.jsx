@@ -1,7 +1,7 @@
 import React from 'react'
 import productActions from '../redux/actions/productActions'
 import { useDispatch, useSelector } from 'react-redux'
-import { useState, useEffect } from 'react'
+import {useEffect } from 'react'
 import "../styles/admin.css"
 import { Link as LinkRouter } from "react-router-dom"
 import EditIcon from '@mui/icons-material/Edit';
@@ -9,8 +9,8 @@ import EditIcon from '@mui/icons-material/Edit';
 export default function Admin() {
 
     const dispatch = useDispatch()
-    const [selectedAmbient, setSelectedAmbient] = useState()
-    const ambients = useSelector(store => store.ambientsReducer.ambients)
+    // const [selectedAmbient, setSelectedAmbient] = useState()
+    // const ambients = useSelector(store => store.ambientsReducer.ambients)
     const products = useSelector(store => store.productsReducer.products)
     const [reload, setReload] = React.useState(false)
 
@@ -23,6 +23,8 @@ export default function Admin() {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        
+
         // console.log(event)
         const productData = {
             name: event.target[0].value,
@@ -31,18 +33,16 @@ export default function Admin() {
             price: event.target[3].value,
             size: event.target[4].value,
             stock: event.target[5].value,
-            hashtags: event.target[6].value.split([','])
+            hashtags: event.target[6].value.split([","])
         }
         const res = await dispatch(productActions.addProduct(productData))
-            console.log(res)
-        console.log(event.target[6].value.split([',']))
+        console.log(res)
+        // console.log(event.target[6].value.split([","]))
         setReload(!reload)
     }
 
     const handleDelete = async (event) => {
         event.preventDefault()
-        // console.log(event)
-        // console.log(event.target[0].value)
         const id = event.target[0].value
         const res = await dispatch(productActions.deleteComment(id))
         console.log(res)

@@ -32,7 +32,7 @@ useEffect(() => {
             price: event.target[3].value,
             size: event.target[4].value,
             stock: event.target[5].value,
-            hashtags: event.target[6].value
+            hashtags: event.target[6].value.split(",")
         }
         
         const res = await dispatch(productActions.modifyProduct(id,productData))
