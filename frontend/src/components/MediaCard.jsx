@@ -154,7 +154,7 @@ export default function MediaCard({ product, reload, keys }) {
                     {/* <button className='buttonCarrito' onClick={addBasket}>Add to basket</button> */}
                     <button className='buttonCarrito' onClick={handleFavourite}>Add To Favourites</button>
                   </Box>
-                  <LinkRouter to={`/products/${product._id}`} >
+                  <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product._id}`} >
                     <button className='buttonCarrito'>Go To Details</button>
                   </LinkRouter>
 
@@ -178,7 +178,7 @@ export default function MediaCard({ product, reload, keys }) {
             <Typography sx={{ fontSize: "1.2rem", display: "flex" }} gutterBottom variant="p">
               ${product.price} USD
             </Typography>
-            <LinkRouter style={{textDecoration:"none"}} to={`/products/${product._id}`} >
+            <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product._id}`} >
               <button className='buttonCarrito'>Go To Details</button>
             </LinkRouter>
           </CardContent>

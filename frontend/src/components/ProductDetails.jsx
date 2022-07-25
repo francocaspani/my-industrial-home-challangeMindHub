@@ -9,7 +9,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
-import Carousel from '../components/CarouselProduct'
+import CarouselProduct from '../components/CarouselProduct'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import productActions from '../redux/actions/productActions';
@@ -19,6 +19,7 @@ import { useEffect, useState } from 'react';
 import RatingDetails from '../components/RatingReview'
 import usersActions from '../redux/actions/userActions';
 import { toast } from 'react-toastify';
+import '../styles/productDetails.css'
 
 
 export default function Product(props) {
@@ -113,11 +114,12 @@ export default function Product(props) {
 
     return (
         <>
+        
             <Box key={card?._id}>
 
                 <Box className='cards-product-details' sx={{ display: 'flex', justifyContent: 'center' }}>
 
-                    <Box sx={{ paddingTop: '8rem', margin: '1rem', }}>
+                    <Box sx={{ paddingTop: '8rem' }}>
                         <Card>
                             <CardActionArea>
                                 <CardMedia
@@ -131,7 +133,7 @@ export default function Product(props) {
 
                         </Card>
                         <Box sx={{ marginTop: '1rem' }}>
-                            <Card sx={{ height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <Card sx={{ height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                                 <Typography variant="body2" color="text.secondary">
                                     Sizes: {card?.size}
                                 </Typography>
@@ -141,8 +143,8 @@ export default function Product(props) {
 
 
 
-                    <Box sx={{ display: 'flex', justifyConten: 'center', alignItems: 'center', flexDirection: 'column', paddingTop: '8rem', width: 500, margin: '1rem' }}>
-                        <Card sx={{ height: 500, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <Box className='box-information-product' sx={{ display: 'flex', justifyConten: 'center', alignItems: 'center', flexDirection: 'column', width: 500, margin: '1rem' }}>
+                        <Card sx={{ height: 500, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', border: "2px solid" }}>
                             <Typography gutterBottom variant="h5" component={'div'}>
                                 {card?.name}
                             </Typography>
@@ -187,7 +189,7 @@ export default function Product(props) {
                     </Box>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
-                    <Carousel />
+                    <CarouselProduct />
                 </Box>
             </Box >
         </>

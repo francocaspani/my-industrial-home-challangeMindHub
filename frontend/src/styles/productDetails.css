@@ -1,0 +1,17 @@
+@media (max-width: 700px) {
+    .cards-product-details {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+.box-information-product {
+    padding-top: 8rem;
+}
+@media (max-width: 700px) {
+    .box-information-product {
+        padding-top: 1rem;
+    }
+}
+
