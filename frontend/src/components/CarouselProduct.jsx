@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Card from '@mui/material/Card';
 import '../styles/carouselProducts.css'
 
+
 export default function CarouselProduct() {
 
     const products = useSelector((store) => store.productsReducer.products)

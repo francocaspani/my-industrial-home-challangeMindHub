@@ -1,22 +1,22 @@
 import React from "react";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
+import { Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 import "../styles/carouselNewCollection.css";
+import { Navigation } from "swiper";
+import {useSelector } from 'react-redux';
+import { Link as LinkRouter } from "react-router-dom";
 
-// import required modules
-import {Navigation} from "swiper";
 
-import { useSelector } from "react-redux";
 
-export default function App() {
+
+export default function CarouselNewCollection() {
     const product = useSelector((store) => store.productsReducer.products)
+
+
     return (
+      
         <div className="containerCarouselNewCollection">
             <div className="titleCaruselNewCollection">
                 <p>New Collection</p>
@@ -35,14 +35,20 @@ export default function App() {
                 className="containerSwiperNewCollection"
             >
                 {product.map(eachproduct =>
+                 
                     <SwiperSlide className='imageproduct' key={eachproduct._id}>
-                        <div className="productName">
-                            <img src= {eachproduct.img} alt={eachproduct.name} />
+                        <LinkRouter  to={`/products/${eachproduct._id}`} >
+                        <div className="containerProductImageName">
+                            <img className="imageCarouselNewCollection"src= {eachproduct.img} alt={eachproduct.name}/>
                             <p>{eachproduct.name}</p>
                         </div>
+                        </LinkRouter>
                     </SwiperSlide>
+                 
                 )}
+           
             </Swiper>
         </div>
-    );
+    )
+
 }

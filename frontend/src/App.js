@@ -21,6 +21,9 @@ import Products from './pages/Products';
 import Basket from './pages/Basket';
 import Admin from './pages/Admin';
 import ModifyProduct from './pages/ModifyProduct';
+import ProductDetails from './components/ProductDetails';
+import ScrollToTop from "react-scroll-to-top";
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 // export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
 export const urlBackend = 'http://localhost:4000/api'
@@ -67,7 +70,8 @@ function App(props) {
         <Route path='/signup' element={<SignUp/>} />
         <Route path='/policies' element={<Policies/>}/>
         <Route path='/product' element={<Product/>} />
-        <Route path='/spaces/:id' element={<Rooms/>} />
+        <Route path='/spaces' element={<Rooms/>} />
+        <Route path='/spaces/:id' element={<ProductDetails/>} />
         <Route path='/products/:id' element={<Product/>} />
         <Route path='/products' element={<Products/>} />
         <Route path='/basket' element={<Basket />} />
@@ -76,6 +80,15 @@ function App(props) {
         {user?.isAdmin && <Route path='/admin' element={<Admin/>}/>}
        {user?.isAdmin && <Route path='/ModifyProduct/:id' element={<ModifyProduct/>}/>}
       </Routes>
+      <ScrollToTop
+      style={{
+        right: "10px",
+        marginbottom: "80px",
+        bottom: "100px",
+      }}
+        smooth
+        component={<KeyboardArrowUpIcon />}
+      />
       <Footer />
       <ToastContainer />
     </div>
