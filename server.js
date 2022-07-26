@@ -8,14 +8,17 @@ const fileUpload = require('express-fileupload')
 
 const app = express()
 const PORT = process.env.PORT || 4000
+app.set('port', PORT)
+
 
 app.use(cors())
 app.use(fileUpload())
 app.use(express.json())
 app.use(passport.initialize())
+app.use(express.static('image/reviews'))
 app.use('/api', Router)
 
-app.set('port', PORT)
+
 
 app.get('/', (req,res) => {
     res.send('Servidor CREADO y corriendo en puerto ' + app.get('port'))

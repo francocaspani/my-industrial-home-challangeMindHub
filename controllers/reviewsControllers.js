@@ -22,7 +22,7 @@ const reviewsControllers = {
                     console.log('file uploaded')
                 }
             })
-            const newReview = await Product.findOneAndUpdate({ _id: idProduct }, { $push: { reviews: { review: review, userId: user, date: Date.now(), rating: rating, titleReview: titleReview, img: 'https://my-industrial-home-back.herokuapp.com/image/reviews/' + fileName } } }, { new: true })
+            const newReview = await Product.findOneAndUpdate({ _id: idProduct }, { $push: { reviews: { review: review, userId: user, date: Date.now(), rating: rating, titleReview: titleReview, img: 'https://my-industrial-home-back.herokuapp.com/' + fileName } } }, { new: true })
             res.json({
                 success: true,
                 response: { newReview },
