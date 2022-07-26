@@ -15,7 +15,7 @@ const productSchema = new mongoose.Schema({
         img: { type: String },
         rating: { type: Number },
         titleReview: { type: String },
-        date: {type: String}
+        date: {type: Date}
     }],
     size: { type: String },
     hashtags: { type: Array },
