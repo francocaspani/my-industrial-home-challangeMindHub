@@ -116,6 +116,7 @@ export default function PayPal(props) {
         });
     };
 
+    
 
     const onApprove = (data, actions) => { //recibo el resultado de mi operacion
         console.log(data)
@@ -134,6 +135,12 @@ export default function PayPal(props) {
                     dispatch(basketActions.modifyState(bougth.sku, "bought"))                   
                     dispatch(basketActions.modifyStock(bougth.sku))
                 })
+                .then(dispatch(basketActions.getProduct(details.purchase_units[0].amount)),
+                    setTimeout(() => {
+                        details && details.purchase_units[0].items.map(bougth => {                    
+                            dispatch(basketActions.modifyState(bougth.sku, "toShip")) 
+                         })
+                    }, 3000));
                 setReload(!reload)
             });
     };
