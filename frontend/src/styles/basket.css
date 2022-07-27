@@ -87,3 +87,23 @@
     font-size: 1.5rem;
     margin-top: 4.5rem;
 }
+
+/* in page tyForBuy */
+
+.containerTyForBuy{
+    padding: 6rem 0 3rem 0;
+}
+.containerTitlesTyForBuy{
+    padding: 1rem 0
+}
+
+.imgTyForBuy{
+    height: 20rem;
+}
+
+.ctaShop{
+    padding-top: .5rem;
+    font-size: 18px;
+    text-decoration: none;
+    color: black;
+}

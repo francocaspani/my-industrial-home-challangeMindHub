@@ -24,6 +24,8 @@ import ModifyProduct from './pages/ModifyProduct';
 import ProductDetails from './components/ProductDetails';
 import ScrollToTop from "react-scroll-to-top";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import TyForBuy from './components/TyForBuy';
+
 
 // export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
 export const urlBackend = 'http://localhost:4000/api'
@@ -75,6 +77,7 @@ function App(props) {
         <Route path='/products/:id' element={<Product/>} />
         <Route path='/products' element={<Products/>} />
         <Route path='/basket' element={<Basket />} />
+        <Route path='/thanks/:id' element={<TyForBuy/>}/>
         {user?.isAdmin && <Route path='/admin' element={<Admin/>}/>}
        {user?.isAdmin && <Route path='/ModifyProduct/:id' element={<ModifyProduct/>}/>}
       </Routes>
