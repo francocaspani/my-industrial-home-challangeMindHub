@@ -102,10 +102,21 @@ background-color: rgba(97, 97, 102, 0.466) !important;
 }
 .carouselRoomName  p{
   background-color: rgba(3, 3, 3, 0.39);
-  width: 100%;
+  width: 100% !important;
   height: 15%;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 0.4rem !important;
+}
+
+.no-link {
+  text-decoration: none;
+}
+
+@media(max-width:650px) {
+  .titleCaruselRooms p {
+    text-align: center;
+    margin-left: 0;
+}
 }

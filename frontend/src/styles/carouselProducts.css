@@ -1,3 +1,50 @@
+.car-flex {
+    display: flex;
+    flex-wrap: wrap !important;
+}
+
+.carousel {
+    background-color: white;
+    width: 20rem !important;
+    height: 34rem;
+    padding: 1rem;
+}
+
+.box-car {
+    display: flex;
+    flex-direction: column;
+    height: 8rem;
+    justify-content: space-between;
+}
+
+.img-caro {
+    height: 18rem !important;
+    width: 100%;
+    object-fit: cover;
+}
+
+.price-car {
+    font-size: 1.2rem;
+    text-align: justify;
+    margin-left: 1rem;
+}
+
+.detail-car {
+    font-size: .9rem;
+    text-align: justify;
+    margin: 1rem;
+}
+
+.bhRnqO {
+    right: -27px;
+
+}
+
+.kVtMtA {
+    left: -27px;
+
+}
+
 @media (min-width: 1500px){
     .sc-gzVnrw{
         width: 80rem;
@@ -86,9 +133,9 @@
         
     }
 }
-@media (max-width: 520px){
+/* @media (max-width: 520px){
     .img-caro {
         width: 20rem;
         
     }
-}
+} */

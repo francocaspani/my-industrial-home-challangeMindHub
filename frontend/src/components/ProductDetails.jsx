@@ -2,6 +2,7 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Box } from '@mui/material';
 import Rating from '@mui/material/Rating';
@@ -104,89 +105,88 @@ export default function Product(props) {
         }
     }
 
-
-
-    // async function ratingProduct() {
-    //     let prodRating;
-    //     const ratings = await card?.reviews.map(rev => rev.rating);
-    //     let sumRating = 0;
-    //     for (let i = 0; i < ratings.length; i++) {
-    //         sumRating = ratings[i] + sumRating
-    //     }
-    //     prodRating = sumRating / (card.reviews.length)
-    //     return prodRating;
-    // }
-    // ratingProduct().then(res => setMagia(res))
-    // console.log(magia)
+    console.log(rating.value)
 
     return (
         <>
 
-            <Box key={card?._id}>
+            <Box key={card?._id} style={{paddingTop: '5.5rem'}}>
 
-                <Box className='cards-product-details' sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Box className='cards-product-details'>
 
-                    <Box sx={{ paddingTop: '8rem' }}>
-                        <Card>
-                            <CardActionArea>
-                                <CardMedia
-                                    component="img"
-                                    height="500"
-                                    image={card?.img}
-                                    alt="product"
-                                />
-                            </CardActionArea>
-
-
-                        </Card>
-                        <Box sx={{ marginTop: '1rem' }}>
-                            <Card sx={{ height: '5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                <Typography variant="body2" color="text.secondary">
-                                    Sizes: {card?.size}
-                                </Typography>
-                            </Card>
-                        </Box>
+                    <Box className='container-img-detail'>
+                        <img src={card?.img} alt="card-detail" className='img-detail' />
                     </Box>
 
-
-
-                    <Box className='box-information-product' sx={{ display: 'flex', justifyConten: 'center', alignItems: 'center', flexDirection: 'column', width: 500, margin: '1rem' }}>
-                        <Card sx={{ height: 500, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', border: "2px solid" }}>
-                            <Typography gutterBottom variant="h5" component={'div'}>
-                                {card?.name}
-                            </Typography>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-                                <Typography sx={{ marginRight: '2rem' }}>Price: $ {card?.price} </Typography>
-                                <Stack sx={{ marginLeft: '2rem' }} spacing={1}>
-
+                    <Box className='box-information-product'>
+                        <div className='card-info-detail'>
+                            <div className='info-detail'>
+                                <Typography className='title-detail' component={'div'}>
+                                    {card?.name}
+                                </Typography>
+                                <Stack className='price-detail' spacing={1}>
                                     <Rating name="half-rating-read" value={rating} precision={0.5} readOnly />
                                 </Stack>
-                            </Box>
-                            <Box>
-                                <CardContent>
-
-                                    <Typography sx={{ marginTop: '2rem' }} variant="body2" color="text.secondary">
-                                        {card?.detail}
-                                    </Typography>
-                                </CardContent>
-                            </Box>
-                            <Box>
-                                <Button sx={{ width: '13rem', margin: '2rem', backgroundColor: '#4d4d4d', color: 'white' }} color="success" variant="contained" onClick={addBasket} disableElevation>
-                                    <AddShoppingCartIcon />
-                                    ⠀⠀Add to cart
-                                </Button>
-                            </Box>
-                            <Box>
-                                <Button sx={{ width: '13rem', backgroundColor: '#4d4d4d' }} color="success" onClick={handleFavourite} variant="contained" disableElevation>
-                                    <VolunteerActivismIcon />
-                                    ⠀⠀
-                                    Add to favorite
-                                </Button>
-                            </Box>
-                        </Card >
+                                <Typography className='price-detail'>Price: $ {card?.price} </Typography>
+                                <Typography className='price-detail' variant="body2" color="text.secondary">
+                                    {card?.detail}
+                                </Typography>
+                                <Typography className='price-detail' variant="body2" color="text.secondary">
+                                    Sizes: {card?.size}
+                                </Typography>
+                            </div>
+                            <div className='container-selectBotton'>
+                                <select className='box-select'><option>1</option></select>
+                                <div className='box-buttons'>
+                                    <button className='button-add' onClick={addBasket} >
+                                        <AddShoppingCartIcon />
+                                        ⠀⠀Add to cart
+                                    </button>
+                                    <button className='button-fav'onClick={handleFavourite} disableElevation>
+                                        <VolunteerActivismIcon />
+                                        ⠀⠀
+                                        Add to favorite
+                                    </button>
+                                </div>
+                            </div>
+                        </div >
                     </Box >
                 </Box >
-                <Box>
+                <Box sx={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
+                    <CarouselProduct />
+                </Box>
+                <Box sx={{margin: '5rem auto', backgroundColor: 'white'}}>
+                    <div className='review-title'>
+                        <p>Ratings and Reviews</p>
+                        <a>Write a review</a>
+                    </div>
+                    <div className='line'></div>
+                    <div className='box-infoRev'>
+                        <div className='box-revInfo'>
+                            <div className='review-info'>
+                                {
+                                    (card?.reviews.length == 0) ?
+                                    <p>0 stars</p>
+                                    :
+                                    <p>{Math.round(rating)} stars</p>
+                                }
+                                <p>|</p>
+                                <p>{card?.reviews.length} Reviews</p>
+                            </div>
+                            <Stack className='review-stars' spacing={1}>
+                                <Rating name="half-rating-read" value={rating} precision={0.5} readOnly />
+                            </Stack>
+                        </div>
+                        <div className='box-reco'>
+                            {
+                                (card?.reviews.length == 0) ?
+                                <p>No reviews yet, be the first one</p>
+                                :
+                                <p>{Math.round(rating)*20}% Recommended</p>
+                            }
+                            <CheckCircleOutlineIcon/>
+                        </div>
+                    </div>
                     <Box className='box-review' sx={{ marginTop: '2rem', marginBottom: '2rem' }}>
                         <Card sx={{ width: '50rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
                             <Typography variant="body2" color="text.secondary">
@@ -194,9 +194,6 @@ export default function Product(props) {
                             </Typography>
                         </Card>
                     </Box>
-                </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
-                    <CarouselProduct />
                 </Box>
             </Box >
         </>

@@ -68,9 +68,11 @@ const Footer = () => {
                 <div>
                     <LinkRouter className='infoFooter' to={'/policies'}>
                         <p>Your Rights</p>
-                        <p>About this Privacy policy</p>
-                        <p>How do we use your personal data</p>
-                        <p>Security and retention of your personal data</p>
+                        <LinkRouter to='/policies' className='no-link'>
+                            <p>About this Privacy policy</p>
+                        </LinkRouter>
+                        {/* <p>How do we use your personal data</p>
+                        <p>Security and retention of your personal data</p> */}
                     </LinkRouter>
                 </div>
             </div>

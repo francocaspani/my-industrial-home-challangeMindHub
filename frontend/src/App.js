@@ -25,8 +25,8 @@ import ProductDetails from './components/ProductDetails';
 import ScrollToTop from "react-scroll-to-top";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
-//export const urlBackend = 'http://localhost:4000/api'
+// export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
+export const urlBackend = 'http://localhost:4000/api'
 
 
 function App(props) {

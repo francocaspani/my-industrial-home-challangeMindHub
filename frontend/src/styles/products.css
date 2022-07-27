@@ -7,17 +7,61 @@
   align-items: center;
 }
 
+.flex-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardProducts {
+  box-shadow: none !important;
+}
+
 .css-bhp9pd-MuiPaper-root-MuiCard-root {
   width: 20rem !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   margin: 1rem;
-  border: 2px solid;
+  box-shadow: none !important;
+
+}
+
+.css-10r5to9-MuiCardActions-root {
+  background-color: transparent !important;
+  display: none !important;
+}
+
+.css-10r5to9-MuiCardActions-root:hover {
+  opacity: 60% !important;
+  background-color: black !important;
+}
+
+.img-quick {
+  background-color: transparent;
+  width: 100%;
+}
+
+.img-quick:hover .quickShop-card {
+  /* display: block !important; */
+  background-color: rgba(0, 0, 0, 0.636) !important;
+  color: white !important;
+  /* position: absolute; */
+  /* top: 0; */
+}
+
+.quickShop-card {
+  font-size: .8rem !important;
+  color: transparent !important;
+  background-color: transparent;
+  width: 100%;
+  /* display: none !important; */
+  /* position: absolute; */
 }
 
 .css-o69gx8-MuiCardMedia-root {
-  width: 20rem!important;
+  width: 100% !important;
+  padding: .5rem !important;
 }
 
 .ctnContent {
@@ -42,10 +86,10 @@
 
 /* Modal*/
 .imageModal {
-  width: 50%;
-  height: 100%;
+  width: 70% !important;
+  padding: 1rem;
   object-fit: cover;
-  border: 5px solid gray;
+  border: 1px solid gray;
 }
 
 .css-1of1wjo {
@@ -56,10 +100,14 @@
 .modalPrice {
   display: flex;
   width: 100%;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   border-bottom: 1px solid gray;
   margin-bottom: 15px;
   padding-bottom: 15px;
+}
+
+.modalSize {
+  font-size: 1rem;
 }
 
 .buttonCarrito {
@@ -103,8 +151,17 @@
   width: 100%;
 }
 
+.box-icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: .8rem;
+  width: 20rem;
+}
+
 .selectModal {
-  width: 40%;
+  width: 2.5rem;
+  height: 2rem;
   margin-top: 5px;
   margin-right: 5px;
   margin-left: 5px;
@@ -134,7 +191,7 @@
 }
 
 .containerCards {
-  padding-top: 10vh;
+  padding-top: 15vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -167,4 +224,23 @@
   background-color: #ccc;
   border: solid gray 1px;
   border-radius: 4px;
+}
+
+.container-infoCard {
+  display: flex;
+  align-items: center;
+  background-color: #eeee !important;
+}
+
+.container-modal {
+  position: 'absolute';
+  top: '50%';
+  left: '50%';
+  transform: 'translate(-50%, -50%)';
+  width: "30rem";
+  height: "55vh";
+  /* bgcolor: 'background.paper'; */
+  border: '2px solid #000';
+  /* boxShadow: 24; */
+  p: 4;
 }

@@ -22,9 +22,9 @@ export default function CarouselNewCollection() {
                 <p>New Collection</p>
             </div>
             <Swiper
-                slidesPerView={5}
+                slidesPerView={11}
                 spaceBetween={25}
-                slidesPerGroup={3}
+                slidesPerGroup={11}
                 loop={true}
                 loopFillGroupWithBlank={true}
                 // pagination={{
@@ -37,10 +37,10 @@ export default function CarouselNewCollection() {
                 {product.map(eachproduct =>
                  
                     <SwiperSlide className='imageproduct' key={eachproduct._id}>
-                        <LinkRouter  to={`/products/${eachproduct._id}`} >
+                        <LinkRouter className="no-link imageproduct" to={`/products/${eachproduct._id}`} >
                         <div className="containerProductImageName">
                             <img className="imageCarouselNewCollection"src= {eachproduct.img} alt={eachproduct.name}/>
-                            <p>{eachproduct.name}</p>
+                            <p style={{marginBottom: '0px'}}>{eachproduct.name}</p>
                         </div>
                         </LinkRouter>
                     </SwiperSlide>
