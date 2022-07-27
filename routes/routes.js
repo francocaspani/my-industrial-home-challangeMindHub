@@ -67,7 +67,7 @@ Router.route('/review/:id')
 .post(passport.authenticate('jwt',{ session: false}),deleteReview)
 
 const basketControllers = require('../controllers/basketControllers');
-const {addToBasket, getUserBasket, deleteBasketProduct, modifyBasketProduct,modifyState, modifyStock} = basketControllers
+const {addToBasket, getUserBasket, deleteBasketProduct, modifyBasketProduct,modifyState, modifyStock, getProduct} = basketControllers
 
 
 Router.route('/basket')
@@ -77,7 +77,9 @@ Router.route('/basket')
 
 Router.route("/deletebasket/:id")
 .delete(passport.authenticate('jwt', {session: false}), deleteBasketProduct)
-// .get(passport.authenticate('jwt', {session: false}), getProduct)
+
+Router.route("/getProd")
+.post(passport.authenticate('jwt', {session: false}), getProduct)
 
 
 // Router.route('/deliveredBasket')

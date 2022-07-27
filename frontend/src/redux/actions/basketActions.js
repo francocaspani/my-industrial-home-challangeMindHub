@@ -86,6 +86,18 @@ const basketActions = {
         console.log(answer.data.response)
         return answer.data.response
         }
+    },
+
+    getProduct: (total) =>{
+        const token = localStorage.getItem('token')
+        return async (dispatch, getState) => {
+            const answer = await axios.post(`${urlBackend}/getProd`,total,
+            {headers: {Authorization: "Bearer "+token}})
+            console.log(answer)
+        dispatch({type: 'message', payload: {view: true, message: answer.data.message, success: answer.data.success}})
+        console.log(answer.data.response)
+        return answer.data.response
+        }
     }
 
 }

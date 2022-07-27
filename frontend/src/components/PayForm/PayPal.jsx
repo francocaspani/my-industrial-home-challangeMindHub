@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import ReactDOM from "react-dom"
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js"; //Importamos el npm
-// import {useStateValue} from '../../StateProvider';
-// import {getTotal} from '../../reducer';
 import basketActions from "../../redux/actions/basketActions";
 import { useDispatch, useSelector } from "react-redux";
-
-
+import {useNavigate} from 'react-router-dom'
 
 export default function PayPal(props) {
     //const [{basket},dispatch] = useStateValue(); //traemos la info de nuestro carrito de compra
@@ -16,6 +12,7 @@ export default function PayPal(props) {
     const [ErrorMessage, setErrorMessage] = useState("");
     const [basketReload, setBasketReload] = useState(false)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const user = useSelector(store => store.usersReducer.userData)
     useEffect(() => {
         if (user) {
@@ -116,6 +113,7 @@ export default function PayPal(props) {
         });
     };
 
+    
 
     const onApprove = (data, actions) => { //recibo el resultado de mi operacion
         console.log(data)
@@ -128,12 +126,19 @@ export default function PayPal(props) {
                 alert('Transaction ' + transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
                 console.log(details)
                 setOrderID(transaction.id)
-                // modifyState()
                 
                 details && details.purchase_units[0].items.map(bougth => {                    
                     dispatch(basketActions.modifyState(bougth.sku, "bought"))                   
                     dispatch(basketActions.modifyStock(bougth.sku))
                 })
+                .then(dispatch(basketActions.getProduct(details.purchase_units[0].amount)),
+                    setTimeout(() => {
+                        details && details.purchase_units[0].items.map(bougth => {                    
+                            dispatch(basketActions.modifyState(bougth.sku, "toShip")) 
+                        })
+                        navigate(`/thanks/${transaction.id}`)
+                    }, 3000));
+
                 setReload(!reload)
             });
     };
