@@ -119,7 +119,7 @@ export default function RatingReview({ product, handleReload, ratingProduct }) {
                 )
             })}
             {user ?
-                <Button sx={{backgroundColor: '#4d4d4d' }} onClick={handleOpen} color="success" variant="contained" endIcon={<SendIcon />}>Write a review</Button>
+                <button className='button-rev' onClick={handleOpen} >Write a review <SendIcon /></button>
                 : <Box>
                     <Box color="success" variant="contained" sx={{borderRadius: '.5rem', color: 'white', marginTop: '2rem', backgroundColor: '#4d4d4d' }}>Log in to write a review</Box>
                 </Box>

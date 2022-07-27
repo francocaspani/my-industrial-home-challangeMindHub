@@ -39,7 +39,7 @@ export default function CarouselRooms() {
       >
         {allAmbients.map(eachambient =>
         
-          <SwiperSlide key={eachambient._id} style={{ backgroundImage: `url("${eachambient.img}")`, backgroundSize: "cover" }}>
+          <SwiperSlide className="slide-room" key={eachambient._id} style={{ backgroundImage: `url("${eachambient.img}")`, backgroundSize: "cover" }}>
              <LinkRouter className="no-link imageCarouselRoom" to= "/spaces" innerRef={eachambient._id}  >
             <div className="carouselRoomName">
               <p>{eachambient.name}</p>

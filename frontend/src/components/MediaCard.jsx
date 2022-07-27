@@ -13,8 +13,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect} from "react";
 import "../styles/products.css"
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
-import LocalGroceryStoreTwoToneIcon from '@mui/icons-material/LocalGroceryStoreTwoTone';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocalGroceryStoreTwoToneIcon from '@mui/icons-material/LocalGroceryStoreTwoTone';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import { Link as LinkRouter } from "react-router-dom"
 import usersActions from '../redux/actions/userActions';
@@ -45,18 +46,18 @@ export default function MediaCard({ product, reload, keys }) {
   if(product.stock > 0) {
     stock = [...Array(product.stock).keys()]
   }
-  console.log(stock)
   const dispatch = useDispatch()
   const user = useSelector(store => store.usersReducer.userData)
   const basket = useSelector(store => store.basketReducer.productsBasket)
-  console.log(stock)
+  const favsIds = user?.favourite.map(favId => favId._id)
+  console.log(favsIds)
+  console.log(product._id)
 
   useEffect(() => {
     if (user) {
       dispatch(basketActions.getUserBasket())
     }
   }, [user])
-
 
   function selected(event) {
     console.log(event.target.value);
@@ -159,7 +160,13 @@ export default function MediaCard({ product, reload, keys }) {
                       ))}
                     </select>
                     <div>
-                      <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteBorderIcon /></Button>
+                    {
+                      (favsIds?.includes(product._id)) ? (
+                        <Button sx={{ size: "small", color: '#000000' }} ><FavoriteIcon /></Button>
+                        ) : (
+                          <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteBorderIcon /></Button>
+                      )
+                    }
                       {(basketIds.includes(product._id)) ? (
                         <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
                       ) : (
@@ -202,7 +209,13 @@ export default function MediaCard({ product, reload, keys }) {
                 ${product.price} USD
               </Typography>
             </CardContent>
-            <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteBorderIcon /></Button>
+              {
+                (favsIds?.includes(product._id)) ? (
+                  <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}><FavoriteIcon /></Button>
+                ) : (
+                  <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteBorderIcon /></Button>
+                )
+              }
               {(basketIds.includes(product._id)) ? (
                 <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
               ) : (

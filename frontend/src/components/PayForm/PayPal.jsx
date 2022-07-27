@@ -123,7 +123,7 @@ export default function PayPal(props) {
                 setSuccess(true);
                 console.log('Capture result', details, JSON.stringify(details, null, 2)); //veo los datos en consola
                 var transaction = details.purchase_units[0].payments.captures[0];
-                alert('Transaction ' + transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                // alert('Transaction ' + transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
                 console.log(details)
                 setOrderID(transaction.id)
                 
@@ -153,7 +153,7 @@ export default function PayPal(props) {
 
     const PayPalCheckOut = () => {
         return (
-            <PayPalScriptProvider options={initialOptions}> {/*Inicializo el CDN*/}
+            <PayPalScriptProvider className='paypal-butt' options={initialOptions}> {/*Inicializo el CDN*/}
 
                 {/*Inicializo los botones*/}
                 <PayPalButtons

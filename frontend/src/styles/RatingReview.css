@@ -55,7 +55,7 @@
 .imgReview {
     width: 20%;
     height: 10rem;
-    border-right: solid 1px black;
+    /* border-right: solid 1px black; */
 }
 
 .textReview {
@@ -126,4 +126,16 @@
 
 .css-1anpwpq-MuiPaper-root-MuiCard-root {
     width: 75% !important;
+}
+
+.button-rev {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 9rem;
+    padding: .5rem;
+    margin: auto;
+    font-size: 1rem;
+    border-radius: 3px;
+    cursor: pointer;
 }

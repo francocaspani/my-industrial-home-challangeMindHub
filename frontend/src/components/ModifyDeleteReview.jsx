@@ -42,6 +42,7 @@ export default function ModifyDeleteReview({ item, handleReload }) {
         handleReload()
     }
 
+    console.log(item)
 
 
     return (
@@ -64,7 +65,7 @@ export default function ModifyDeleteReview({ item, handleReload }) {
 
                         }
 
-                        <Typography>Fecha review</Typography>
+                        <Typography style={{fontSize: '.8rem'}}>{new Date(item?.date).toDateString()}</Typography>
                     </span>
 
                     

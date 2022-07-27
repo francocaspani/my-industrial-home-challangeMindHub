@@ -1,6 +1,8 @@
 .main-container-basket {
     padding-top: 6rem;
     display: flex;
+    min-height: 100vh;
+    background-color: white;
 }
 
 .main-container-sub {
@@ -10,8 +12,9 @@
     background-color: white;
     margin: 4rem 0;
     width: 25%;
-    height: 15rem;
+    height: fit-content;
     border: 1px solid gray;
+    padding: 2rem;
 }
 
 .container-basket {
@@ -33,6 +36,7 @@
     justify-content: space-around;
     height: 3rem;
     width: 15%;
+    font-size: 1rem;
 }
 
 .basket-amount {
@@ -40,6 +44,8 @@
     flex-direction: column;
     justify-content: space-around;
     height: 3rem;
+    font-size: 1rem;
+
 }
 
 .basket-total {
@@ -47,6 +53,8 @@
     flex-direction: column;
     justify-content: space-around;
     height: 3rem;
+    font-size: 1rem;
+
 }
 
 .amount {
@@ -61,12 +69,17 @@
     width: 80%;
     justify-content: space-between;
     align-items: center;
-    margin: 0 auto;
+    margin: .4rem auto;
 }
 
 .container-total {
     font-size: 1.2rem;
     font-weight: 500;
+}
+
+.container-buttons {
+    margin: 3rem auto;
+    width: 100%;
 }
 
 .button-finish {
@@ -88,7 +101,13 @@
     margin-top: 4.5rem;
 }
 
-/* in page tyForBuy */
+.paypal-butt {
+    background-color: white !important;
+}
+
+.menu-button {
+    background-color: white !important;
+}
 
 .containerTyForBuy{
     padding: 6rem 0 3rem 0;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import basketActions from '../redux/actions/basketActions'
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Link as LinkRouter } from "react-router-dom"
 import "../styles/basket.css"
 
 function BasketCard({ product, reload }) {
@@ -34,7 +35,9 @@ function BasketCard({ product, reload }) {
 
     return (
         <div className='basket'>
-            <img style={{ width: '50px' }} alt='img-basket' src={product?.productId.img} />
+            <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product?.productId._id}`}>
+                <img style={{ width: '60px' }} alt='img-basket' src={product?.productId.img} />
+            </LinkRouter>
             <div className='basket-name'>
                 <p>{product.productId.name}</p>
                 <p>$ {product.productId.price}</p>
@@ -57,7 +60,7 @@ function BasketCard({ product, reload }) {
                 <p>Total</p>
                 <p>$ {product.amount * product.productId.price}</p>
             </div>
-            <DeleteIcon onClick={deleteBasket} />
+            <DeleteIcon style={{cursor: 'pointer'}} onClick={deleteBasket} />
         </div>
     )
 }

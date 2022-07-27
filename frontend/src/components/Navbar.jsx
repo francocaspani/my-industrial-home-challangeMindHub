@@ -42,6 +42,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.usersReducer.userData)
   const basket = useSelector(store => store.basketReducer.productsBasket)
+  console.log(basket)
 
   let subtotals = []
   if (basket) {

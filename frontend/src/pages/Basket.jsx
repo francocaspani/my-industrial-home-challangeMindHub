@@ -72,10 +72,10 @@ function Basket(props) {
                     <p>{totalBasket}</p>
                 </div>
                 <div className='container-buttons'>
-                    <LinkRouter to='' className='linkRouter'>
+                    {/* <LinkRouter to='' className='linkRouter'>
                         <div className='button-continue'>Proceed to checkout</div>
-                    </LinkRouter>
-                    <PayPal total={totalBasket} shipping={shipping} subTotal={subTotalBasket}/>
+                    </LinkRouter> */}
+                    <PayPal className='paypal-butt' total={totalBasket} shipping={shipping} subTotal={subTotalBasket}/>
                     <LinkRouter to='/products' className='linkRouter'>
                         <div className='button-continue'>Continue shopping</div>
                     </LinkRouter>

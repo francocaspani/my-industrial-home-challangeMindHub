@@ -45,6 +45,12 @@
 
 }
 
+.box-priceFav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 @media (min-width: 1500px){
     .sc-gzVnrw{
         width: 80rem;

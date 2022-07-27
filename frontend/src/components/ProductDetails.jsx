@@ -35,6 +35,13 @@ export default function Product(props) {
     const [basket, setBasket] = useState(false)
     const user = useSelector(store => store.usersReducer.userData)
     const rating = useSelector(store => store.productsReducer.rating)
+    const prodBasket = useSelector(store => store.basketReducer.productsBasket)
+    const basketIds = prodBasket.map(prod => prod.productId._id);
+    const favsIds = user?.favourite.map(favId => favId._id)
+    console.log(favsIds)
+
+
+
 
     useEffect(() => {
         dispatch(productActions.getOneProduct(id))
@@ -75,6 +82,7 @@ export default function Product(props) {
     const handleReload = () => {
         setReload(!reload)
     }
+    const reloaded = () => { setBasket(!basket) }
 
     const handleFavourite = async () => {
 
@@ -153,7 +161,7 @@ export default function Product(props) {
                     </Box >
                 </Box >
                 <Box sx={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
-                    <CarouselProduct />
+                    <CarouselProduct basketIds={basketIds} reloaded={reloaded} favsIds={favsIds}/>
                 </Box>
                 <Box sx={{margin: '5rem auto', backgroundColor: 'white'}}>
                     <div className='review-title'>

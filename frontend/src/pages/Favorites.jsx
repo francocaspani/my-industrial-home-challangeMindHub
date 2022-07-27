@@ -7,12 +7,23 @@ import { toast } from 'react-toastify';
 import usersActions from '../redux/actions/userActions';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import CarouselProduct from '../components/CarouselProduct';
+import { Link as LinkRouter } from "react-router-dom"
 
 export default function Favorites() {
   const [basket, setBasket] = useState(false)
   const token = localStorage.getItem('token')
   const user = useSelector(store => store.usersReducer.userData)
+  const baskets = useSelector(store => store.basketReducer.productsBasket)
   const dispatch = useDispatch()
+  const basketIds = baskets?.map(prod => prod._id);
+  const reloaded = () => { setBasket(!basket) }
+  console.log(basketIds)
+  const favsIds = user?.favourite.map(favId => favId._id)
+  console.log(favsIds)
+
+
 
   useEffect(() => {
     if (user) {
@@ -29,6 +40,8 @@ export default function Favorites() {
     dispatch(basketActions.addToBasket(productToAdd));
     setBasket(!basket)
 }
+
+console.log(basket)
 
 const handleFavourite = async (id) => {
 
@@ -58,24 +71,41 @@ const handleFavourite = async (id) => {
     verifyToken()
   }
 }
+console.log(handleFavourite)
   return (
     <>
       <div className="containerFavourite">
-        {user ? user.favourite.map(product => {
+        <p className='favMainTitle'>My favorites list</p>
+        {(user?.favourite.length !== 0) ? user?.favourite.map(product => {
           return (
-            <div className='contentFavorite'>
-              <img className='imgFavorites' src={product.img} alt='foto'></img>
-              <div>{product.name}</div>
-              <div>{product.price}$</div>
-              <div>Stock: {product.stock}</div>
-              <button onClick={()=> addBasket(product._id)}><ShoppingCartIcon/></button>
-              <button onClick={()=> handleFavourite(product._id) }><DeleteIcon/></button>
+            <div className='containerProdFav'>
+              <div className='contentFavorite'>
+                <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product?._id}`}>
+                  <img className='imgFavorites' src={product.img} alt='foto'></img>
+                </LinkRouter>
+                <div className='fav-title'>{product.name}</div>
+                <div>Stock: {product.stock}</div>
+                <div className='fav-price'>${product.price}</div>
+                {/* <button onClick={()=> addBasket(product._id)}><ShoppingCartIcon/></button> */}
+                <div className='box-buttonFav'>
+                  <button className='button-add' onClick={()=> addBasket(product._id)}>
+                                            <AddShoppingCartIcon />
+                                            ⠀⠀Add to cart
+                                        </button>
+                  <DeleteIcon className='delete-icon' onClick={()=> handleFavourite(product._id) }/>
+                </div>
+              </div>
+              <div className='line'></div>
             </div>
           )
         }
         )
-          : <div><p>Nothing here</p></div>
-        }
+        : <div style={{margin: '15rem auto'}}>
+            <p className='no-fav'>No products have been added to the wish list</p>
+            <div className='line'></div>
+          </div>
+      }
+      <CarouselProduct basketIds={basketIds} reloaded={reloaded} favsIds={favsIds}/>
       </div>
     </>
   )
