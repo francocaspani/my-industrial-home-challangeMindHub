@@ -46,7 +46,7 @@ function Products() {
   return (
     <>
       <div className='containerCards'>
-        <Accordion sx={{ width: "70vw" }}>
+        <Accordion sx={{ width: "40vw" }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
@@ -56,7 +56,7 @@ function Products() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              <FormGroup sx={{ display: "flex", flexDirection: "row" }}>
+              <FormGroup sx={{ display: "flex", flexDirection: 'row'  }}>
                 <FormControlLabel control={<Checkbox />} label="exterior" onChange={handlenRoomfilter} value="exterior" />
                 <FormControlLabel control={<Checkbox />} label="bedroom" onChange={handlenRoomfilter} value="bedroom" />
                 <FormControlLabel control={<Checkbox />} label="kitchen" onChange={handlenRoomfilter} value="kitchen" />

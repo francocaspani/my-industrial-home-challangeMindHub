@@ -14,6 +14,8 @@ import { useEffect} from "react";
 import "../styles/products.css"
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import LocalGroceryStoreTwoToneIcon from '@mui/icons-material/LocalGroceryStoreTwoTone';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import { Link as LinkRouter } from "react-router-dom"
 import usersActions from '../redux/actions/userActions';
 import { toast } from 'react-toastify';
@@ -24,8 +26,8 @@ const style = { // estilo para la apertura de la imagen del producto desde la ca
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: "43vw",
-  height: "55vh",
+  width: "30rem",
+  // height: "55vh",
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -39,10 +41,15 @@ export default function MediaCard({ product, reload, keys }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const token = localStorage.getItem('token')
-  const stock = [...Array(product.stock).keys()]
+  let stock;
+  if(product.stock > 0) {
+    stock = [...Array(product.stock).keys()]
+  }
+  console.log(stock)
   const dispatch = useDispatch()
   const user = useSelector(store => store.usersReducer.userData)
   const basket = useSelector(store => store.basketReducer.productsBasket)
+  console.log(stock)
 
   useEffect(() => {
     if (user) {
@@ -104,84 +111,107 @@ export default function MediaCard({ product, reload, keys }) {
   }
   return (
     <>
-
       <Card className='cardProduts' key={keys}>
-        <CardMedia
-          component="img"
-          height="320"
-          image={product.img}
-          alt="product image"
-        />
+        <div className='img-quick'>
+      <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product._id}`}>
+          <CardMedia
+            component="img"
+            height="320"
+            image={product.img}
+            alt="product image"
+            className='img-c'
+          />
+    </LinkRouter>
+
+          <Button sx={{ fontSize: ".8rem", color: 'white',  }} className='quickShop-card' onClick={handleOpen}>Quickshop</Button>
+        </div>
         <Typography component="div" sx={{ width: "100%" }}>
           <CardActions className='buttonsCards' sx={{ justifyContent: "center" }} >
 
             {/* BOTONES */}
-            <Button sx={{ size: "small", color: '#000000' }} onClick={handleOpen}>Quickshop</Button>
             {/* MODAL */}
             <Modal
               open={open}
               onClose={handleClose}
             >
-              <Box sx={style} >
+              <Box sx={style}>
+                <div className='flex-modal'>
                 <img className='imageModal' src={product.img} alt={product.name} />
                 <Box sx={{ margin: "1rem", display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
-                  <Typography sx={{ fontSize: "2rem" }} gutterBottom variant="h4" component="div">
+                  <Typography sx={{ fontSize: "1.5rem" }} gutterBottom variant="h4" component="div">
                     {product.name} {/*  name producto */}
                   </Typography>
                   <Typography className='modalPrice' gutterBottom variant="p">
-                    ${product.price}
+                    ${product.price} USD
                   </Typography>
-                  <Typography className='modalPrice' gutterBottom variant="p">
+                  <Typography className='modalSize' gutterBottom variant="p">
                     Size: {product.size}
                   </Typography>
-                  <Typography className='modalPrice' gutterBottom variant="p">
+                  <Typography className='modalSize' gutterBottom variant="p">
                     {product.detail}
                   </Typography>
-                  <Box sx={{ display: "flex", flexDirection: "row" }}>
+                  <Box className='box-icons'>
 
                     <select className='selectModal' onChange={selected}>
 
-                      {stock.map((stock, index) => (
+                      {stock?.map((stock, index) => (
                         <option key={index}>{stock + 1}</option>
                       ))}
                     </select>
+                    <div>
+                      <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteBorderIcon /></Button>
+                      {(basketIds.includes(product._id)) ? (
+                        <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
+                      ) : (
+                        <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreIcon /></Button>
+                      )}
+                    </div>
 
-                    {(basketIds.includes(product._id)) ? (
+                    {/* {(basketIds.includes(product._id)) ? (
                       <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
                     ) : (
                       <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreTwoToneIcon /></Button>
-                    )}
+                    )} */}
                     {/* <button className='buttonCarrito' onClick={addBasket}>Add to basket</button> */}
-                    <button className='buttonCarrito' onClick={handleFavourite}>Add To Favourites</button>
+                    {/* <button className='buttonCarrito' onClick={handleFavourite}>Add To Favourites</button> */}
                   </Box>
                   <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product._id}`} >
                     <button className='buttonCarrito'>Go To Details</button>
                   </LinkRouter>
 
                 </Box>
+                </div>
               </Box>
             </Modal>
             {/* Cierra el modal */}
 
-            <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteTwoToneIcon /></Button>
+            {/* <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteTwoToneIcon /></Button>
             {(basketIds.includes(product._id)) ? (
               <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
             ) : (
               <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreTwoToneIcon /></Button>
-            )}
+            )} */}
             {/* cierra botones */}
           </CardActions>
-          <CardContent className='ctnContent' sx={{ display: "flex", flexDirection: "column", fontSize: "0.9rem" }}>
-            <Typography sx={{ fontSize: "1.5rem", display: "flex" }} gutterBottom variant="h4" component="div">
-              {product.name} {/*  name producto */}
-            </Typography>
-            <Typography sx={{ fontSize: "1.2rem", display: "flex" }} gutterBottom variant="p">
-              ${product.price} USD
-            </Typography>
-            <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product._id}`} >
-              <button className='buttonCarrito'>Go To Details</button>
-            </LinkRouter>
-          </CardContent>
+          <div className='container-infoCard'>
+            <CardContent className='ctnContent' sx={{ display: "flex", flexDirection: "column", fontSize: "0.9rem" }}>
+              <Typography sx={{ fontSize: ".9rem", display: "flex" }} gutterBottom variant="h4" component="div">
+                {product.name} {/*  name producto */}
+              </Typography>
+              <Typography sx={{ fontSize: ".9rem", display: "flex" }} gutterBottom variant="p">
+                ${product.price} USD
+              </Typography>
+            </CardContent>
+            <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteBorderIcon /></Button>
+              {(basketIds.includes(product._id)) ? (
+                <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
+              ) : (
+                <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreIcon /></Button>
+              )}
+              {/* <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product._id}`} >
+                <button className='buttonCarrito'>Go To Details</button>
+              </LinkRouter> */}
+          </div>
         </Typography>
       </Card>
     </>

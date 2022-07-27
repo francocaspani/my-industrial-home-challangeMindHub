@@ -179,13 +179,13 @@ export default function Navbar() {
     >
       <List>
         {[{ to: '/', name: 'Home' }, { to: '/spaces', name: 'Spaces' }, { to: '/products', name: 'Products' }, { to: '/basket', name: 'Basket' }, { to: '/Favorites', name: 'Favs' }].map((text, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton>
-              <LinkRouter className='links' to={text.to}>
+          <LinkRouter className='links' to={text.to}>
+            <ListItem key={index} disablePadding>
+              <ListItemButton>
                 <ListItemText primary={text.name} />
-              </LinkRouter>
-            </ListItemButton>
-          </ListItem>
+              </ListItemButton>
+            </ListItem>
+          </LinkRouter>
         ))}
       </List>
       <Divider />
@@ -331,7 +331,7 @@ export default function Navbar() {
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
-            <LinkRouter to={'/basket'}>
+            <LinkRouter className='no-linkNav' to={'/basket'}>
               <ShoppingCartIcon />
             </LinkRouter>
           </Badge>
@@ -444,7 +444,7 @@ export default function Navbar() {
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
-              <LinkRouter to={"/Favorites"} >
+              <LinkRouter className='no-linkNav' to={"/Favorites"} >
                 <IconButton
                   size="large"
                   aria-label="show 17 new notifications"

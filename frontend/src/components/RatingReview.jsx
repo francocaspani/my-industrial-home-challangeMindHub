@@ -64,8 +64,8 @@ export default function RatingReview({ product, handleReload, ratingProduct }) {
     return (
         <Box className='reviewContainer'>
             <span className='titleReviewContainer'>
-                <Typography>Ratings and Reviews</Typography>
-                <span onClick={handleOpen}><Typography>Write a review</Typography></span>
+                {/* <Typography>Ratings and Reviews</Typography> */}
+                {/* <span onClick={handleOpen}><Typography>Write a review</Typography></span> */}
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -104,7 +104,7 @@ export default function RatingReview({ product, handleReload, ratingProduct }) {
                     </Box>
                 </Modal>
             </span>
-            <Box className='ratingBox'>
+            {/* <Box className='ratingBox'>
                 <span className='ratingText'>
                     <Typography>{ratingProduct} stars</Typography>
                     <Typography>{product?.reviews.length} Reviews</Typography>
@@ -112,7 +112,7 @@ export default function RatingReview({ product, handleReload, ratingProduct }) {
                 <Stack spacing={1}>
                     <Rating name="half-rating-read" value={ratingProduct} precision={0.5} size='large' readOnly />
                 </Stack>
-            </Box>
+            </Box> */}
             {product?.reviews.map((item, index) => {
                 return (
                     <ModifyDeleteReview item={item} handleReload={handleReload} />

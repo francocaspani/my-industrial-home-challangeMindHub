@@ -38,7 +38,7 @@ export default function CarouselBestSellers({product}) {
                             <LinkRouter  to={`/products/${product._id}`}  >
                             <img className="imageBestSellers" src={eachproduct} alt={product.name} />
                             </LinkRouter>
-                            <p>{product.name}</p>
+                            {/* <p>{product.name}</p> */}
                         </div>
                        
                     </SwiperSlide>

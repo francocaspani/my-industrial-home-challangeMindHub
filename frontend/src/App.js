@@ -26,7 +26,7 @@ import ScrollToTop from "react-scroll-to-top";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
-//export const urlBackend = 'http://localhost:4000/api'
+// export const urlBackend = 'http://localhost:4000/api'
 
 
 function App(props) {
@@ -45,45 +45,45 @@ function App(props) {
         const res = await dispatch(usersActions.verifyToken(token))
         console.log(res)
         if (res) {
-          
+
           toast(res.data.message, {
             theme: "dark",
             position: "bottom-left",
             autoClose: 4000,
-        })
+          })
         }
       }
       verifyToken()
     }
   }, [])
-  
+
   // console.log(user?)
   return (
     <div className="App">
       <Navbar />
       <Routes location={location} key={location.pathname}>
         <Route path='/home' element={<Index />} />
-        <Route path='/Favorites' element={<Favorites/>} />
+        <Route path='/Favorites' element={<Favorites />} />
         <Route path='/' element={<Index />} />
         <Route path='/*' element={<Index />} />
-        <Route path='/signin' element={<SignIn/>} />
-        <Route path='/signup' element={<SignUp/>} />
-        <Route path='/policies' element={<Policies/>}/>
-        <Route path='/product' element={<Product/>} />
-        <Route path='/spaces' element={<Rooms/>} />
-        <Route path='/spaces/:id' element={<ProductDetails/>} />
-        <Route path='/products/:id' element={<Product/>} />
-        <Route path='/products' element={<Products/>} />
+        <Route path='/signin' element={<SignIn />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/policies' element={<Policies />} />
+        <Route path='/product' element={<Product />} />
+        <Route path='/spaces' element={<Rooms />} />
+        <Route path='/spaces/:id' element={<ProductDetails />} />
+        <Route path='/products/:id' element={<Product />} />
+        <Route path='/products' element={<Products />} />
         <Route path='/basket' element={<Basket />} />
-        {user?.isAdmin && <Route path='/admin' element={<Admin/>}/>}
-       {user?.isAdmin && <Route path='/ModifyProduct/:id' element={<ModifyProduct/>}/>}
+        {user?.isAdmin && <Route path='/admin' element={<Admin />} />}
+        {user?.isAdmin && <Route path='/ModifyProduct/:id' element={<ModifyProduct />} />}
       </Routes>
       <ScrollToTop
-      style={{
-        right: "10px",
-        marginbottom: "80px",
-        bottom: "100px",
-      }}
+        style={{
+          right: "10px",
+          marginbottom: "80px",
+          bottom: "100px",
+        }}
         smooth
         component={<KeyboardArrowUpIcon />}
       />

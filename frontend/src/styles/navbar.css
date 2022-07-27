@@ -41,6 +41,11 @@ body{
     color: rgb(66, 64, 64);
 }
 
+.no-linkNav {
+    text-decoration: none;
+    color: white;
+}
+
 .search-product {
     display: flex;
     flex-direction: column;

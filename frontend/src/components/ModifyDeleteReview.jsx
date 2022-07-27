@@ -45,51 +45,54 @@ export default function ModifyDeleteReview({ item, handleReload }) {
 
 
     return (
-        <Box key={item._id} className='everyReview'>
-            <Box className='imgReview'>
-                <img height={100} src={item.img} alt='image' />
-            </Box>
+        <>
+            <Box key={item._id} className='everyReview'>
+                <Box className='imgReview'>
+                    <img height={100} src={item.img} alt='image' />
+                </Box>
 
-            <Box className='textReview'>
-                <span className='ratingDateReview'>
-                    {user && user.id === item.userId ?
-                        <Stack spacing={1}>
-                            <Rating   onChange={(event, newValue)=> setRating(newValue)} name="simple-controlled" value={item.rating} precision={0.5} />
-                        </Stack>
-                        :
-                        <Stack spacing={1}>
-                            <Rating name="half-rating-read" defaultValue={item.rating} precision={0.5} readOnly />
-                        </Stack>
+                <Box className='textReview'>
+                    <span className='ratingDateReview'>
+                        {user && user.id === item.userId ?
+                            <Stack spacing={1}>
+                                <Rating   onChange={(event, newValue)=> setRating(newValue)} name="simple-controlled" value={item.rating} precision={0.5} />
+                            </Stack>
+                            :
+                            <Stack spacing={1}>
+                                <Rating name="half-rating-read" defaultValue={item.rating} precision={0.5} readOnly />
+                            </Stack>
 
-                    }
+                        }
 
-                    <Typography>Fecha review</Typography>
-                </span>
+                        <Typography>Fecha review</Typography>
+                    </span>
 
-                
-                {user && user.id == item.userId ?
-                    <Box className='comments'>
-                        <span suppressContentEditableWarning={true} contentEditable className='titleReview' onInput={(event) => setModifyTitle(event.currentTarget.textContent)}><b className='titlereview'>{item.titleReview}</b></span>
-                        <span suppressContentEditableWarning={true} contentEditable className='descriptionReview' onInput={(event) => setModify(event.currentTarget.textContent)}>{item.review}</span>
-                        <Box className='comments2'>
+                    
+                    {user && user.id == item.userId ?
+                        <Box className='comments'>
+                            <span suppressContentEditableWarning={true} contentEditable className='titleReview' onInput={(event) => setModifyTitle(event.currentTarget.textContent)}><b className='titlereview'>{item.titleReview}</b></span>
+                            <span suppressContentEditableWarning={true} contentEditable className='descriptionReview' onInput={(event) => setModify(event.currentTarget.textContent)}>{item.review}</span>
+                            <Box className='comments2'>
 
 
-                            <Button onClick={() => handleModify(item._id)} sx={{ margin: '.2rem' }} variant="outlined" color="success">
-                                <EditIcon />
-                            </Button>
-                            <Button onClick={handleDelete} id={item._id} sx={{ margin: '.2rem' }} variant="outlined" color="error">
-                                <DeleteIcon />
-                            </Button>
+                                <Button onClick={() => handleModify(item._id)} sx={{ margin: '.2rem' }} variant="outlined" color="success">
+                                    <EditIcon />
+                                </Button>
+                                <Button onClick={handleDelete} id={item._id} sx={{ margin: '.2rem' }} variant="outlined" color="error">
+                                    <DeleteIcon />
+                                </Button>
+                            </Box>
+
+
                         </Box>
+                        : <Box className='comments'><span  className='titleReview' onInput={(event) => setModify(event.currentTarget.textContent)}><b className='titlereview'>{item.titleReview}</b></span>
+                            <span  className='descriptionReview' onInput={(event) => setModify(event.currentTarget.textContent)}>{item.review}</span> </Box>}
+                </Box>
 
 
-                    </Box>
-                    : <Box className='comments'><span  className='titleReview' onInput={(event) => setModify(event.currentTarget.textContent)}><b className='titlereview'>{item.titleReview}</b></span>
-                        <span  className='descriptionReview' onInput={(event) => setModify(event.currentTarget.textContent)}>{item.review}</span> </Box>}
             </Box>
-
-
-        </Box>
+            <div className='line'></div>
+        </>
 
 
 

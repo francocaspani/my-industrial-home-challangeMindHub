@@ -1,15 +1,19 @@
 .reviewContainer {
-    width: 40rem;
+    width: 90%;
     height: auto;
-    border: solid 2px black;
+    /* border: solid 2px black; */
     padding: .5rem;
     margin: 1rem;
 }
 
+.css-r40f8v-MuiTypography-root {
+    width: 100% !important;
+}
+
 .comments {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: left; */
+    align-items: flex-start;
     flex-direction: column;
 }
 
@@ -41,14 +45,15 @@
 
 .everyReview {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
-    border-top: solid 1px black;
+    width: 90%;
+    margin: 1rem auto;
+    /* border-top: solid 1px black; */
 }
 
 .imgReview {
-    width: 40%;
+    width: 20%;
     height: 10rem;
     border-right: solid 1px black;
 }
@@ -56,14 +61,16 @@
 .textReview {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    /* padding: 2rem; */
+    width: 75%;
+    /* background-color: green; */
 }
 
 .ratingDateReview {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    margin: 1rem;
+    margin-bottom: 1rem;
 }
 
 .descriptionReview {
@@ -85,7 +92,6 @@
     justify-content: space-around;
     align-items: center;
     border-bottom: solid 2px black;
-    ;
 }
 
 .formBoxReview {
@@ -114,8 +120,10 @@
     align-items: center;
 }
 
-
-
 .titlereview {
     font-size: 1.3rem;
+}
+
+.css-1anpwpq-MuiPaper-root-MuiCard-root {
+    width: 75% !important;
 }
