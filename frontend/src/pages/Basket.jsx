@@ -138,17 +138,17 @@ function Basket(props) {
 
                 <div className='main-container-sub'>
                     <div>
-                        <p>To confirm the purchase, we ask you to please log in</p>
+                        <p style={{fontSize: '1rem'}}>To confirm the purchase, we ask you to please log in</p>
                         <LinkRouter to={'/signin'}>
-                        <button type="submit" className="submit" value="submit">
+                        <button style={{padding: '.5rem', backgroundColor: 'black'}} type="submit" className="submit" value="submit">
                             Sign in
                         </button>
                         </LinkRouter>
                     </div>
                     <div className='containerBasketLocalStg'>
-                        <p>If you do not have an account, register here</p>
+                        <p style={{fontSize: '1rem'}}>If you do not have an account, register here</p>
                         <LinkRouter to={'/signup'}>
-                        <button type="submit" className="submit" value="submit">
+                        <button style={{padding: '.5rem', backgroundColor: 'black', marginBottom: '1.5rem'}} type="submit" className="submit" value="submit">
                             Sign up
                         </button>
                         </LinkRouter>

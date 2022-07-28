@@ -111,6 +111,10 @@
 }
 
 .containerTyForBuy{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 6rem 0 3rem 0;
 }
 .containerTitlesTyForBuy{
@@ -122,10 +126,15 @@
 }
 
 .ctaShop{
-    padding-top: .5rem;
     font-size: 18px;
     text-decoration: none;
-    color: black;
+    color: white;
+    width: fit-content;
+    border: 1px solid black;
+    margin: auto;
+    border-radius: 5px;
+    padding: .8rem;
+    background-color: rgb(174, 171, 171);
 }
 
  @media(max-width: 1000px) {
