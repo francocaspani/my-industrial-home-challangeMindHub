@@ -29,12 +29,18 @@ export default function Product(props) {
     const [reload, setReload] = useState(false)
     const [card, setCard] = useState()
     const [magia, setMagia] = useState(0)
-
+    const [productModel, setProductmodel] = React.useState(1)
     const { id } = useParams()
     const dispatch = useDispatch()
     const [basket, setBasket] = useState(false)
     const user = useSelector(store => store.usersReducer.userData)
     const rating = useSelector(store => store.productsReducer.rating)
+
+  
+    let stock;
+        if(card?.stock > 0) {
+            stock = [...Array(card?.stock).keys()]
+        }
 
     useEffect(() => {
         dispatch(productActions.getOneProduct(id))
@@ -44,10 +50,10 @@ export default function Product(props) {
     }, [id, reload])
 
     useEffect(() => {
-        if (card){
+        if (card) {
             dispatch(productActions.getRating(card.reviews))
         }
-        
+
     }, [card])
 
     console.log(card)
@@ -107,10 +113,16 @@ export default function Product(props) {
 
     console.log(rating.value)
 
+    function selected(event) {
+        console.log(event.target.value);
+        setProductmodel(event.target.value);
+      }
+
+
     return (
         <>
 
-            <Box key={card?._id} style={{paddingTop: '5.5rem'}}>
+            <Box key={card?._id} style={{ paddingTop: '5.5rem' }}>
 
                 <Box className='cards-product-details'>
 
@@ -136,13 +148,21 @@ export default function Product(props) {
                                 </Typography>
                             </div>
                             <div className='container-selectBotton'>
-                                <select className='box-select'><option>1</option></select>
+                                {/* <select className='box-select'><option>1</option></select> */}
+                                <select className='box-select' onChange={selected}>
+
+                                    {stock?.map((stock, index) => (
+                                        <option key={index}>{stock + 1}</option>
+                                    ))}
+                                </select>
+
+
                                 <div className='box-buttons'>
                                     <button className='button-add' onClick={addBasket} >
                                         <AddShoppingCartIcon />
                                         ⠀⠀Add to cart
                                     </button>
-                                    <button className='button-fav'onClick={handleFavourite} disableElevation>
+                                    <button className='button-fav' onClick={handleFavourite} disableElevation>
                                         <VolunteerActivismIcon />
                                         ⠀⠀
                                         Add to favorite
@@ -155,7 +175,7 @@ export default function Product(props) {
                 <Box sx={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
                     <CarouselProduct />
                 </Box>
-                <Box sx={{margin: '5rem auto', backgroundColor: 'white'}}>
+                <Box sx={{ margin: '5rem auto', backgroundColor: 'white' }}>
                     <div className='review-title'>
                         <p>Ratings and Reviews</p>
                         <a>Write a review</a>
@@ -166,9 +186,9 @@ export default function Product(props) {
                             <div className='review-info'>
                                 {
                                     (card?.reviews.length == 0) ?
-                                    <p>0 stars</p>
-                                    :
-                                    <p>{Math.round(rating)} stars</p>
+                                        <p>0 stars</p>
+                                        :
+                                        <p>{Math.round(rating)} stars</p>
                                 }
                                 <p>|</p>
                                 <p>{card?.reviews.length} Reviews</p>
@@ -180,11 +200,11 @@ export default function Product(props) {
                         <div className='box-reco'>
                             {
                                 (card?.reviews.length == 0) ?
-                                <p>No reviews yet, be the first one</p>
-                                :
-                                <p>{Math.round(rating)*20}% Recommended</p>
+                                    <p>No reviews yet, be the first one</p>
+                                    :
+                                    <p>{Math.round(rating) * 20}% Recommended</p>
                             }
-                            <CheckCircleOutlineIcon/>
+                            <CheckCircleOutlineIcon />
                         </div>
                     </div>
                     <Box className='box-review' sx={{ marginTop: '2rem', marginBottom: '2rem' }}>
