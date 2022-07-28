@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import productActions from '../redux/actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect} from "react";
+import { useEffect } from "react";
 import "../styles/products.css"
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import LocalGroceryStoreTwoToneIcon from '@mui/icons-material/LocalGroceryStoreTwoTone';
@@ -42,7 +42,7 @@ export default function MediaCard({ product, reload, keys }) {
   const handleClose = () => setOpen(false);
   const token = localStorage.getItem('token')
   let stock;
-  if(product.stock > 0) {
+  if (product.stock > 0) {
     stock = [...Array(product.stock).keys()]
   }
   console.log(stock)
@@ -95,10 +95,22 @@ export default function MediaCard({ product, reload, keys }) {
   async function addBasket() {
     const productToAdd = {
       productId: product._id,
-      amount: productModel
+      amount: productModel,
+      img: product.img,
+      price: product.price,
+      name: product.name
     }
-    dispatch(basketActions.addToBasket(productToAdd));
-    reload()
+    if (user) {
+      dispatch(basketActions.addToBasket(productToAdd));
+      reload()
+    }
+    else {
+      let basketLocalStorage = JSON.parse(localStorage.getItem('basket')) || []
+
+      basketLocalStorage.push(productToAdd)
+      let basketLocalStorageJSON = JSON.stringify(basketLocalStorage)
+      localStorage.setItem('basket', basketLocalStorageJSON)
+    }
   }
   function basketAlert() {
     // if (res) {
@@ -113,17 +125,17 @@ export default function MediaCard({ product, reload, keys }) {
     <>
       <Card className='cardProduts' key={keys}>
         <div className='img-quick'>
-      <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product._id}`}>
-          <CardMedia
-            component="img"
-            height="320"
-            image={product.img}
-            alt="product image"
-            className='img-c'
-          />
-    </LinkRouter>
+          <LinkRouter style={{ textDecoration: 'none' }} to={`/products/${product._id}`}>
+            <CardMedia
+              component="img"
+              height="320"
+              image={product.img}
+              alt="product image"
+              className='img-c'
+            />
+          </LinkRouter>
 
-          <Button sx={{ fontSize: ".8rem", color: 'white',  }} className='quickShop-card' onClick={handleOpen}>Quickshop</Button>
+          <Button sx={{ fontSize: ".8rem", color: 'white', }} className='quickShop-card' onClick={handleOpen}>Quickshop</Button>
         </div>
         <Typography component="div" sx={{ width: "100%" }}>
           <CardActions className='buttonsCards' sx={{ justifyContent: "center" }} >
@@ -136,50 +148,50 @@ export default function MediaCard({ product, reload, keys }) {
             >
               <Box sx={style}>
                 <div className='flex-modal'>
-                <img className='imageModal' src={product.img} alt={product.name} />
-                <Box sx={{ margin: "1rem", display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
-                  <Typography sx={{ fontSize: "1.5rem" }} gutterBottom variant="h4" component="div">
-                    {product.name} {/*  name producto */}
-                  </Typography>
-                  <Typography className='modalPrice' gutterBottom variant="p">
-                    ${product.price} USD
-                  </Typography>
-                  <Typography className='modalSize' gutterBottom variant="p">
-                    Size: {product.size}
-                  </Typography>
-                  <Typography className='modalSize' gutterBottom variant="p">
-                    {product.detail}
-                  </Typography>
-                  <Box className='box-icons'>
+                  <img className='imageModal' src={product.img} alt={product.name} />
+                  <Box sx={{ margin: "1rem", display: "flex", flexDirection: "column", justifyContent: "space-around" }}>
+                    <Typography sx={{ fontSize: "1.5rem" }} gutterBottom variant="h4" component="div">
+                      {product.name} {/*  name producto */}
+                    </Typography>
+                    <Typography className='modalPrice' gutterBottom variant="p">
+                      ${product.price} USD
+                    </Typography>
+                    <Typography className='modalSize' gutterBottom variant="p">
+                      Size: {product.size}
+                    </Typography>
+                    <Typography className='modalSize' gutterBottom variant="p">
+                      {product.detail}
+                    </Typography>
+                    <Box className='box-icons'>
 
-                    <select className='selectModal' onChange={selected}>
+                      <select className='selectModal' onChange={selected}>
 
-                      {stock?.map((stock, index) => (
-                        <option key={index}>{stock + 1}</option>
-                      ))}
-                    </select>
-                    <div>
-                      <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteBorderIcon /></Button>
-                      {(basketIds.includes(product._id)) ? (
-                        <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
-                      ) : (
-                        <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreIcon /></Button>
-                      )}
-                    </div>
+                        {stock?.map((stock, index) => (
+                          <option key={index}>{stock + 1}</option>
+                        ))}
+                      </select>
+                      <div>
+                        <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteBorderIcon /></Button>
+                        {(basketIds.includes(product._id)) ? (
+                          <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
+                        ) : (
+                          <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreIcon /></Button>
+                        )}
+                      </div>
 
-                    {/* {(basketIds.includes(product._id)) ? (
+                      {/* {(basketIds.includes(product._id)) ? (
                       <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
                     ) : (
                       <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreTwoToneIcon /></Button>
                     )} */}
-                    {/* <button className='buttonCarrito' onClick={addBasket}>Add to basket</button> */}
-                    {/* <button className='buttonCarrito' onClick={handleFavourite}>Add To Favourites</button> */}
-                  </Box>
-                  <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product._id}`} >
-                    <button className='buttonCarrito'>Go To Details</button>
-                  </LinkRouter>
+                      {/* <button className='buttonCarrito' onClick={addBasket}>Add to basket</button> */}
+                      {/* <button className='buttonCarrito' onClick={handleFavourite}>Add To Favourites</button> */}
+                    </Box>
+                    <LinkRouter style={{ textDecoration: 'none' }} to={`/products/${product._id}`} >
+                      <button className='buttonCarrito'>Go To Details</button>
+                    </LinkRouter>
 
-                </Box>
+                  </Box>
                 </div>
               </Box>
             </Modal>
@@ -203,12 +215,12 @@ export default function MediaCard({ product, reload, keys }) {
               </Typography>
             </CardContent>
             <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteBorderIcon /></Button>
-              {(basketIds.includes(product._id)) ? (
-                <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
-              ) : (
-                <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreIcon /></Button>
-              )}
-              {/* <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product._id}`} >
+            {(basketIds.includes(product._id)) ? (
+              <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
+            ) : (
+              <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreIcon /></Button>
+            )}
+            {/* <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product._id}`} >
                 <button className='buttonCarrito'>Go To Details</button>
               </LinkRouter> */}
           </div>

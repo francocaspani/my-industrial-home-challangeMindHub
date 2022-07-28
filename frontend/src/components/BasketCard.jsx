@@ -16,7 +16,13 @@ function BasketCard({ product, reload }) {
         await dispatch(basketActions.deleteBasketProduct(productId));
         console.log(productId)
         reload()
+
+        let storageProducts = JSON.parse(localStorage.getItem('basket'));
+        let products = storageProducts.filter(product => product.productId !== productId);
+        localStorage.setItem('basket', JSON.stringify(products));
     }
+
+
     async function modifyBasket(event) {
         event.preventDefault()
         setAmount(event.target.value);
@@ -30,7 +36,7 @@ function BasketCard({ product, reload }) {
 
     function selected(event) {
         setAmount(event.target.value);
-   }
+    }
 
     return (
         <div className='basket'>
@@ -50,6 +56,7 @@ function BasketCard({ product, reload }) {
                     </select>
                     {/* <p id={product.productId._id} onClick={()=>modifyBasket('less', product.productId._id)} >-</p> */}
                     <p>{product.amount}</p>
+
                     {/* <p id={product.productId._id} onClick={()=>modifyBasket('plus', product.productId._id)}>+</p> */}
                 </div>
             </div>
