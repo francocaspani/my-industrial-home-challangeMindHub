@@ -15,7 +15,14 @@
 
 .cardProducts {
   box-shadow: none !important;
+  width: 20rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  margin: 1rem!important;
+  box-shadow: none !important;
 }
+
 
 .css-bhp9pd-MuiPaper-root-MuiCard-root {
   width: 20rem !important;

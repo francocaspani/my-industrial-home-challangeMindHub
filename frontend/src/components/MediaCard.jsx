@@ -124,7 +124,7 @@ export default function MediaCard({ product, reload, keys }) {
   }
   return (
     <>
-      <Card className='cardProduts' key={keys}>
+      <Card className='cardProducts' key={keys}>
         <div className='img-quick'>
           <LinkRouter style={{ textDecoration: 'none' }} to={`/products/${product._id}`}>
             <CardMedia
