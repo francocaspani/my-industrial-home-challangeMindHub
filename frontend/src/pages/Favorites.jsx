@@ -5,7 +5,6 @@ import basketActions from '../redux/actions/basketActions';
 import {useState, useEffect} from 'react'
 import { toast } from 'react-toastify';
 import usersActions from '../redux/actions/userActions';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import CarouselProduct from '../components/CarouselProduct';

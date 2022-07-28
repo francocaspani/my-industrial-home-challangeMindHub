@@ -1,13 +1,10 @@
-import * as React from 'react';
+import React from "react";
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, Box } from '@mui/material';
+import { Box } from '@mui/material';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import CarouselProduct from '../components/CarouselProduct'
@@ -21,6 +18,9 @@ import RatingReview from '../components/RatingReview'
 import usersActions from '../redux/actions/userActions';
 import { toast } from 'react-toastify';
 import '../styles/productDetails.css'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link as LinkRouter } from "react-router-dom";
+
 
 
 export default function Product(props) {
@@ -38,12 +38,7 @@ export default function Product(props) {
     const prodBasket = useSelector(store => store.basketReducer.productsBasket)
     const basketIds = prodBasket.map(prod => prod.productId._id);
     const favsIds = user?.favourite.map(favId => favId._id)
-    console.log(favsIds)
-
-
-
-
-  
+    // console.log(favsIds)
     let stock;
         if(card?.stock > 0) {
             stock = [...Array(card?.stock).keys()]
@@ -52,8 +47,6 @@ export default function Product(props) {
     useEffect(() => {
         dispatch(productActions.getOneProduct(id))
             .then(res => setCard(res.data.response.product))
-
-
     }, [id, reload])
 
     useEffect(() => {
@@ -63,15 +56,14 @@ export default function Product(props) {
 
     }, [card])
 
-    console.log(card)
+    // console.log(card)
     async function addBasket(e) {
         const productToAdd = {
             productId: id,
-            amount: 1,
+            amount: productModel,
             img: card.img,
             price: card.price,
             name: card.name
-
         }
         if (user) {
             dispatch(basketActions.addToBasket(productToAdd));
@@ -89,13 +81,11 @@ export default function Product(props) {
 
     // const userBasket = useSelector(store => store.basketReducer.productsBasket)
     // console.log(userBasket)
-
     useEffect(() => {
         if (user) {
             dispatch(basketActions.getUserBasket())
         }
     }, [basket])
-
 
 
     const handleReload = () => {
@@ -121,7 +111,6 @@ export default function Product(props) {
                 autoClose: 4000,
             })
         }
-
         if (localStorage.getItem('token') !== null) {
             const token = localStorage.getItem('token')
 
@@ -131,22 +120,23 @@ export default function Product(props) {
             verifyToken()
         }
     }
-
-    console.log(rating.value)
+    // console.log(rating.value)
 
     function selected(event) {
-        console.log(event.target.value);
+        // console.log(event.target.value);
         setProductmodel(event.target.value);
       }
 
 
     return (
-        <>
+        <div>
 
             <Box key={card?._id} style={{ paddingTop: '5.5rem' }}>
 
                 <Box className='cards-product-details'>
-
+                 <LinkRouter to="/products">
+                     <ArrowBackIcon className="ArrowBackIcon_ProductoDetails"/>
+                     </LinkRouter>
                     <Box className='container-img-detail'>
                         <img src={card?.img} alt="card-detail" className='img-detail' />
                     </Box>
@@ -158,7 +148,9 @@ export default function Product(props) {
                                     {card?.name}
                                 </Typography>
                                 <Stack className='price-detail' spacing={1}>
+                                    
                                     <Rating name="half-rating-read" value={rating} precision={0.5} readOnly />
+                                  
                                 </Stack>
                                 <Typography className='price-detail'>Price: $ {card?.price} </Typography>
                                 <Typography className='price-detail' variant="body2" color="text.secondary">
@@ -203,7 +195,7 @@ export default function Product(props) {
                     </div>
                     <div className='line'></div>
                     <div className='box-infoRev'>
-                        <div className='box-revInfo'>
+                        <div className='box-revInfo' >
                             <div className='review-info'>
                                 {
                                     (card?.reviews.length == 0) ?
@@ -237,6 +229,6 @@ export default function Product(props) {
                     </Box>
                 </Box>
             </Box >
-        </>
+        </div>
     );
 }

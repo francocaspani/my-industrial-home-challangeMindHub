@@ -8,19 +8,17 @@ import Typography from '@mui/material/Typography';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import productActions from '../redux/actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
 import "../styles/products.css"
-import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocalGroceryStoreTwoToneIcon from '@mui/icons-material/LocalGroceryStoreTwoTone';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import { Link as LinkRouter } from "react-router-dom"
 import usersActions from '../redux/actions/userActions';
 import { toast } from 'react-toastify';
 import basketActions from '../redux/actions/basketActions';
+
 
 const style = { // estilo para la apertura de la imagen del producto desde la card
   position: 'absolute',

@@ -7,6 +7,11 @@
     padding: 1rem;
     min-height: 80vh;
 }
+.ArrowBackIcon_ProductoDetails{
+    color: black;
+    width: 3rem !important;
+    height: 3rem;
+}
 
 .container-img-detail {
     width: 50%;

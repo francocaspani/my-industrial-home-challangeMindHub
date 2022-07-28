@@ -43,7 +43,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.usersReducer.userData)
   const basket = useSelector(store => store.basketReducer.productsBasket)
-  console.log(basket)
+  // console.log(basket)
 
   let subtotals = []
   if (basket) {
@@ -132,11 +132,11 @@ export default function Navbar() {
   let productLocal = JSON.parse(localStorage.getItem('basket'))
 
   function basketLocal(e) {
-    console.log('CLAROOOOOOOO')
+    // console.log('CLAROOOOOOOO')
     const productIndex = productLocal.indexOf(e)
-    console.log(productIndex)
+    // console.log(productIndex)
     productLocal.splice(productIndex, 1)
-    console.log(productLocal)
+    // console.log(productLocal)
 
     let stringiFied = JSON.stringify(productLocal)
     localStorage.setItem('basket', stringiFied)
