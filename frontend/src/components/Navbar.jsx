@@ -495,7 +495,7 @@ export default function Navbar() {
                   color="inherit"
                 >
                   <Badge badgeContent={user?.favourite.length} color="error">
-                    <FavoriteIcon />
+                    <FavoriteIcon/>
                   </Badge>
                 </IconButton>
               </LinkRouter>

@@ -11,16 +11,15 @@ export default function GoogleSignUp({country}){
 
     async function handleCallbackResponse(response){
         let userObject = jwt_decode(response.credential);
-        const userData = {
+        dispatch(usersActions.signUpUser ({
             firstName: userObject.given_name,
             lastName: userObject.family_name,
             email: userObject.email,
-            password: `Aa${userObject.sub}`,
+            password: userObject.sub,
             country: country,
-            from: 'Google Account'
-        }
-        const res = await dispatch(usersActions.signUpUser(userData))
-
+            isAdmin: false,
+            from: 'google'
+        }))
     }
 
     useEffect(()=>{

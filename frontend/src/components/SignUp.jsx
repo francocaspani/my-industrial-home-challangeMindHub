@@ -59,7 +59,6 @@ function SignUp() {
             from: 'propietary-signup'
         }
         const res = await dispatch(usersActions.signUpUser(userData))
-        console.log(res)
         if (res.data.from === 'validator') {
             res.data.message.map((message, index) => toast.error(message.message, {
                 theme: "dark",
@@ -97,8 +96,7 @@ function SignUp() {
                                         <select onChange={handleSelect} className='select-modal' name="country" id="country">
                                             {sortedCountries?.map((everycountry, index) => <option key={index} value={everycountry}>{everycountry}</option>)}
                                         </select>
-                                        {/* {selectedCountry && <span><GoogleSignUp country={selectedCountry} /></span>
-                                        } */}
+                                        {selectedCountry && <span><GoogleSignUp country={selectedCountry} /></span>} 
                                     </Box>
 
                                 </Modal>

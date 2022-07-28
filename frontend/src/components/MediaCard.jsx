@@ -18,6 +18,11 @@ import { Link as LinkRouter } from "react-router-dom"
 import usersActions from '../redux/actions/userActions';
 import { toast } from 'react-toastify';
 import basketActions from '../redux/actions/basketActions';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
+
+
+
 
 
 const style = { // estilo para la apertura de la imagen del producto desde la card
@@ -120,6 +125,9 @@ export default function MediaCard({ product, reload, keys }) {
     })
     // }
   }
+
+const idFavorites = user?.favourite.map(favorite => favorite._id)
+// console.log(idFavorites)
   return (
     <>
       <Card className='cardProducts' key={keys}>
@@ -201,6 +209,26 @@ export default function MediaCard({ product, reload, keys }) {
               </Box>
             </Modal>
             {/* Cierra el modal */}
+              {/* {console.log(user)} */}
+
+              {/* <div onClick={handleFavourite}> */}
+                  {idFavorites?.includes(product._id) ?
+                    <Button style={{ "fontSize": 30,color:"black"}} className="material-icons corazon" onClick={handleFavourite}>
+                      <FavoriteIcon/></Button>
+                    :
+                    <Button style={{ "fontSize": 30, color:"black"}} className="material-icons" onClick={handleFavourite}>
+                      <FavoriteBorderIcon /></Button>}
+                {/* </div> */}
+
+
+
+
+            {/* <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteTwoToneIcon /></Button> */}
+
+
+
+
+
 
             {/* <Button sx={{ size: "small", color: '#000000' }} onClick={handleFavourite}> <FavoriteTwoToneIcon /></Button>
             {(basketIds.includes(product._id)) ? (
