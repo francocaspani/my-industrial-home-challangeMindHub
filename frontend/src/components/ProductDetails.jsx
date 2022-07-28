@@ -29,7 +29,7 @@ export default function Product(props) {
     const [reload, setReload] = useState(false)
     const [card, setCard] = useState()
     const [magia, setMagia] = useState(0)
-
+    const [productModel, setProductmodel] = React.useState(1)
     const { id } = useParams()
     const dispatch = useDispatch()
     const [basket, setBasket] = useState(false)
@@ -42,6 +42,12 @@ export default function Product(props) {
 
 
 
+
+  
+    let stock;
+        if(card?.stock > 0) {
+            stock = [...Array(card?.stock).keys()]
+        }
 
     useEffect(() => {
         dispatch(productActions.getOneProduct(id))
@@ -128,6 +134,12 @@ export default function Product(props) {
 
     console.log(rating.value)
 
+    function selected(event) {
+        console.log(event.target.value);
+        setProductmodel(event.target.value);
+      }
+
+
     return (
         <>
 
@@ -157,7 +169,15 @@ export default function Product(props) {
                                 </Typography>
                             </div>
                             <div className='container-selectBotton'>
-                                <select className='box-select'><option>1</option></select>
+                                {/* <select className='box-select'><option>1</option></select> */}
+                                <select className='box-select' onChange={selected}>
+
+                                    {stock?.map((stock, index) => (
+                                        <option key={index}>{stock + 1}</option>
+                                    ))}
+                                </select>
+
+
                                 <div className='box-buttons'>
                                     <button className='button-add' onClick={addBasket} >
                                         <AddShoppingCartIcon />
