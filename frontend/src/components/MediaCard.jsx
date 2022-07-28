@@ -210,12 +210,12 @@ const idFavorites = user?.favourite.map(favorite => favorite._id)
               {/* {console.log(user)} */}
 
               {/* <div onClick={handleFavourite}> */}
-                  {idFavorites?.includes(product._id) ?
+                  {/* {idFavorites?.includes(product._id) ?
                     <Button style={{ "fontSize": 30,color:"black"}} className="material-icons corazon" onClick={handleFavourite}>
                       <FavoriteIcon/></Button>
                     :
                     <Button style={{ "fontSize": 30, color:"black"}} className="material-icons" onClick={handleFavourite}>
-                      <FavoriteBorderIcon /></Button>}
+                      <FavoriteBorderIcon /></Button>} */}
                 {/* </div> */}
 
 
