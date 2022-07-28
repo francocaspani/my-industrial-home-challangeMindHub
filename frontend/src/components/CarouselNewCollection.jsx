@@ -36,12 +36,14 @@ export default function CarouselNewCollection() {
             >
                 {product.map(eachproduct =>
                  
-                    <SwiperSlide className='imageproduct' key={eachproduct._id}>
-                        <LinkRouter className="no-link imageproduct" to={`/products/${eachproduct._id}`} >
-                        <div className="containerProductImageName">
-                            <img className="imageCarouselNewCollection"src= {eachproduct.img} alt={eachproduct.name}/>
+                    <SwiperSlide className='containerimageproduct' key={eachproduct._id}>
+                        <LinkRouter className="no-link imageproduct" to={`/products/${eachproduct._id}`}>
+                        {/* <div className="containerProductImageName"> */}
+                            <img className="imageproduct"src= {eachproduct.img} alt={eachproduct.name}/>
+                           <div className="name_product_carouselNewC">
                             <p style={{marginBottom: '0px'}}>{eachproduct.name}</p>
-                        </div>
+                            </div>
+                        {/* </div> */}
                         </LinkRouter>
                     </SwiperSlide>
                  

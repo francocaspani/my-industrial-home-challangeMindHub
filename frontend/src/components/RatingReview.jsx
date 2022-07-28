@@ -104,15 +104,6 @@ export default function RatingReview({ product, handleReload, ratingProduct }) {
                     </Box>
                 </Modal>
             </span>
-            {/* <Box className='ratingBox'>
-                <span className='ratingText'>
-                    <Typography>{ratingProduct} stars</Typography>
-                    <Typography>{product?.reviews.length} Reviews</Typography>
-                </span>
-                <Stack spacing={1}>
-                    <Rating name="half-rating-read" value={ratingProduct} precision={0.5} size='large' readOnly />
-                </Stack>
-            </Box> */}
             {product?.reviews.map((item, index) => {
                 return (
                     <ModifyDeleteReview item={item} handleReload={handleReload} />

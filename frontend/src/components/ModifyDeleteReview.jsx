@@ -42,9 +42,6 @@ export default function ModifyDeleteReview({ item, handleReload }) {
         handleReload()
     }
 
-    console.log(item)
-
-
     return (
         <>
             <Box key={item._id} className='everyReview'>
@@ -54,7 +51,7 @@ export default function ModifyDeleteReview({ item, handleReload }) {
 
                 <Box className='textReview'>
                     <span className='ratingDateReview'>
-                        {user && user.id === item.userId ?
+                        {user && user.id === item.userId._id ?
                             <Stack spacing={1}>
                                 <Rating   onChange={(event, newValue)=> setRating(newValue)} name="simple-controlled" value={item.rating} precision={0.5} />
                             </Stack>
@@ -69,7 +66,7 @@ export default function ModifyDeleteReview({ item, handleReload }) {
                     </span>
 
                     
-                    {user && user.id == item.userId ?
+                    {user && user.id === item.userId._id ?
                         <Box className='comments'>
                             <span suppressContentEditableWarning={true} contentEditable className='titleReview' onInput={(event) => setModifyTitle(event.currentTarget.textContent)}><b className='titlereview'>{item.titleReview}</b></span>
                             <span suppressContentEditableWarning={true} contentEditable className='descriptionReview' onInput={(event) => setModify(event.currentTarget.textContent)}>{item.review}</span>

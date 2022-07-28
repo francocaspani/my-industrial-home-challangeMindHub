@@ -28,7 +28,7 @@ import TyForBuy from './components/TyForBuy';
 import basketActions from './redux/actions/basketActions';
 
 export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
-//export const urlBackend = 'http://localhost:4000/api'
+// export const urlBackend = 'http://localhost:4000/api'
 
 
 function App(props) {

@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import "../styles/carouselBestSellers.css";
 import "../App.css";
 import "../styles/carouselNewCollection.css";
+import CarouselProduct from "../components/CarouselProduct.jsx"
 
 
 function Index() {
@@ -17,6 +18,7 @@ function Index() {
     <div className='containerIndex'>
       <img src='https://www.porcelanosa.com/trendbook/app/uploads/2019/03/venis-ferroker_aluminio_ferroker_loft_h.jpg' alt="Hero" style={{ width: '100%', objectFit: 'cover' }} />
       <CarouselRooms />
+      {/* <CarouselProduct/> */}
       <CarouselNewCollection/>
       <BoxInformation />
       <div className="titleCaruselBestSellers">

@@ -3,11 +3,11 @@ import GoogleIcon from '@mui/icons-material/Google';
 import axios from "axios";
 import '../styles/signUp.css'
 import usersActions from "../redux/actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import Modal from '@mui/material/Modal';
-import GoogleSignUp from './GoogleSignUp';
+
 import Box from '@mui/material/Box';
 
 
