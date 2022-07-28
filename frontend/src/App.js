@@ -25,9 +25,10 @@ import ProductDetails from './components/ProductDetails';
 import ScrollToTop from "react-scroll-to-top";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TyForBuy from './components/TyForBuy';
+import basketActions from './redux/actions/basketActions';
 
-export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
-//export const urlBackend = 'http://localhost:4000/api'
+// export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
+export const urlBackend = 'http://localhost:4000/api'
 
 
 function App(props) {
@@ -56,7 +57,24 @@ function App(props) {
       }
       verifyToken()
     }
+
+    
   }, [])
+
+  useEffect(() => {
+    
+    if (localStorage.getItem('basket') !== null) {
+      let productLocal = JSON.parse(localStorage.getItem('basket'))
+      if (user) {
+        productLocal.map(product => {         
+            dispatch(basketActions.addToBasket(product));
+        })
+        localStorage.removeItem('basket')
+      }
+    }
+    
+  }, [user])
+  
 
   // console.log(user?)
   return (
