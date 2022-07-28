@@ -27,7 +27,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TyForBuy from './components/TyForBuy';
 
 export const urlBackend = 'https://my-industrial-home-back.herokuapp.com/api'
-// export const urlBackend = 'http://localhost:4000/api'
+//export const urlBackend = 'http://localhost:4000/api'
 
 
 function App(props) {

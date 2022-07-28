@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import productActions from '../redux/actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect} from "react";
+import { useEffect } from "react";
 import "../styles/products.css"
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -43,7 +43,7 @@ export default function MediaCard({ product, reload, keys }) {
   const handleClose = () => setOpen(false);
   const token = localStorage.getItem('token')
   let stock;
-  if(product.stock > 0) {
+  if (product.stock > 0) {
     stock = [...Array(product.stock).keys()]
   }
   const dispatch = useDispatch()
@@ -96,10 +96,22 @@ export default function MediaCard({ product, reload, keys }) {
   async function addBasket() {
     const productToAdd = {
       productId: product._id,
-      amount: productModel
+      amount: productModel,
+      img: product.img,
+      price: product.price,
+      name: product.name
     }
-    dispatch(basketActions.addToBasket(productToAdd));
-    reload()
+    if (user) {
+      dispatch(basketActions.addToBasket(productToAdd));
+      reload()
+    }
+    else {
+      let basketLocalStorage = JSON.parse(localStorage.getItem('basket')) || []
+
+      basketLocalStorage.push(productToAdd)
+      let basketLocalStorageJSON = JSON.stringify(basketLocalStorage)
+      localStorage.setItem('basket', basketLocalStorageJSON)
+    }
   }
   function basketAlert() {
     // if (res) {
@@ -114,17 +126,17 @@ export default function MediaCard({ product, reload, keys }) {
     <>
       <Card className='cardProduts' key={keys}>
         <div className='img-quick'>
-      <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product._id}`}>
-          <CardMedia
-            component="img"
-            height="320"
-            image={product.img}
-            alt="product image"
-            className='img-c'
-          />
-    </LinkRouter>
+          <LinkRouter style={{ textDecoration: 'none' }} to={`/products/${product._id}`}>
+            <CardMedia
+              component="img"
+              height="320"
+              image={product.img}
+              alt="product image"
+              className='img-c'
+            />
+          </LinkRouter>
 
-          <Button sx={{ fontSize: ".8rem", color: 'white',  }} className='quickShop-card' onClick={handleOpen}>Quickshop</Button>
+          <Button sx={{ fontSize: ".8rem", color: 'white', }} className='quickShop-card' onClick={handleOpen}>Quickshop</Button>
         </div>
         <Typography component="div" sx={{ width: "100%" }}>
           <CardActions className='buttonsCards' sx={{ justifyContent: "center" }} >
@@ -179,14 +191,14 @@ export default function MediaCard({ product, reload, keys }) {
                     ) : (
                       <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreTwoToneIcon /></Button>
                     )} */}
-                    {/* <button className='buttonCarrito' onClick={addBasket}>Add to basket</button> */}
-                    {/* <button className='buttonCarrito' onClick={handleFavourite}>Add To Favourites</button> */}
-                  </Box>
-                  <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product._id}`} >
-                    <button className='buttonCarrito'>Go To Details</button>
-                  </LinkRouter>
+                      {/* <button className='buttonCarrito' onClick={addBasket}>Add to basket</button> */}
+                      {/* <button className='buttonCarrito' onClick={handleFavourite}>Add To Favourites</button> */}
+                    </Box>
+                    <LinkRouter style={{ textDecoration: 'none' }} to={`/products/${product._id}`} >
+                      <button className='buttonCarrito'>Go To Details</button>
+                    </LinkRouter>
 
-                </Box>
+                  </Box>
                 </div>
               </Box>
             </Modal>

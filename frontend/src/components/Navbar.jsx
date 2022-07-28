@@ -38,6 +38,7 @@ export default function Navbar() {
 
   // const navigate = useNavigate()
   const [basketReload, setBasketReload] = useState(null)
+
   //const [basket, setBasket] = useState([])
   const dispatch = useDispatch();
   const user = useSelector(store => store.usersReducer.userData)
@@ -73,6 +74,8 @@ export default function Navbar() {
     await dispatch(basketActions.deleteBasketProduct(productId));
     setBasketReload(!basketReload)
   }
+
+
 
   const [search, setSearch] = React.useState(null);
 
@@ -124,14 +127,45 @@ export default function Navbar() {
     </Box>
   )
 
+
+
+  let productLocal = JSON.parse(localStorage.getItem('basket'))
+
+  function basketLocal(e) {
+    console.log('CLAROOOOOOOO')
+    const productIndex = productLocal.indexOf(e)
+    console.log(productIndex)
+    productLocal.splice(productIndex, 1)
+    console.log(productLocal)
+
+    let stringiFied = JSON.stringify(productLocal)
+    localStorage.setItem('basket', stringiFied)
+    setBasketReload(!basketReload)
+  }
+
   const basketDrawer = (anchor) => (
+
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
       role="presentation"
     // onClick={toggleDrawer(anchor, false)}
     // onKeyDown={toggleDrawer(anchor, false)}
     >
+
       <div className='drawer-basket'>
+        {
+          (!user && productLocal?.length > 0) ?
+          productLocal.map(product => (
+              <div className='drawer-product'>
+                <img alt='img-drawer' className='img-drawer' src={product.img} />
+                <div>
+                  <p className='name-drawer'>{product.name}</p>
+                  <p className='price-drawer'>$ {product.price} x {product.amount}</p>
+                </div>
+                <DeleteIcon onClick={() => basketLocal(product.productId)} />
+              </div>
+            )) : <p></p>
+        }
         {
           (basket && basket.length !== 0) ? basket.map(product => (
             <div className='drawer-product'>
@@ -143,7 +177,6 @@ export default function Navbar() {
               <DeleteIcon onClick={() => deleteBasket(product._id)} />
             </div>
           ))
-
             : <p></p>
         }
         {
@@ -166,8 +199,8 @@ export default function Navbar() {
             </div>
             ) : <p className='empty'></p>
         }
-
       </div>
+
     </Box>
   )
 
@@ -193,18 +226,18 @@ export default function Navbar() {
       <List>
 
         {!user ?
-          
-            <div>
-              {[{ to: '/signin', name: 'Log-in' }, { to: '/signup', name: 'Sign-up' }].map((text, index) => (
-                <ListItem key={index} disablePadding>
-                  <ListItemButton>
-                    <LinkRouter className='links' to={text.to}>
-                      <ListItemText primary={text.name} />
-                    </LinkRouter>
-                  </ListItemButton>
-                </ListItem>))}
-            </div>
-          
+
+          <div>
+            {[{ to: '/signin', name: 'Log-in' }, { to: '/signup', name: 'Sign-up' }].map((text, index) => (
+              <ListItem key={index} disablePadding>
+                <ListItemButton>
+                  <LinkRouter className='links' to={text.to}>
+                    <ListItemText primary={text.name} />
+                  </LinkRouter>
+                </ListItemButton>
+              </ListItem>))}
+          </div>
+
           :
           <>
             <div>
@@ -213,23 +246,23 @@ export default function Navbar() {
                   <LinkRouter className='links' to="/index" onClick={() => {
                     dispatch(usersActions.logOutUser())
                   }}>
-                    <ListItemText sx={{textDecoration:"none"}} primary="Log out" />
+                    <ListItemText sx={{ textDecoration: "none" }} primary="Log out" />
                   </LinkRouter>
                 </ListItemButton>
               </ListItem>
             </div>
-            {user.isAdmin ? 
+            {user.isAdmin ?
               <div>
-                  <LinkRouter className='links' to="/admin">
+                <LinkRouter className='links' to="/admin">
                   <ListItemButton>
-                    <ListItemText sx={{textDecoration:"none"}} primary="Admin" />
+                    <ListItemText sx={{ textDecoration: "none" }} primary="Admin" />
                   </ListItemButton>
-                  </LinkRouter>
+                </LinkRouter>
               </div>
               :
-                <></>
-              }
-            </>
+              <></>
+            }
+          </>
         }
       </List>
     </Box>
@@ -262,7 +295,7 @@ export default function Navbar() {
   const renderMenu = (
     <Menu
       sx={{
-        top:"50px",
+        top: "50px",
       }}
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -282,33 +315,33 @@ export default function Navbar() {
       {/* {console.log(user)} */}
       {!user ?
         <div>
-            <LinkRouter className='links' to='/signin'>
-              <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
-            </LinkRouter>
-            <LinkRouter className='links' to='/signup'>
-              <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
-            </LinkRouter>
-          </div> 
+          <LinkRouter className='links' to='/signin'>
+            <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
+          </LinkRouter>
+          <LinkRouter className='links' to='/signup'>
+            <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
+          </LinkRouter>
+        </div>
         :
         <>
-        <LinkRouter className='links' to="/index" onClick={() => {dispatch(usersActions.logOutUser())}}>
+          <LinkRouter className='links' to="/index" onClick={() => { dispatch(usersActions.logOutUser()) }}>
             <MenuItem>
               <Typography textAlign="center">Log Out</Typography>
             </MenuItem>
           </LinkRouter>
-          {user.isAdmin ? 
-        <div>
-            <LinkRouter className='links'  to="/admin">
-              <MenuItem>
-                <Typography textAlign="center">Admin</Typography>
-              </MenuItem>
-            </LinkRouter>
-        </div>
-        :
-          <></>
-        }
-          </>
+          {user.isAdmin ?
+            <div>
+              <LinkRouter className='links' to="/admin">
+                <MenuItem>
+                  <Typography textAlign="center">Admin</Typography>
+                </MenuItem>
+              </LinkRouter>
+            </div>
+            :
+            <></>
           }
+        </>
+      }
     </Menu>
   );
 
@@ -434,9 +467,13 @@ export default function Navbar() {
               ))}
             </div>
           </Box>
+
           <Box className='title'>
-            <img alt='logo' className='logo' src='https://media.discordapp.net/attachments/998343174818889748/999050414328647870/MY-INDUSTRIAL-HOME-black.png' />
+            <LinkRouter to='/'>
+              <img alt='logo' className='logo' src='https://media.discordapp.net/attachments/998343174818889748/999050414328647870/MY-INDUSTRIAL-HOME-black.png' />
+            </LinkRouter>
           </Box>
+
           <Box className='icons'>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>

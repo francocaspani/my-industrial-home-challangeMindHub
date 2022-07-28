@@ -51,21 +51,34 @@ export default function Product(props) {
     }, [id, reload])
 
     useEffect(() => {
-        if (card){
+        if (card) {
             dispatch(productActions.getRating(card.reviews))
         }
-        
+
     }, [card])
 
     console.log(card)
     async function addBasket(e) {
-        const product = {
+        const productToAdd = {
             productId: id,
-            amount: 1
+            amount: 1,
+            img: card.img,
+            price: card.price,
+            name: card.name
 
         }
-        dispatch(basketActions.addToBasket(product));
-        setBasket(!basket)
+        if (user) {
+            dispatch(basketActions.addToBasket(productToAdd));
+            reload()
+        }
+        else {
+            let basketLocalStorage = JSON.parse(localStorage.getItem('basket')) || []
+            basketLocalStorage.push(productToAdd)
+            let basketLocalStorageJSON = JSON.stringify(basketLocalStorage)
+            localStorage.setItem('basket', basketLocalStorageJSON)
+        }
+        // dispatch(basketActions.addToBasket(product));
+        // setBasket(!basket)
     }
 
     // const userBasket = useSelector(store => store.basketReducer.productsBasket)
@@ -118,7 +131,7 @@ export default function Product(props) {
     return (
         <>
 
-            <Box key={card?._id} style={{paddingTop: '5.5rem'}}>
+            <Box key={card?._id} style={{ paddingTop: '5.5rem' }}>
 
                 <Box className='cards-product-details'>
 
@@ -150,7 +163,7 @@ export default function Product(props) {
                                         <AddShoppingCartIcon />
                                         ⠀⠀Add to cart
                                     </button>
-                                    <button className='button-fav'onClick={handleFavourite} disableElevation>
+                                    <button className='button-fav' onClick={handleFavourite} disableElevation>
                                         <VolunteerActivismIcon />
                                         ⠀⠀
                                         Add to favorite
@@ -163,7 +176,7 @@ export default function Product(props) {
                 <Box sx={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
                     <CarouselProduct basketIds={basketIds} reloaded={reloaded} favsIds={favsIds}/>
                 </Box>
-                <Box sx={{margin: '5rem auto', backgroundColor: 'white'}}>
+                <Box sx={{ margin: '5rem auto', backgroundColor: 'white' }}>
                     <div className='review-title'>
                         <p>Ratings and Reviews</p>
                         <a>Write a review</a>
@@ -174,9 +187,9 @@ export default function Product(props) {
                             <div className='review-info'>
                                 {
                                     (card?.reviews.length == 0) ?
-                                    <p>0 stars</p>
-                                    :
-                                    <p>{Math.round(rating)} stars</p>
+                                        <p>0 stars</p>
+                                        :
+                                        <p>{Math.round(rating)} stars</p>
                                 }
                                 <p>|</p>
                                 <p>{card?.reviews.length} Reviews</p>
@@ -188,11 +201,11 @@ export default function Product(props) {
                         <div className='box-reco'>
                             {
                                 (card?.reviews.length == 0) ?
-                                <p>No reviews yet, be the first one</p>
-                                :
-                                <p>{Math.round(rating)*20}% Recommended</p>
+                                    <p>No reviews yet, be the first one</p>
+                                    :
+                                    <p>{Math.round(rating) * 20}% Recommended</p>
                             }
-                            <CheckCircleOutlineIcon/>
+                            <CheckCircleOutlineIcon />
                         </div>
                     </div>
                     <Box className='box-review' sx={{ marginTop: '2rem', marginBottom: '2rem' }}>
