@@ -57,10 +57,14 @@ const productControllers = {
         try {
             productdb = await Product.findOneAndUpdate({ _id: id }, product, { new: true })
         } catch (err) { error = err }
+        if (error) {
+            res.status(404)
+        }
         res.json({
             response: error ? 'ERROR' : { productdb },
             success: error ? false : true,
             error: error
+        
         })
     },
     removeProduct: async (req, res) => {

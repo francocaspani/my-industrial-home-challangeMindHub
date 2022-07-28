@@ -97,8 +97,7 @@ function SignUp() {
                                         <select onChange={handleSelect} className='select-modal' name="country" id="country">
                                             {sortedCountries?.map((everycountry, index) => <option key={index} value={everycountry}>{everycountry}</option>)}
                                         </select>
-                                        {/* {selectedCountry && <span><GoogleSignUp country={selectedCountry} /></span>
-                                        } */}
+                                        {selectedCountry && <span><GoogleSignUp country={selectedCountry} /></span>} 
                                     </Box>
 
                                 </Modal>

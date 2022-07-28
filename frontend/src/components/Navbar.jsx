@@ -330,7 +330,7 @@ export default function Navbar() {
     >
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
+          <Badge badgeContent={basket.length} color="error">
             <LinkRouter to={'/basket'}>
               <ShoppingCartIcon />
             </LinkRouter>
@@ -345,7 +345,7 @@ export default function Navbar() {
           color="inherit"
         >
           <Badge badgeContent={user?.favourite.length} color="error">
-            <FavoriteIcon />
+            <FavoriteIcon color='inherit' />
           </Badge>
         </IconButton>
         <p>Favs</p>
@@ -444,14 +444,14 @@ export default function Navbar() {
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
-              <LinkRouter to={"/Favorites"} >
+              <LinkRouter style={{color:"white"}} to={"/Favorites"} >
                 <IconButton
                   size="large"
                   aria-label="show 17 new notifications"
                   color="inherit"
                 >
                   <Badge badgeContent={user?.favourite.length} color="error">
-                    <FavoriteIcon />
+                    <FavoriteIcon/>
                   </Badge>
                 </IconButton>
               </LinkRouter>

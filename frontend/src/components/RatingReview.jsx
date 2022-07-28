@@ -60,7 +60,7 @@ export default function RatingReview({ product, handleReload, ratingProduct }) {
 
     const card = useSelector(store => store.productsReducer.product)
 
-
+console.log(card)
     return (
         <Box className='reviewContainer'>
             <span className='titleReviewContainer'>
