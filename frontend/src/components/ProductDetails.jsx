@@ -189,18 +189,18 @@ export default function Product(props) {
                                     //    <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
                                     <button className='button-add' onClick={basketAlert} >
                                         <AddShoppingCartIcon />
-                                        ⠀⠀Added to cart
+                                        Added to cart
                                     </button>
                                      ) : (
                                         <button className='button-add' onClick={addBasket} >
                                         <LocalGroceryStoreIcon />
-                                        ⠀⠀Add to cart
+                                        Add to cart
                                     </button>
                                     //    <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreIcon /></Button>
                                 )}
                                     <button className='button-fav' onClick={handleFavourite} disableElevation>
                                         <VolunteerActivismIcon />
-                                        ⠀⠀
+                                        
                                         Add to favorite
                                     </button>
                                 </div>

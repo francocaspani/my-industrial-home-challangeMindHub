@@ -109,12 +109,12 @@ function basketAlert() {
                       //    <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
                       <button style={{backgroundColor: 'gray'}} className='button-addFav' onClick={basketAlert} >
                           <AddShoppingCartIcon />
-                          ⠀⠀Added to cart
+                          Added to cart
                       </button>
                       ) : (
                           <button className='button-addFav' onClick={()=> addBasket(product._id)} >
                           <LocalGroceryStoreIcon />
-                          ⠀⠀Add to cart
+                           Add to cart
                       </button>
                   )}
                   <DeleteIcon className='delete-icon' onClick={()=> handleFavourite(product._id) }/>
