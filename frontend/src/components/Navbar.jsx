@@ -191,7 +191,7 @@ export default function Navbar() {
                 ) : <p className='empty'>Empty basket</p>
             }
             {
-              (!user && productLocal?.length !== 0) ?
+              (!user && productLocal?.length > 0) ?
                 (<div className='container-buttons'>
                   <LinkRouter to='/basket' className='linkRouter' onClick={toggleDrawer(anchor, false)}>
                     <div className='button-finish-drawer'>Proceed to checkout</div>
@@ -519,7 +519,7 @@ export default function Navbar() {
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={toggleDrawer('right', true)}>
-                <Badge badgeContent={basket.length} color="error">
+                <Badge badgeContent={user ? basket?.length : productLocal?.length} color="error">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
