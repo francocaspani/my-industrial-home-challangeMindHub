@@ -6,7 +6,6 @@ const Router = require('./routes/routes')
 const cors = require('cors')
 const passport = require('passport')
 const fileUpload = require('express-fileupload')
-const path = require("path")
 const app = express()
 const PORT = process.env.PORT || 4000
 app.set('port', PORT)

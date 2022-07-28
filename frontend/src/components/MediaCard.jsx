@@ -18,8 +18,6 @@ import { Link as LinkRouter } from "react-router-dom"
 import usersActions from '../redux/actions/userActions';
 import { toast } from 'react-toastify';
 import basketActions from '../redux/actions/basketActions';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
 
 
 
