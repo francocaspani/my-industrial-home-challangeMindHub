@@ -132,12 +132,8 @@ export default function Navbar() {
   let productLocal = JSON.parse(localStorage.getItem('basket'))
 
   function basketLocal(e) {
-    console.log('CLAROOOOOOOO')
     const productIndex = productLocal.indexOf(e)
-    console.log(productIndex)
     productLocal.splice(productIndex, 1)
-    console.log(productLocal)
-
     let stringiFied = JSON.stringify(productLocal)
     localStorage.setItem('basket', stringiFied)
     setBasketReload(!basketReload)
@@ -165,6 +161,14 @@ export default function Navbar() {
                 <DeleteIcon onClick={() => basketLocal(product.productId)} />
               </div>
             )) : <p></p>
+        }
+        {
+          (!user && productLocal?.length > 0) ?
+            (<div className='container-total-drawer'>
+              <p>Total:</p>
+              <p>${subTotalBasket}</p>
+            </div>
+            ) : <p className='empty'>Empty basket</p>
         }
         {
           (basket && basket.length !== 0) ? basket.map(product => (
