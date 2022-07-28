@@ -139,3 +139,15 @@
     border-radius: 3px;
     cursor: pointer;
 }
+
+@media(max-width: 500px) {
+    .everyReview {
+        flex-direction: column;
+        /* display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        margin: 1rem auto; */
+        /* border-top: solid 1px black; */
+    }
+}

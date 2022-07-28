@@ -9,6 +9,7 @@ import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import CarouselProduct from '../components/CarouselProduct'
 import { useParams } from 'react-router-dom'
@@ -38,16 +39,12 @@ export default function Product(props) {
     const prodBasket = useSelector(store => store.basketReducer.productsBasket)
     const basketIds = prodBasket.map(prod => prod.productId._id);
     const favsIds = user?.favourite.map(favId => favId._id)
-    console.log(favsIds)
-
-
-
-
+    const reloaded = () => { setBasket(!basket) }
   
     let stock;
-        if(card?.stock > 0) {
-            stock = [...Array(card?.stock).keys()]
-        }
+    if(card?.stock > 0) {
+        stock = [...Array(card?.stock).keys()]
+    }
 
     useEffect(() => {
         dispatch(productActions.getOneProduct(id))
@@ -67,7 +64,7 @@ export default function Product(props) {
     async function addBasket(e) {
         const productToAdd = {
             productId: id,
-            amount: 1,
+            amount: productModel,
             img: card.img,
             price: card.price,
             name: card.name
@@ -75,7 +72,6 @@ export default function Product(props) {
         }
         if (user) {
             dispatch(basketActions.addToBasket(productToAdd));
-            reload()
         }
         else {
             let basketLocalStorage = JSON.parse(localStorage.getItem('basket')) || []
@@ -83,6 +79,7 @@ export default function Product(props) {
             let basketLocalStorageJSON = JSON.stringify(basketLocalStorage)
             localStorage.setItem('basket', basketLocalStorageJSON)
         }
+        reloaded()
         // dispatch(basketActions.addToBasket(product));
         // setBasket(!basket)
     }
@@ -101,7 +98,6 @@ export default function Product(props) {
     const handleReload = () => {
         setReload(!reload)
     }
-    const reloaded = () => { setBasket(!basket) }
 
     const handleFavourite = async () => {
 
@@ -139,11 +135,21 @@ export default function Product(props) {
         setProductmodel(event.target.value);
       }
 
+      function basketAlert() {
+        // if (res) {
+        toast('This product is already in the basket', {
+          theme: "dark",
+          position: "bottom-left",
+          autoClose: 4000,
+        })
+        // }
+      }
+
 
     return (
         <>
 
-            <Box key={card?._id} style={{ paddingTop: '5.5rem' }}>
+            <Box key={card?._id} className='main-containerProdDet'>
 
                 <Box className='cards-product-details'>
 
@@ -179,10 +185,19 @@ export default function Product(props) {
 
 
                                 <div className='box-buttons'>
-                                    <button className='button-add' onClick={addBasket} >
+                                {(basketIds.includes(card?._id)) ? (
+                                    //    <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
+                                    <button className='button-add' onClick={basketAlert} >
                                         <AddShoppingCartIcon />
+                                        ⠀⠀Added to cart
+                                    </button>
+                                     ) : (
+                                        <button className='button-add' onClick={addBasket} >
+                                        <LocalGroceryStoreIcon />
                                         ⠀⠀Add to cart
                                     </button>
+                                    //    <Button sx={{ size: "small", color: '#000000' }} onClick={addBasket}> <LocalGroceryStoreIcon /></Button>
+                                )}
                                     <button className='button-fav' onClick={handleFavourite} disableElevation>
                                         <VolunteerActivismIcon />
                                         ⠀⠀
@@ -221,9 +236,9 @@ export default function Product(props) {
                         <div className='box-reco'>
                             {
                                 (card?.reviews.length == 0) ?
-                                    <p>No reviews yet, be the first one</p>
+                                    <p style={{marginBottom: '.3rem'}}>No reviews yet, be the first one</p>
                                     :
-                                    <p>{Math.round(rating) * 20}% Recommended</p>
+                                    <p style={{marginBottom: '.3rem'}}>{Math.round(rating) * 20}% Recommended</p>
                             }
                             <CheckCircleOutlineIcon />
                         </div>

@@ -8,6 +8,7 @@ import usersActions from '../redux/actions/userActions';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import CarouselProduct from '../components/CarouselProduct';
 import { Link as LinkRouter } from "react-router-dom"
 
@@ -16,12 +17,17 @@ export default function Favorites() {
   const token = localStorage.getItem('token')
   const user = useSelector(store => store.usersReducer.userData)
   const baskets = useSelector(store => store.basketReducer.productsBasket)
+  console.log(baskets)
   const dispatch = useDispatch()
-  const basketIds = baskets?.map(prod => prod._id);
+  const basketIds = baskets?.map(prod => prod.productId._id);
   const reloaded = () => { setBasket(!basket) }
+  const favsIds = user?.favourite.map(favId => favId)
+  const favs = user?.favourite.map(product => product._id)
+  console.log(favs)
   console.log(basketIds)
-  const favsIds = user?.favourite.map(favId => favId._id)
-  console.log(favsIds)
+  // console.log(favsIds)
+
+
 
 
 
@@ -31,17 +37,17 @@ export default function Favorites() {
     }
   }, [basket])
 
-
   async function addBasket(id) {
     const productToAdd = {
         productId : id,
         amount : 1
     }
+    console.log(productToAdd)
     dispatch(basketActions.addToBasket(productToAdd));
-    setBasket(!basket)
+    reloaded()
 }
 
-console.log(basket)
+// console.log(basket)
 
 const handleFavourite = async (id) => {
 
@@ -71,7 +77,17 @@ const handleFavourite = async (id) => {
     verifyToken()
   }
 }
-console.log(handleFavourite)
+
+function basketAlert() {
+  // if (res) {
+  toast('This product is already in the basket', {
+    theme: "dark",
+    position: "bottom-left",
+    autoClose: 4000,
+  })
+  // }
+}
+
   return (
     <>
       <div className="containerFavourite">
@@ -80,18 +96,27 @@ console.log(handleFavourite)
           return (
             <div className='containerProdFav'>
               <div className='contentFavorite'>
-                <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product?._id}`}>
-                  <img className='imgFavorites' src={product.img} alt='foto'></img>
-                </LinkRouter>
-                <div className='fav-title'>{product.name}</div>
-                <div>Stock: {product.stock}</div>
-                <div className='fav-price'>${product.price}</div>
-                {/* <button onClick={()=> addBasket(product._id)}><ShoppingCartIcon/></button> */}
+                <div className='box-infoFav'>
+                  <LinkRouter style={{textDecoration: 'none'}} to={`/products/${product?._id}`}>
+                    <img className='imgFavorites' src={product.img} alt='foto'></img>
+                  </LinkRouter>
+                  <div className='fav-title'>{product.name}</div>
+                  <div>Stock: {product.stock}</div>
+                  <div className='fav-price'>${product.price}</div>
+                </div>
                 <div className='box-buttonFav'>
-                  <button className='button-add' onClick={()=> addBasket(product._id)}>
-                                            <AddShoppingCartIcon />
-                                            ⠀⠀Add to cart
-                                        </button>
+                  {(basketIds?.includes(product._id)) ? (
+                      //    <Button sx={{ size: "small", color: 'gray' }} onClick={basketAlert}> <AddShoppingCartIcon /></Button>
+                      <button style={{backgroundColor: 'gray'}} className='button-addFav' onClick={basketAlert} >
+                          <AddShoppingCartIcon />
+                          ⠀⠀Added to cart
+                      </button>
+                      ) : (
+                          <button className='button-addFav' onClick={()=> addBasket(product._id)} >
+                          <LocalGroceryStoreIcon />
+                          ⠀⠀Add to cart
+                      </button>
+                  )}
                   <DeleteIcon className='delete-icon' onClick={()=> handleFavourite(product._id) }/>
                 </div>
               </div>

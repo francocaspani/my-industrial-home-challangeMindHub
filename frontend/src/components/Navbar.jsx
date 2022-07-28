@@ -362,28 +362,30 @@ export default function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <LinkRouter className='no-linkNav' to={'/basket'}>
+      <LinkRouter style={{textDecoration: 'none', color: 'black'}} to={"/basket"} >
+        <MenuItem>
+          <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <Badge badgeContent={4} color="error">
               <ShoppingCartIcon />
-            </LinkRouter>
-          </Badge>
-        </IconButton>
-        <p>Basket</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={user?.favourite.length} color="error">
-            <FavoriteIcon />
-          </Badge>
-        </IconButton>
-        <p>Favs</p>
-      </MenuItem>
+            </Badge>
+          </IconButton>
+          <p>Basket</p>
+        </MenuItem>
+      </LinkRouter>
+      <LinkRouter style={{textDecoration: 'none', color: 'black'}} to={"/Favorites"} >
+        <MenuItem>
+          <IconButton
+            size="large"
+            aria-label="show 17 new notifications"
+            color="inherit"
+          >
+            <Badge badgeContent={user?.favourite.length} color="error">
+              <FavoriteIcon />
+            </Badge>
+          </IconButton>
+          <p>Favs</p>
+        </MenuItem>
+      </LinkRouter>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"

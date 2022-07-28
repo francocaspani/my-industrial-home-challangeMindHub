@@ -21,7 +21,7 @@ import "../styles/products.css"
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import LocalGroceryStoreTwoToneIcon from '@mui/icons-material/LocalGroceryStoreTwoTone';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import { Link as LinkRouter } from "react-router-dom"
 import usersActions from '../redux/actions/userActions';
@@ -45,7 +45,6 @@ export default function CarouselProduct({basketIds, reloaded, favsIds}) {
     const dispatch = useDispatch()
     const user = useSelector(store => store.usersReducer.userData)
     const basket = useSelector(store => store.basketReducer.productsBasket)
-    console.log(user)
   
     useEffect(() => {
       if (user) {
@@ -53,7 +52,6 @@ export default function CarouselProduct({basketIds, reloaded, favsIds}) {
       }
     }, [user])
     console.log(favsIds)
-    console.log(products)
   
   
     // function selected(event) {
@@ -63,6 +61,7 @@ export default function CarouselProduct({basketIds, reloaded, favsIds}) {
     // const basketIds = basket.map(prod => prod.productId._id);
   
     const handleFavourite = async (e) => {
+      console.log(e)
   
       if (user) {
         const res = await dispatch(usersActions.handleFavourites(e, token))
@@ -79,6 +78,7 @@ export default function CarouselProduct({basketIds, reloaded, favsIds}) {
           autoClose: 4000,
         })
       }
+      reloaded()
   
       if (localStorage.getItem('token') !== null) {
         const token = localStorage.getItem('token')
@@ -91,7 +91,6 @@ export default function CarouselProduct({basketIds, reloaded, favsIds}) {
     }
   
     async function addBasket(e) {
-      console.log(e)
       const productToAdd = {
         productId: e,
         amount: productModel
@@ -109,15 +108,15 @@ export default function CarouselProduct({basketIds, reloaded, favsIds}) {
       // }
     }
 
-    function favAlert() {
-      // if (res) {
-      toast('This product is already in favs', {
-        theme: "dark",
-        position: "bottom-left",
-        autoClose: 4000,
-      })
-      // }
-    }
+    // function favAlert() {
+    //   // if (res) {
+    //   toast('This product is already in favs', {
+    //     theme: "dark",
+    //     position: "bottom-left",
+    //     autoClose: 4000,
+    //   })
+    //   // }
+    // }
 
     return (
         <Swiper
@@ -146,7 +145,7 @@ export default function CarouselProduct({basketIds, reloaded, favsIds}) {
                             <div style={{display: 'flex'}}>
                               {
                                 (favsIds?.includes(productdetails._id)) ? (
-                                  <Button sx={{ size: "small", color: '#000000' }} onClick={favAlert}><FavoriteIcon /></Button>
+                                  <Button sx={{ size: "small", color: '#000000' }} onClick={()=>handleFavourite(productdetails._id)}><FavoriteIcon /></Button>
                                   ) : (
                                     <Button sx={{ size: "small", color: '#000000' }} onClick={()=>handleFavourite(productdetails._id)}> <FavoriteBorderIcon /></Button>
                                 )

@@ -51,97 +51,53 @@
     justify-content: space-between;
 }
 
-@media (min-width: 1500px){
-    .sc-gzVnrw{
-        width: 80rem;
-    }
-}
-@media (min-width: 1500px){
-    .sc-bZQynM{
-        width: 80rem;
-    }
-}
-
-
-@media (max-width: 1500px){
-    .sc-gzVnrw {
-        width: 70rem;
-    }
-}
-
-@media (max-width: 1500px){
-    .sc-bZQynM {
-        width: 70rem;
-    }
-}
-
-@media (max-width: 1160px){
-    .sc-gzVnrw {
-        width: 60rem;
-    }
-}
-
-@media (max-width: 1160px){
-    .sc-bZQynM {
-        width: 60rem;
-    }
-}
-@media (max-width: 1000px){
-    .sc-gzVnrw {
-        width: 50rem;
-        
-    }
-}
-
-@media (max-width: 1000px){
-    .sc-bZQynM {
-        width: 50rem;
-        
-    }
-}
-@media (max-width: 840px){
-    .sc-gzVnrw {
-        width: 40rem;
-        
-    }
-}
-
-@media (max-width: 840px){
-    .sc-bZQynM {
-        width: 40rem;
-        
-    }
-}
-
-@media (max-width: 680px){
-    .sc-gzVnrw {
-        width: 30rem;
-        
-    }
-}
-
-@media (max-width: 680px){
-    .sc-bZQynM {
-        width: 30rem;
-        
-    }
-}
 @media (max-width: 520px){
-    .sc-gzVnrw {
-        width: 20rem;
-        
+    .carousel {
+        background-color: white;
+        width: 10rem !important;
+        height: 30rem;
+        padding: 1rem;
     }
-}
-
-@media (max-width: 520px){
-    .sc-bZQynM {
-        width: 20rem;
-        
+    .box-car {
+        display: flex;
+        flex-direction: column;
+        height: 8rem;
+        justify-content: space-between;
+        /* background-color: red; */
     }
-}
-/* @media (max-width: 520px){
+    
     .img-caro {
-        width: 20rem;
-        
+        height: 12rem !important;
+        width: 90% !important;
+        object-fit: cover;
+        margin: auto;
     }
-} */
+    
+    .price-car {
+        font-size: 1rem;
+        text-align: justify;
+        margin-left: 1rem;
+    }
+    
+    .detail-car {
+        font-size: .9rem;
+        text-align: justify;
+        margin: 1rem;
+    }
+    
+    /* .bhRnqO {
+        right: -27px;
+    
+    }
+    
+    .kVtMtA {
+        left: -27px;
+    
+    } */
+    
+    .box-priceFav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

@@ -114,6 +114,7 @@ background-color: rgba(97, 97, 102, 0.466) !important;
   align-items: center;
   justify-content: center;
   border-radius: 0.4rem !important;
+  margin-top: -82px;
 }
 
 .no-link {
