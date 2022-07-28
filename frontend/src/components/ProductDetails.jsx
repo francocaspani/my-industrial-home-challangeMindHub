@@ -245,7 +245,7 @@ export default function Product(props) {
                     </div>
                     <Box className='box-review' sx={{ marginTop: '2rem', marginBottom: '2rem' }}>
                         <Card sx={{ width: '50rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
-                            <Typography variant="body2" color="text.secondary">
+                            <Typography className='contenedorResenas' variant="body2" color="text.secondary">
                                 < RatingReview product={card} ratingProduct={rating} handleReload={handleReload} />
                             </Typography>
                         </Card>
