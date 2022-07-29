@@ -71,14 +71,12 @@ export default function ModifyDeleteReview({ item, handleReload }) {
                             <span suppressContentEditableWarning={true} contentEditable className='titleReview' onInput={(event) => setModifyTitle(event.currentTarget.textContent)}><b className='titlereview'>{item.titleReview}</b></span>
                             <span suppressContentEditableWarning={true} contentEditable className='descriptionReview' onInput={(event) => setModify(event.currentTarget.textContent)}>{item.review}</span>
                             <Box className='comments2'>
-
-
-                                <Button onClick={() => handleModify(item._id)} sx={{ margin: '.2rem' }} variant="outlined" color="success">
-                                    <EditIcon />
-                                </Button>
-                                <Button onClick={handleDelete} id={item._id} sx={{ margin: '.2rem' }} variant="outlined" color="error">
-                                    <DeleteIcon />
-                                </Button>
+                                <div className="buttonEditIcon_comment" onClick={() => handleModify(item._id)} sx={{ margin: '.2rem' }}>
+                                    <EditIcon className="iconEditIcon_comment"/>  
+                                </div>
+                                <div className="buttonDeleteIcon_comment" onClick={handleDelete} id={item._id} sx={{ margin: '.2rem' }}>
+                                    <DeleteIcon className="iconDeleteIcon_comment" />
+                                </div>
                             </Box>
 
 

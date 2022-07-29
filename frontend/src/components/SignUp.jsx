@@ -59,7 +59,7 @@ function SignUp() {
             from: 'propietary-signup'
         }
         const res = await dispatch(usersActions.signUpUser(userData))
-        console.log(res)
+        // console.log(res)
         if (res.data.from === 'validator') {
             res.data.message.map((message, index) => toast.error(message.message, {
                 theme: "dark",
