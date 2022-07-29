@@ -99,7 +99,7 @@ export default function Admin() {
                             <div className="container-input">
                                     <label className='labelAdmin' name="Hashtags">
                                 <label>Hashtags </label>
-                                    {/* <p> Add the first hashtags as room or space </p> */}
+                                    <p style={{fontSize: '.8rem', margin: '.3rem 0'}}> Add the first hashtags as room or space </p>
                                     <input placeholder='Hashtags (separate with commas "," )' type="hashtags" id="hashtags" className="input-adm" />
                                     </label>
                             </div>
