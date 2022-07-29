@@ -5,6 +5,7 @@
     align-items: center;
     padding-top: 15.1vh;
     padding-bottom: 5vh;
+    background-color: #99999b;
 }
 .ambient-select {
     width: 20rem;
@@ -19,9 +20,10 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+
 }
 .cardAdmin{
-    width: 20%;
+    width: 18%;
     height: 50%;
     display: flex;
     flex-direction: column;
@@ -30,24 +32,159 @@
     border: solid 3.3px black;
     margin: 1rem;
     padding: 1rem;
+    background-color: #7e7d7d;
+    border-radius: 15px;
 }
 .cardimgAdmin{
     width: 100%;
-    height: 20rem;
+    height: 18rem;
 }
 .cardtittleAdmin{
-    padding: 1rem;
+    padding: 1rem;  
 }
 
 .labelAdmin{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #8f9091;
+    background-color: #7e7d7d;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1rem;
+    font-size: 1.450rem;
+    border-radius: 7px;
+    border: solid 1px black;
+}
+.labelAdminP{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #7e7d7d;
+    padding: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.450rem;
+}
+.labelAdminHastags{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #7e7d7d;
+    padding: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.960rem;
 }
 .formAdminDelete{
     padding-top: 2vh !important;
 }
 .labelAdminHashtags{
     font-size: 1rem;
+}
+.submit{
+    background-color: black;
+    color: white;
+    font-size: 1.5rem;
+}
+.option{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+}
+.ctnCardAdmin{
+    background-color: #99999b;
+}
+.country-select{
+    background-color: white;
+}
+/*res*/
+@media screen and (max-width:1260px){
+    .cardAdmin{
+        width: 25%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: solid 3.3px black;
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+}
+@media screen and (max-width:1100px){
+    .cardAdmin{
+        width: 30%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: solid 3.3px black;
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+}
+@media screen and (max-width:1100px){
+    .cardAdmin{
+        width: 30%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: solid 3.3px black;
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+}
+@media screen and (max-width:720px){
+    .cardAdmin{
+        width: 40%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: solid 3.3px black;
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
+@media screen and (max-width:640px){
+    .cardAdmin{
+        width: 50%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: solid 3.3px black;
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
+@media screen and (max-width:590px){
+    .cardAdmin{
+        width: 65%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: solid 3.3px black;
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
+@media screen and (max-width:450px){
+    .cardAdmin{
+        width: 78%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: solid 3.3px black;
+        margin: 1rem;
+        padding: 1rem;
+    }
 }

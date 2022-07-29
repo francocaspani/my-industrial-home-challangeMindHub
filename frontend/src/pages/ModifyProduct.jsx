@@ -51,42 +51,46 @@ useEffect(() => {
    <>
     <form onSubmit={handleSubmit} className="form-admin">
                 <div className="container-input">
-                <label className='labelAdmin' name="Name">Name
+            
+                    <h2 className='labelAdmin'>Product Name
                     <input placeholder='name' type="text" id="name" className="" defaultValue={product.name} />
-                </label>
+                </h2>
+              
                 </div>
                 <div className="container-input">
-                    <label  className='labelAdmin' name="Detail">Detail
+                 
+                    <h2 className='labelAdmin'>Product details
                     <input placeholder='detail' type="text" id="detail" className="" defaultValue={product.detail} />
-                    </label>
+                    </h2>
                 </div>
                 <div className="container-input">
-                    <label  className='labelAdmin' name="Image Product">Image Product
+                <h2 className='labelAdmin'>Product image (url)
                     <input placeholder='img' type="text" id="img" className="" defaultValue={product.img} />
-                    </label>
+                    </h2>
                 </div>
                 <div className="container-input">
-                    <label  className='labelAdmin' name="Price">Price
+                <h2 className='labelAdmin'>Product price
                     <input placeholder='price' type="price" id="price" className="" defaultValue={product.price} />
-                    </label>
+                    </h2>
                 </div>
                 <div className="container-input">
-                    <label  className='labelAdmin' name="Size">Size
+                <h2 className='labelAdmin'>Product size
                     <input placeholder='size' type="size" id="size" className="" defaultValue={product.size}/>
-                    </label>
+                    </h2>
                 </div>
                 <div className="container-input">
-                    <label  className='labelAdmin' name="Stock">Stock
+                <h2 className='labelAdmin'>Indicate the stock
                     <input placeholder='stock' type="stock" id="stock" className="" defaultValue={product.stock}/>
-                    </label>
+                    </h2>
                 </div>
                 <div className="container-input">
-                    <label  className='labelAdmin' name="Hashtags">Hashtags
+                    <label className='labelAdmin' name="Hashtags">
+                    <h2 className='labelAdminP'>Hashtags </h2>
                     <input placeholder='hashtags' type="hashtags" id="hashtags" className="" defaultValue={product.hashtags}/>
                     </label>
                 </div>
                 <button type="submit" className="submit" value="submit">
-                    modify product
+                    Modify product
                 </button>
     </form>
     </>

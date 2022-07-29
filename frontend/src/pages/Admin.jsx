@@ -55,33 +55,33 @@ export default function Admin() {
             <div>
                 <form onSubmit={handleSubmit} className="form-admin">
                     <div className="container-input">
-                    <h2 className='labelAdmin'>Indicate the Name of the Product
-                        <input placeholder='name' type="text" id="name" className="" />
+                    <h2 className='labelAdmin'>Product Name
+                        <input placeholder='Name' type="text" id="name" className="" />
                     </h2>
                     </div>
                     <div className="container-input">
-                    <h2 className='labelAdmin'>Indicate the product detail
-                        <input placeholder='detail' type="text" id="detail" className="" />
+                    <h2 className='labelAdmin'>Product detail
+                        <input placeholder='Detail' type="text" id="detail" className="" />
                     </h2>
                     </div>
                     <div className="container-input">
-                    <h2 className='labelAdmin'>Indicate the link of the image
-                        <input placeholder='img' type="text" id="img" className="" />
+                    <h2 className='labelAdmin'>Product image (url)
+                        <input placeholder='URL image' type="text" id="img" className="" />
                     </h2>
                     </div>
                     <div className="container-input">
-                    <h2 className='labelAdmin'>Indicate the price of the product
-                        <input placeholder='price' type="price" id="price" className="" />
+                    <h2 className='labelAdmin'>Product price
+                        <input placeholder='Price' type="price" id="price" className="" />
                     </h2>
                     </div>
                     <div className="container-input">
-                    <h2 className='labelAdmin'>Please indicate product size
-                        <input placeholder='size' type="size" id="size" className="" />
+                    <h2 className='labelAdmin'>Product size
+                        <input placeholder='Size' type="size" id="size" className="" />
                     </h2>
                     </div>
                     <div className="container-input">
                     <h2 className='labelAdmin'>Indicate the stock
-                        <input placeholder='stock' type="stock" id="stock" className="" />
+                        <input placeholder='Stock' type="stock" id="stock" className="" />
                     </h2>
                     </div>
                     {/* <div className="container-input">
@@ -95,19 +95,21 @@ export default function Admin() {
                     </select>
                 </div> */}
                     <div className="container-input">
-                        <h2 className='labelAdmin'>Hashtags </h2>
-                            <label className='labelAdmin labelAdminHashtags' name="Hashtags">Añade el primer hashtag como ambiente
-                            <input placeholder='hashtags(separar con comas)' type="hashtags" id="hashtags" className="" />
+                            <label className='labelAdmin' name="Hashtags">
+                        <h2 className='labelAdminP'>Hashtags </h2>
+                             <p className='labelAdminHastags'> Add the first hashtags as room or space </p>
+                            <input placeholder='Hashtags (separate with commas "," )' type="hashtags" id="hashtags" className="" />
                             </label>
                     </div>
                     <button type="submit" className="submit" value="submit">
-                        Add your product
+                        Add product
                     </button>
                 </form>
 
                 <form onSubmit={handleDelete} className="form-admin formAdminDelete">
                     <div className="container-input">
-                    <label className='labelAdmin' name="Hashtags">Select the Product to delete
+                    <label className='labelAdmin' name="Hashtags">
+                        <h2 className='labelAdminP'>Select Product to delete </h2>
                         <select className="country-select">
                             <option className="option">Product</option>
                             {products.map((product, key) => (
@@ -119,7 +121,7 @@ export default function Admin() {
                     </label>
                     </div>
                     <button type="submit" className="submit" value="submit">
-                        Delete Your Product
+                        Delete  Product
                     </button>
                 </form>
             </div>
@@ -131,7 +133,7 @@ export default function Admin() {
                             <img className='cardimgAdmin' src={product.img} alt="" />
                             <h1 className='cardtittleAdmin'>{product.name}</h1>
                             <LinkRouter to={`/ModifyProduct/${product._id}`} >
-                                <button><EditIcon /></button>
+                                <button><EditIcon/></button>
                             </LinkRouter>
                         </div>
                     </>
