@@ -21,6 +21,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
 }
 
 .titleReviewContainer {
@@ -138,6 +140,24 @@
     font-size: 1rem;
     border-radius: 3px;
     cursor: pointer;
+}
+.buttonEditIcon_comment {
+    border: none !important;
+    /* padding: 0% !important; */
+    transition: none;
+    cursor:pointer;
+}
+.buttonDeleteIcon_comment{
+    border: none!important;
+    /* padding: 0% !important; */
+    cursor:pointer;
+    gap: 1rem;
+}
+.iconEditIcon_comment {
+    color: black !important;
+}
+.iconDeleteIcon_comment{
+    color: black !important; 
 }
 
 @media(max-width: 500px) {
