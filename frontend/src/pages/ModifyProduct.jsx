@@ -3,6 +3,8 @@ import { useEffect } from 'react'
 import productActions from '../redux/actions/productActions'
 import { useDispatch } from 'react-redux'
 import { useParams } from "react-router-dom"
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Link as LinkRouter } from "react-router-dom";
 import "../styles/admin.css"
 
 
@@ -47,46 +49,49 @@ useEffect(() => {
 
   return (
     <>
+        <LinkRouter className="backArrow" to="/admin">
+            <ArrowBackIcon />
+        </LinkRouter>
     {product &&
    <>
-    <form onSubmit={handleSubmit} className="form-admin">
+    <form onSubmit={handleSubmit} className="form-adminBox">
                 <div className="container-input">
             
-                    <h2 className='labelAdmin'>Product Name
-                    <input placeholder='name' type="text" id="name" className="" defaultValue={product.name} />
-                </h2>
+                    <label className='labelAdmin'>Product Name
+                    <input placeholder='name' type="text" id="name" className="input-adm" defaultValue={product.name} />
+                </label>
               
                 </div>
                 <div className="container-input">
                  
-                    <h2 className='labelAdmin'>Product details
-                    <input placeholder='detail' type="text" id="detail" className="" defaultValue={product.detail} />
-                    </h2>
+                    <label className='labelAdmin'>Product details
+                    <input placeholder='detail' type="text" id="detail" className="input-adm" defaultValue={product.detail} />
+                    </label>
                 </div>
                 <div className="container-input">
-                <h2 className='labelAdmin'>Product image (url)
-                    <input placeholder='img' type="text" id="img" className="" defaultValue={product.img} />
-                    </h2>
+                <label className='labelAdmin'>Product image (url)
+                    <input placeholder='img' type="text" id="img" className="input-adm" defaultValue={product.img} />
+                    </label>
                 </div>
                 <div className="container-input">
-                <h2 className='labelAdmin'>Product price
-                    <input placeholder='price' type="price" id="price" className="" defaultValue={product.price} />
-                    </h2>
+                <label className='labelAdmin'>Product price
+                    <input placeholder='price' type="price" id="price" className="input-adm" defaultValue={product.price} />
+                    </label>
                 </div>
                 <div className="container-input">
-                <h2 className='labelAdmin'>Product size
-                    <input placeholder='size' type="size" id="size" className="" defaultValue={product.size}/>
-                    </h2>
+                <label className='labelAdmin'>Product size
+                    <input placeholder='size' type="size" id="size" className="input-adm" defaultValue={product.size}/>
+                    </label>
                 </div>
                 <div className="container-input">
-                <h2 className='labelAdmin'>Indicate the stock
-                    <input placeholder='stock' type="stock" id="stock" className="" defaultValue={product.stock}/>
-                    </h2>
+                <label className='labelAdmin'>Indicate the stock
+                    <input placeholder='stock' type="stock" id="stock" className="input-adm" defaultValue={product.stock}/>
+                    </label>
                 </div>
                 <div className="container-input">
                     <label className='labelAdmin' name="Hashtags">
-                    <h2 className='labelAdminP'>Hashtags </h2>
-                    <input placeholder='hashtags' type="hashtags" id="hashtags" className="" defaultValue={product.hashtags}/>
+                    <label className='labelAdmin'>Hashtags </label>
+                    <input placeholder='hashtags' type="hashtags" id="hashtags" className="input-adm" defaultValue={product.hashtags}/>
                     </label>
                 </div>
                 <button type="submit" className="submit" value="submit">
