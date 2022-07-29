@@ -16,6 +16,7 @@
     height: fit-content;
     border: 1px solid gray;
     padding: 2rem;
+    z-index: 0;
 }
 
 .container-basket {
