@@ -9,7 +9,7 @@ const TyForBuy = () => {
         <div className='containerTyForBuy'>
             <div className='containerTitlesTyForBuy'>
                 <h2>Thanks for your purchase!</h2>
-                <h3>Your order confirmation is: {id}</h3>
+                <p style={{marginTop: '1rem'}}>Your order confirmation is:  <b style={{letterSpacing: '.8px'}}>{id}</b></p>
             </div>
             <div className='containerTitlesTyForBuy'>
                 <p>Will be send you an email with the details of your purchase. If you don`t receive it check your spam.</p>
@@ -18,7 +18,7 @@ const TyForBuy = () => {
                 <img className='imgTyForBuy' src={Purchase} alt="ds" />
             </div>
             <LinkRouter className='ctaShop' to={'/products'}>
-                <p className='ctaShop'>Continue shopping</p>
+                <p>Continue shopping</p>
             </LinkRouter>
         </div>
     )

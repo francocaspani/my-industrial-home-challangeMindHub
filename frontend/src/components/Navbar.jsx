@@ -45,6 +45,16 @@ export default function Navbar() {
   const basket = useSelector(store => store.basketReducer.productsBasket)
   // console.log(basket)
 
+  let productLocal = JSON.parse(localStorage.getItem('basket'))
+
+  function basketLocal(e) {
+    const productIndex = productLocal.indexOf(e)
+    productLocal.splice(productIndex, 1)
+    let stringiFied = JSON.stringify(productLocal)
+    localStorage.setItem('basket', stringiFied)
+    setBasketReload(!basketReload)
+  }
+
   let subtotals = []
   if (basket) {
     (basket && basket?.map(product => {
@@ -60,6 +70,24 @@ export default function Navbar() {
     return subTotalBasket;
   }
   addTotal()
+
+  
+  let subLocaltotals = []
+  if (productLocal) {
+    (productLocal && productLocal?.map(product => {
+      subLocaltotals.push(product.price * product.amount)
+    }))
+  }
+
+  let subLocalTotalBasket = 0;
+  function addLocalTotal() {
+    for (let i = 0; i < subLocaltotals.length; i++) {
+      subLocalTotalBasket = subLocaltotals[i] + subLocalTotalBasket;
+    }
+    return subLocalTotalBasket;
+  }
+  addLocalTotal()
+  console.log(subLocalTotalBasket)
 
   // const reload = ()=>{setBasketReload(!basketReload)}
 
@@ -129,15 +157,6 @@ export default function Navbar() {
 
 
 
-  let productLocal = JSON.parse(localStorage.getItem('basket'))
-
-  function basketLocal(e) {
-    const productIndex = productLocal.indexOf(e)
-    productLocal.splice(productIndex, 1)
-    let stringiFied = JSON.stringify(productLocal)
-    localStorage.setItem('basket', stringiFied)
-    setBasketReload(!basketReload)
-  }
 
   const basketDrawer = (anchor) => (
 
@@ -147,63 +166,79 @@ export default function Navbar() {
     // onClick={toggleDrawer(anchor, false)}
     // onKeyDown={toggleDrawer(anchor, false)}
     >
-
-      <div className='drawer-basket'>
-        {
-          (!user && productLocal?.length > 0) ?
-          productLocal.map(product => (
-              <div className='drawer-product'>
-                <img alt='img-drawer' className='img-drawer' src={product.img} />
-                <div>
-                  <p className='name-drawer'>{product.name}</p>
-                  <p className='price-drawer'>$ {product.price} x {product.amount}</p>
+      {
+        (!user) ?
+          (<div className='drawer-basket'>
+            {
+              (!user && productLocal?.length > 0) ?
+              productLocal.map(product => (
+                  <div className='drawer-product'>
+                    <img alt='img-drawer' className='img-drawer' src={product.img} />
+                    <div>
+                      <p className='name-drawer'>{product.name}</p>
+                      <p className='price-drawer'>$ {product.price} x {product.amount}</p>
+                    </div>
+                    <DeleteIcon onClick={() => basketLocal(product.productId)} />
+                  </div>
+                )) : <p></p>
+            }
+            {
+              (!user && productLocal?.length > 0) ?
+                (<div className='container-total-drawer'>
+                  <p>Total:</p>
+                  <p>${subLocalTotalBasket}</p>
                 </div>
-                <DeleteIcon onClick={() => basketLocal(product.productId)} />
-              </div>
-            )) : <p></p>
-        }
-        {
-          (!user && productLocal?.length > 0) ?
-            (<div className='container-total-drawer'>
-              <p>Total:</p>
-              <p>${subTotalBasket}</p>
-            </div>
-            ) : <p className='empty'>Empty basket</p>
-        }
-        {
-          (basket && basket.length !== 0) ? basket.map(product => (
-            <div className='drawer-product'>
-              <img alt='img-drawer' className='img-drawer' src={product.productId.img} />
-              <div>
-                <p className='name-drawer'>{product.productId.name}</p>
-                <p className='price-drawer'>$ {product.productId.price} x {product.amount}</p>
-              </div>
-              <DeleteIcon onClick={() => deleteBasket(product._id)} />
-            </div>
-          ))
-            : <p></p>
-        }
-        {
-          (basket.length !== 0) ?
-            (<div className='container-total-drawer'>
-              <p>Total:</p>
-              <p>${subTotalBasket}</p>
-            </div>
-            ) : <p className='empty'>Empty basket</p>
-        }
-        {
-          (basket.length !== 0) ?
-            (<div className='container-buttons'>
-              <LinkRouter to='/basket' className='linkRouter' onClick={toggleDrawer(anchor, false)}>
-                <div className='button-finish-drawer'>Proceed to checkout</div>
-              </LinkRouter>
-              <LinkRouter to='/products' className='linkRouter' onClick={toggleDrawer(anchor, false)}>
-                <div className='button-finish-drawer'>Continue shopping</div>
-              </LinkRouter>
-            </div>
-            ) : <p className='empty'></p>
-        }
-      </div>
+                ) : <p className='empty'>Empty basket</p>
+            }
+            {
+              (!user && productLocal?.length > 0) ?
+                (<div className='container-buttons'>
+                  <LinkRouter to='/basket' className='linkRouter' onClick={toggleDrawer(anchor, false)}>
+                    <div className='button-finish-drawer'>Proceed to checkout</div>
+                  </LinkRouter>
+                  <LinkRouter to='/products' className='linkRouter' onClick={toggleDrawer(anchor, false)}>
+                    <div className='button-finish-drawer'>Continue shopping</div>
+                  </LinkRouter>
+                </div>
+              ) : <p className='empty'></p>
+            }
+          </div>) : 
+          (<div className='drawer-basket'>
+            {
+              (basket && basket.length !== 0) ? basket.map(product => (
+                <div className='drawer-product'>
+                  <img alt='img-drawer' className='img-drawer' src={product.productId.img} />
+                  <div>
+                    <p className='name-drawer'>{product.productId.name}</p>
+                    <p className='price-drawer'>$ {product.productId.price} x {product.amount}</p>
+                  </div>
+                  <DeleteIcon onClick={() => deleteBasket(product._id)} />
+                </div>
+              ))
+                : <p></p>
+            }
+            {
+              (basket.length !== 0) ?
+                (<div className='container-total-drawer'>
+                  <p>Total:</p>
+                  <p>${subTotalBasket}</p>
+                </div>
+                ) : <p className='empty'>Empty basket</p>
+            }
+            {
+              (basket.length !== 0) ?
+                (<div className='container-buttons'>
+                  <LinkRouter to='/basket' className='linkRouter' onClick={toggleDrawer(anchor, false)}>
+                    <div className='button-finish-drawer'>Proceed to checkout</div>
+                  </LinkRouter>
+                  <LinkRouter to='/products' className='linkRouter' onClick={toggleDrawer(anchor, false)}>
+                    <div className='button-finish-drawer'>Continue shopping</div>
+                  </LinkRouter>
+                </div>
+                ) : <p className='empty'></p>
+            }
+          </div>)
+      }
 
     </Box>
   )
@@ -484,7 +519,7 @@ export default function Navbar() {
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={toggleDrawer('right', true)}>
-                <Badge badgeContent={basket.length} color="error">
+                <Badge badgeContent={user ? basket?.length : productLocal?.length} color="error">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
