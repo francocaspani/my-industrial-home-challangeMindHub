@@ -62,43 +62,43 @@ function Basket(props) {
         <div className="main-container-basket">
             {/* desde aca */}
             {
-            (!user) ?
-            (productLocal?.length > 0) ?
-                (<div className='container-basket'>
-                    {
-                        productLocal?.map(product => (
-                            <div className='basket'>
-                                <LinkRouter style={{ textDecoration: 'none' }} to={`/products/${product?.productId._id}`}>
-                                    <img style={{ width: '60px' }} alt='img-basket' src={product.img} />
-                                </LinkRouter>
-                                <div className='basket-name'>
-                                    <p>{product.name}</p>
-                                    <p>$ {product.price}</p>
-                                </div>
-                                <div className='basket-amount'>
-                                    <p>Quantity</p>
-                                    <div className='amount'>
-                                        {/* <select onChange={modifyBasket}>
+                (!user) ?
+                    (productLocal?.length > 0) ?
+                        (<div className='container-basket'>
+                            {
+                                productLocal?.map(product => (
+                                    <div className='basket'>
+                                        <LinkRouter style={{ textDecoration: 'none' }} to={`/products/${product?.productId._id}`}>
+                                            <img style={{ width: '60px' }} alt='img-basket' src={product.img} />
+                                        </LinkRouter>
+                                        <div className='basket-name'>
+                                            <p>{product.name}</p>
+                                            <p>$ {product.price}</p>
+                                        </div>
+                                        <div className='basket-amount'>
+                                            <p>Quantity</p>
+                                            <div className='amount'>
+                                                {/* <select onChange={modifyBasket}>
 
                                             {stock.map((stock, index) => (
                                                 <option key={index}>{stock + 1}</option>
                                             ))}
                                         </select> */}
-                                        {/* <p id={product.productId._id} onClick={()=>modifyBasket('less', product.productId._id)} >-</p> */}
-                                        <p>{product.amount}</p>
+                                                {/* <p id={product.productId._id} onClick={()=>modifyBasket('less', product.productId._id)} >-</p> */}
+                                                <p>{product.amount}</p>
 
-                                        {/* <p id={product.productId._id} onClick={()=>modifyBasket('plus', product.productId._id)}>+</p> */}
+                                                {/* <p id={product.productId._id} onClick={()=>modifyBasket('plus', product.productId._id)}>+</p> */}
+                                            </div>
+                                        </div>
+                                        <div className='basket-total'>
+                                            <p>Total</p>
+                                            <p>$ {product.amount * product.price}</p>
+                                        </div>
+                                        <DeleteIcon style={{ cursor: 'pointer' }} onClick={() => basketLocal(product.productId)} />
                                     </div>
-                                </div>
-                                <div className='basket-total'>
-                                    <p>Total</p>
-                                    <p>$ {product.amount * product.price}</p>
-                                </div>
-                                <DeleteIcon style={{ cursor: 'pointer' }} onClick={() => basketLocal(product.productId)} />
-                            </div>
-                        ))
-                    }
-                </div>) : (<div className='container-basket'><p className='empty-basket'>Your basket is empty.</p></div>) : <></>} 
+                                ))
+                            }
+                        </div>) : (<div className='container-basket'><p className='empty-basket'>Your basket is empty.</p></div>) : <></>}
             {/* hasta aca */}
             {
                 (user) ?
@@ -129,7 +129,11 @@ function Basket(props) {
                         {/* <LinkRouter to='' className='linkRouter'>
                         <div className='button-continue'>Proceed to checkout</div>
                     </LinkRouter> */}
-                        <PayPal className='paypal-butt' total={totalBasket} shipping={shipping} subTotal={subTotalBasket} />
+                        {basket?.length !== 0 ?
+                            <PayPal className='paypal-butt' total={totalBasket} shipping={shipping} subTotal={subTotalBasket} />
+                            :
+                            <></>
+                        }
                         <LinkRouter to='/products' className='linkRouter'>
                             <div className='button-continue'>Continue shopping</div>
                         </LinkRouter>
@@ -138,19 +142,19 @@ function Basket(props) {
 
                 <div className='main-container-sub'>
                     <div>
-                        <p style={{fontSize: '1rem'}}>To confirm the purchase, we ask you to please log in</p>
+                        <p style={{ fontSize: '1rem' }}>To confirm the purchase, we ask you to please log in</p>
                         <LinkRouter to={'/signin'}>
-                        <button style={{padding: '.5rem', backgroundColor: 'black'}} type="submit" className="submit" value="submit">
-                            Sign in
-                        </button>
+                            <button style={{ padding: '.5rem', backgroundColor: 'black' }} type="submit" className="submit" value="submit">
+                                Sign in
+                            </button>
                         </LinkRouter>
                     </div>
                     <div className='containerBasketLocalStg'>
-                        <p style={{fontSize: '1rem'}}>If you do not have an account, register here</p>
+                        <p style={{ fontSize: '1rem' }}>If you do not have an account, register here</p>
                         <LinkRouter to={'/signup'}>
-                        <button style={{padding: '.5rem', backgroundColor: 'black', marginBottom: '1.5rem'}} type="submit" className="submit" value="submit">
-                            Sign up
-                        </button>
+                            <button style={{ padding: '.5rem', backgroundColor: 'black', marginBottom: '1.5rem' }} type="submit" className="submit" value="submit">
+                                Sign up
+                            </button>
                         </LinkRouter>
                         <LinkRouter to='/products' className='linkRouter'>
                             <div className='button-continue'>Continue shopping</div>
