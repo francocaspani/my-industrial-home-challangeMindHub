@@ -85,8 +85,8 @@ function App(props) {
         <Route path='/Favorites' element={<Favorites />} />
         <Route path='/' element={<Index />} />
         <Route path='/*' element={<Index />} />
-        <Route path='/signin' element={<SignIn />} />
-        <Route path='/signup' element={<SignUp />} />
+        {!user && <Route path='/signin' element={<SignIn />} />}
+        {!user && <Route path='/signup' element={<SignUp />} />}
         <Route path='/policies' element={<Policies />} />
         <Route path='/product' element={<Product />} />
         <Route path='/spaces' element={<Rooms />} />

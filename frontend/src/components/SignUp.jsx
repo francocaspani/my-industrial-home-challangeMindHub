@@ -7,8 +7,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import Modal from '@mui/material/Modal';
-
 import Box from '@mui/material/Box';
+import GoogleAuth from './GoogleAuth';
 
 
 const style = { // estilo para la apertura de la imagen del producto desde la card
@@ -20,7 +20,7 @@ const style = { // estilo para la apertura de la imagen del producto desde la ca
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 4
   };
   
 
@@ -75,7 +75,7 @@ function SignUp() {
         }
     }
 
-
+    
     return (
         <div className='main-sign'>
             <img alt='img-sign' className='img-sign' src='https://img.freepik.com/fotos-premium/loft-estilo-industrial-balcon-interior-3d-render_269031-362.jpg?w=2000' />
@@ -91,12 +91,12 @@ function SignUp() {
                                     open={open}
                                     onClose={handleClose}
                                 >
-                                    <Box sx={style} >
+                                    <Box sx={style} className='modalGoogle' >
 
                                         <select onChange={handleSelect} className='select-modal' name="country" id="country">
                                             {sortedCountries?.map((everycountry, index) => <option key={index} value={everycountry}>{everycountry}</option>)}
                                         </select>
-                                        {/* {selectedCountry && <span><GoogleSignUp country={selectedCountry} /></span>}  */}
+                                        {selectedCountry && <span><GoogleAuth country={selectedCountry} /></span>} 
                                     </Box>
 
                                 </Modal>

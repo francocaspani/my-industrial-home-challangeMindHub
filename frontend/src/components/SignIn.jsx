@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import usersActions from "../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
-
+import GoogleLogIn from './GoogleLogIn';
 function SignIn() {
 
     const dispatch = useDispatch()
@@ -43,7 +43,7 @@ function SignIn() {
                     <form onSubmit={HandleSubmit}>
                     <div className="logos">
                         <p className="with">Sign in with:</p>
-                        <GoogleIcon/>
+                        <span><GoogleLogIn/></span>
                         <div >
                         </div>
                         <p className="or">or:</p>
