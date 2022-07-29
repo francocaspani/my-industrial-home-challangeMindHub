@@ -50,9 +50,7 @@ export default function RatingReview({ product, handleReload, ratingProduct }) {
         formData.append('review', review)
         formData.append('idProduct', idProduct)
         formData.append('rating', rating)
-        console.log(formData)
         const res = await dispatch(reviewActions.addReview(formData, token))
-        console.log(res)
         handleClose()
         handleReload()
 

@@ -24,7 +24,6 @@ export default function ModifyDeleteReview({ item, handleReload }) {
     }]
 
     async function handleModify(event) {
-        console.log(event)
         // eslint-disable-next-line
         const reviewMsj = {
             reviewId: event,

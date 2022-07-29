@@ -10,7 +10,6 @@ const GoogleAuth = ({country}) => {
 
     async function handleCallbackResponse(response) {
         let userObject = jwt_decode(response.credential);
-        console.log(userObject)
         const userData = {
             firstName: userObject.given_name,
             lastName: userObject.family_name,
@@ -20,7 +19,6 @@ const GoogleAuth = ({country}) => {
             country: country,
             from: 'Google Account'
         }; 
-        console.log(userData)
         const res = await dispatch(usersActions.signUpUser(userData));
         if (res.data.success) {
             navigate('/signin')

@@ -16,14 +16,11 @@ export default function Favorites() {
   const token = localStorage.getItem('token')
   const user = useSelector(store => store.usersReducer.userData)
   const baskets = useSelector(store => store.basketReducer.productsBasket)
-  console.log(baskets)
   const dispatch = useDispatch()
   const basketIds = baskets?.map(prod => prod.productId._id);
   const reloaded = () => { setBasket(!basket) }
   const favsIds = user?.favourite.map(favId => favId)
   const favs = user?.favourite.map(product => product._id)
-  console.log(favs)
-  console.log(basketIds)
   // console.log(favsIds)
 
 
@@ -41,7 +38,6 @@ export default function Favorites() {
       productId: id,
       amount: 1
     }
-    console.log(productToAdd)
     dispatch(basketActions.addToBasket(productToAdd));
     reloaded()
   }
@@ -52,7 +48,6 @@ export default function Favorites() {
 
     if (user) {
       const res = await dispatch(usersActions.handleFavourites(id, token))
-      console.log(res)
       toast(res.data.message, {
         theme: "dark",
         position: "bottom-left",

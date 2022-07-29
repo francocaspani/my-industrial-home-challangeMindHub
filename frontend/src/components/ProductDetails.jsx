@@ -98,7 +98,6 @@ export default function Product(props) {
 
         if (user) {
             const res = await dispatch(usersActions.handleFavourites(id, token))
-            console.log(res)
             toast(res.data.message, {
                 theme: "dark",
                 position: "bottom-left",

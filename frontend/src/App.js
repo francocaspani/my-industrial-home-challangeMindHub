@@ -45,7 +45,6 @@ function App(props) {
 
       const verifyToken = async () => {
         const res = await dispatch(usersActions.verifyToken(token))
-        console.log(res)
         if (res) {
 
           toast(res.data.message, {
@@ -76,7 +75,6 @@ function App(props) {
   }, [user])
   
 
-  // console.log(user?)
   return (
     <div className="App">
       <Navbar />

@@ -36,7 +36,6 @@ export default function Admin() {
             hashtags: event.target[6].value.split([","])
         }
         const res = await dispatch(productActions.addProduct(productData))
-        console.log(res)
         // console.log(event.target[6].value.split([","]))
         setReload(!reload)
     }
@@ -45,7 +44,6 @@ export default function Admin() {
         event.preventDefault()
         const id = event.target[0].value
         const res = await dispatch(productActions.deleteComment(id))
-        console.log(res)
         setReload(!reload)
     }
 

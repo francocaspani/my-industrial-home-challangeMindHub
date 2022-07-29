@@ -31,7 +31,6 @@ export default function CarouselProduct({basketIds, reloaded, favsIds}) {
     // if(product.stock > 0) {
     //   stock = [...Array(product.stock).keys()]
     // }
-    // console.log(stock)
     const dispatch = useDispatch()
     const user = useSelector(store => store.usersReducer.userData)
     const basket = useSelector(store => store.basketReducer.productsBasket)
@@ -41,7 +40,6 @@ export default function CarouselProduct({basketIds, reloaded, favsIds}) {
         dispatch(basketActions.getUserBasket())
       }
     }, [user])
-    console.log(favsIds)
   
   
     // function selected(event) {
@@ -51,11 +49,9 @@ export default function CarouselProduct({basketIds, reloaded, favsIds}) {
     // const basketIds = basket.map(prod => prod.productId._id);
   
     const handleFavourite = async (e) => {
-      console.log(e)
   
       if (user) {
         const res = await dispatch(usersActions.handleFavourites(e, token))
-        console.log(res)
         toast(res.data.message, {
           theme: "dark",
           position: "bottom-left",

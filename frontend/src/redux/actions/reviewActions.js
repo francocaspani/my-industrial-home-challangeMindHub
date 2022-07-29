@@ -22,7 +22,6 @@ const reviewActions = {
     },
     deleteComment: (reviewId) => {
         const token = localStorage.getItem('token') 
-        console.log('+++++', token)
         return async (dispatch, getState) => {
             const res = await axios.post(`${urlBackend}/review/${reviewId}`, {}, {
                 headers: {'Authorization': `Bearer ${token}`}

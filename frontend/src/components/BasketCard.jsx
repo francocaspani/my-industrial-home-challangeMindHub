@@ -15,7 +15,6 @@ function BasketCard({ product, reload }) {
     async function deleteBasket() {
         const productId = product._id;
         await dispatch(basketActions.deleteBasketProduct(productId));
-        console.log(productId)
         reload()
 
         let storageProducts = JSON.parse(localStorage.getItem('basket'));

@@ -87,7 +87,6 @@ export default function Navbar() {
     return subLocalTotalBasket;
   }
   addLocalTotal()
-  console.log(subLocalTotalBasket)
 
   // const reload = ()=>{setBasketReload(!basketReload)}
 

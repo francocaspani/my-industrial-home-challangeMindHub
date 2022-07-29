@@ -26,7 +26,6 @@ function Basket(props) {
 
     const reload = () => { setBasketReload(!basketReload) }
 
-    console.log(basket)
 
 
     let subtotals = []

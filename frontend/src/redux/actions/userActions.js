@@ -18,7 +18,6 @@ const usersActions = {
             try {
                 const res = await axios.post(`${urlBackend}/auth/login`, { loggedUser })
                 dispatch({ type: 'logInUser', payload: res.data })
-                console.log(res)
                 if (res.data.success) {
                     localStorage.setItem('token', res.data.response.token)
                 }
@@ -35,12 +34,10 @@ const usersActions = {
         }
     },
     sendNewsletter: (email) => {
-        console.log(email)
         return async (dispatch, getState) => {
             try {
                 const res = await axios.post(`${urlBackend}/confirmation/${email}`)
                 dispatch({ type: 'newsletter', payload: res.data })
-                console.log(res)
                 return res
             } catch (error) {
                 console.log(error)

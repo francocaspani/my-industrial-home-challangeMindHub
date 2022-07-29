@@ -21,10 +21,7 @@ export default function PayPal(props) {
     }, [basketReload, user,reload])
 
     const basket = useSelector(store => store.basketReducer.productsBasket)
-    console.log(basket)
     let total = props.total
-    console.log(props.subTotal)
-    console.log(props.shipping)
 
 
     // console.log(1, orderID);
@@ -46,7 +43,6 @@ export default function PayPal(props) {
 
     const createOrder = (data, actions) => {
         //Creo la orden de con los datos, esta puede ser general o con detalle de items
-        console.log(data)
         return actions.order.create({
             //     purchase_units: [
 
@@ -80,9 +76,7 @@ export default function PayPal(props) {
                     }
                 },
                 items: basket.map((eachProduct) => {
-                    console.log(eachProduct.productId.name)
-                    console.log(eachProduct.productId.price)
-                    console.log(eachProduct.amount)
+
                     return ({
                         name: eachProduct.productId.name,
                         unit_amount: {
@@ -116,7 +110,6 @@ export default function PayPal(props) {
     
 
     const onApprove = (data, actions) => { //recibo el resultado de mi operacion
-        console.log(data)
         return actions.order.capture()
             .then(function (details) {
                 const { payer } = details;

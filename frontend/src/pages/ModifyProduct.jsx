@@ -41,7 +41,6 @@ useEffect(() => {
         }
         
         const res = await dispatch(productActions.modifyProduct(id,productData))
-        console.log(res)
         setReload(!reload)
     }
 

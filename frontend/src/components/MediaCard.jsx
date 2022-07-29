@@ -51,8 +51,6 @@ export default function MediaCard({ product, reload, keys }) {
   const user = useSelector(store => store.usersReducer.userData)
   const basket = useSelector(store => store.basketReducer.productsBasket)
   const favsIds = user?.favourite.map(favId => favId._id)
-  console.log(favsIds)
-  console.log(product._id)
 
   useEffect(() => {
     if (user) {
@@ -61,7 +59,6 @@ export default function MediaCard({ product, reload, keys }) {
   }, [user])
 
   function selected(event) {
-    console.log(event.target.value);
     setProductmodel(event.target.value);
   }
   const basketIds = basket.map(prod => prod.productId._id);
@@ -70,7 +67,6 @@ export default function MediaCard({ product, reload, keys }) {
 
     if (user) {
       const res = await dispatch(usersActions.handleFavourites(product._id, token))
-      console.log(res)
       toast(res.data.message, {
         theme: "dark",
         position: "bottom-left",
@@ -125,7 +121,6 @@ export default function MediaCard({ product, reload, keys }) {
   }
 
 const idFavorites = user?.favourite.map(favorite => favorite._id)
-// console.log(idFavorites)
   return (
     <>
       <Card className='cardProducts' key={keys}>

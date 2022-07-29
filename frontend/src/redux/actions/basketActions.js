@@ -9,7 +9,6 @@ const basketActions = {
             try {
                 const res = await axios.get(`${urlBackend}/basket`, { headers: { Authorization: "Bearer " + token } })
                 dispatch({ type: 'getProductsBasket', payload: res.data.response.basket })
-                console.log(res)
                 return res
             } catch (error) {
                 console.log(error)
@@ -43,7 +42,6 @@ const basketActions = {
             try {
                 const answer = await axios.delete(`${urlBackend}/deletebasket/${idProduct}`, { headers: { Authorization: "Bearer " + token } })
                 dispatch({ type: 'message', payload: { view: true, message: answer.data.message, success: answer.data.success } })
-                console.log(answer)
                 return answer.data.response
             } catch (err) {
                 console.log(err)
@@ -57,21 +55,16 @@ const basketActions = {
             const answer = await axios.put(`${urlBackend}/basket`, {toModify} ,
                 { headers: { Authorization: "Bearer " + token } })
             dispatch({ type: 'message', payload: { view: true, message: answer.data.message, success: answer.data.success } })
-            console.log(answer.data.response)
             return answer.data.response
         }
     },
 
     modifyState: (sku, buyState) => {
-        console.log(sku)
-        console.log(buyState)
         const token = localStorage.getItem('token')
         return async (dispatch, getState) => {
             const answer = await axios.put(`${urlBackend}/hola`,{sku, buyState},
             {headers: {Authorization: "Bearer "+token}})
-            console.log(answer)
         dispatch({type: 'message', payload: {view: true, message: answer.data.message, success: answer.data.success}})
-        console.log(answer.data.response)
         return answer.data.response
         }
     },
@@ -81,9 +74,7 @@ const basketActions = {
         return async (dispatch, getState) => {
             const answer = await axios.put(`${urlBackend}/modifyStock/${sku}`,{},
             {headers: {Authorization: "Bearer "+token}})
-            console.log(answer)
         dispatch({type: 'message', payload: {view: true, message: answer.data.message, success: answer.data.success}})
-        console.log(answer.data.response)
         return answer.data.response
         }
     },
@@ -93,9 +84,7 @@ const basketActions = {
         return async (dispatch, getState) => {
             const answer = await axios.post(`${urlBackend}/getProd`,total,
             {headers: {Authorization: "Bearer "+token}})
-            console.log(answer)
         dispatch({type: 'message', payload: {view: true, message: answer.data.message, success: answer.data.success}})
-        console.log(answer.data.response)
         return answer.data.response
         }
     }

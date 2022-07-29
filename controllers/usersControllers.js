@@ -73,7 +73,6 @@ const usersControllers = {
     },
     logInUser: async (req, res) => {
         const { email, password, from } = req.body.loggedUser
-        console.log(req.body.loggedUser)
         try {
             const userExist = await User.findOne({ email }).populate('favourite')
             if (!userExist) {
@@ -112,7 +111,6 @@ const usersControllers = {
                 } else {
                     if (userExist.verification) {
                         let matchPassword = userExist.password.filter(pass => bcryptjs.compareSync(password, pass))
-                        console.log(matchPassword.length);
                         if (matchPassword.length > 0) {
                             const userData = {
                                 id: userExist._id,
@@ -172,7 +170,6 @@ const usersControllers = {
     },
     newsletterConfirmation: async (req, res) => {
         const email = req.params.email
-        console.log('averrrrrrrrrrrrrrrrrrrrrrrrrrrr' + email)
         await sendNewsletter(email)
         if(email) {
             res.json({
@@ -192,7 +189,7 @@ const usersControllers = {
         if (user) {
             user.verification = true
             await user.save()
-            res.redirect('https://mytinerary-caspani.vercel.app/verification')
+            res.redirect('https://my-industrial-home-challange-mind-hub.vercel.app')
         }
         else {
             res.json({
