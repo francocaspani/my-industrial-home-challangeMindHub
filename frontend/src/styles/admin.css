@@ -1,11 +1,20 @@
+.mainContainer-adm {
+    padding-top: 8rem;
+}
 .form-admin{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 15.1vh;
-    padding-bottom: 5vh;
-    background-color: #99999b;
+    /* padding-top: 6rem; */
+    margin-top: 2rem;
+}
+.input-adm {
+    background-color: transparent;
+    color: rgb(63, 63, 63);
+}
+.form-adminBox {
+    padding: 8rem 0;
 }
 .ambient-select {
     width: 20rem;
@@ -14,13 +23,40 @@
     border-bottom: solid 1px black;
     background-color: transparent;
 }
+.box-adDe {
+    display: flex;
+    justify-content: center;
+}
+.box-add {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+.box-delete {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+.box-modify {
+    background-color: white;
+    margin: 2rem auto;
+}
 .ctnCardAdmin{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    background-color: white;
 
+}
+.backArrow {
+    position: absolute;
+    top: 25%;
+    left: 10%;
+}
+.modi-title {
+    padding: 1rem;
 }
 .cardAdmin{
     width: 18%;
@@ -29,30 +65,33 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: solid 3.3px black;
+    border: solid 1px black;
     margin: 1rem;
     padding: 1rem;
-    background-color: #7e7d7d;
+    /* background-color: #7e7d7d; */
+    background-color: transparent;
     border-radius: 15px;
 }
 .cardimgAdmin{
     width: 100%;
-    height: 18rem;
+    height: 15rem;
+    object-fit: cover;
 }
 .cardtittleAdmin{
-    padding: 1rem;  
+    padding: 1rem;
+    font-size: 1rem;
 }
 
 .labelAdmin{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #7e7d7d;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 1rem;
-    font-size: 1.450rem;
-    border-radius: 7px;
-    border: solid 1px black;
+    /* background-color: #7e7d7d; */
+    /* font-family: Arial, Helvetica, sans-serif; */
+    padding: .5rem;
+    font-size: 1.1rem;
+    /* border-radius: 7px;
+    border: solid 1px black; */
 }
 .labelAdminP{
     display: flex;
@@ -81,14 +120,14 @@
 .submit{
     background-color: black;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 .option{
     font-family: Arial, Helvetica, sans-serif;
     background-color: white;
 }
 .ctnCardAdmin{
-    background-color: #99999b;
+    /* background-color: #99999b; */
 }
 .country-select{
     background-color: white;

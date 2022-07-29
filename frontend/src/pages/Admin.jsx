@@ -52,94 +52,103 @@ export default function Admin() {
 
     return (
         <>
-            <div>
-                <form onSubmit={handleSubmit} className="form-admin">
-                    <div className="container-input">
-                    <h2 className='labelAdmin'>Product Name
-                        <input placeholder='Name' type="text" id="name" className="" />
-                    </h2>
-                    </div>
-                    <div className="container-input">
-                    <h2 className='labelAdmin'>Product detail
-                        <input placeholder='Detail' type="text" id="detail" className="" />
-                    </h2>
-                    </div>
-                    <div className="container-input">
-                    <h2 className='labelAdmin'>Product image (url)
-                        <input placeholder='URL image' type="text" id="img" className="" />
-                    </h2>
-                    </div>
-                    <div className="container-input">
-                    <h2 className='labelAdmin'>Product price
-                        <input placeholder='Price' type="price" id="price" className="" />
-                    </h2>
-                    </div>
-                    <div className="container-input">
-                    <h2 className='labelAdmin'>Product size
-                        <input placeholder='Size' type="size" id="size" className="" />
-                    </h2>
-                    </div>
-                    <div className="container-input">
-                    <h2 className='labelAdmin'>Indicate the stock
-                        <input placeholder='Stock' type="stock" id="stock" className="" />
-                    </h2>
-                    </div>
-                    {/* <div className="container-input">
-                    <select className="country-select">
-                        <option className="option">Ambient</option>
-                        {ambients.map((ambient, key) => (
-                            <option className="option" key={key} value={ambient._id}>
-                                {ambient.name}
-                            </option>
-                        ))}
-                    </select>
-                </div> */}
-                    <div className="container-input">
-                            <label className='labelAdmin' name="Hashtags">
-                        <h2 className='labelAdminP'>Hashtags </h2>
-                             <p className='labelAdminHastags'> Add the first hashtags as room or space </p>
-                            <input placeholder='Hashtags (separate with commas "," )' type="hashtags" id="hashtags" className="" />
+            <div className='mainContainer-adm'>
+                <div className='box-adDe'>
+                    <div className='box-add'>
+                        <h3>Add your products</h3>
+                        <form onSubmit={handleSubmit} className="form-admin">
+                            <div className="container-input">
+                            <label className='labelAdmin'>Product Name</label>
+                            <input placeholder='Name' type="text" id="name" className="input-adm" />
+                            {/* </div> */}
+                            {/* <div className="container-input"> */}
+                            <label className='labelAdmin'>Product detail
+                                <input placeholder='Detail' type="text" id="detail" className="input-adm" />
                             </label>
+                            </div>
+                            <div className="container-input">
+                            <label className='labelAdmin'>Product image (url)
+                                <input placeholder='URL image' type="text" id="img" className="input-adm" />
+                            </label>
+                            </div>
+                            <div className="container-input">
+                            <label className='labelAdmin'>Product price
+                                <input placeholder='Price' type="price" id="price" className="input-adm" />
+                            </label>
+                            </div>
+                            <div className="container-input">
+                            <label className='labelAdmin'>Product size
+                                <input placeholder='Size' type="size" id="size" className="input-adm" />
+                            </label>
+                            </div>
+                            <div className="container-input">
+                            <label className='labelAdmin'>Indicate the stock
+                                <input placeholder='Stock' type="stock" id="stock" className="input-adm" />
+                            </label>
+                            </div>
+                            {/* <div className="container-input">
+                            <select className="country-select">
+                                <option className="option">Ambient</option>
+                                {ambients.map((ambient, key) => (
+                                    <option className="option" key={key} value={ambient._id}>
+                                        {ambient.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div> */}
+                            <div className="container-input">
+                                    <label className='labelAdmin' name="Hashtags">
+                                <label>Hashtags </label>
+                                    <p style={{fontSize: '.8rem', margin: '.3rem 0'}}> Add the first hashtags as room or space </p>
+                                    <input placeholder='Hashtags (separate with commas "," )' type="hashtags" id="hashtags" className="input-adm" />
+                                    </label>
+                            </div>
+                            <button type="submit" className="submit" value="submit">
+                                Add product
+                            </button>
+                        </form>
                     </div>
-                    <button type="submit" className="submit" value="submit">
-                        Add product
-                    </button>
-                </form>
+                    <div className='box-delete'>
+                        <h3>Delete your products</h3>
+                        <form onSubmit={handleDelete} className="form-admin formAdminDelete">
+                            <div className="container-input">
+                            <label className='labelAdmin' name="Hashtags">
+                                <label>Select Product to delete </label>
+                                <select className="country-select">
+                                    <option className="option">Product</option>
+                                    {products.map((product, key) => (
+                                        <option className="option" key={key} value={product._id}>
+                                            {product.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </label>
+                            </div>
+                            <button type="submit" className="submit" value="submit">
+                                Delete  Product
+                            </button>
+                        </form>
+                    </div>
+                </div>
 
-                <form onSubmit={handleDelete} className="form-admin formAdminDelete">
-                    <div className="container-input">
-                    <label className='labelAdmin' name="Hashtags">
-                        <h2 className='labelAdminP'>Select Product to delete </h2>
-                        <select className="country-select">
-                            <option className="option">Product</option>
-                            {products.map((product, key) => (
-                                <option className="option" key={key} value={product._id}>
-                                    {product.name}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                    </div>
-                    <button type="submit" className="submit" value="submit">
-                        Delete  Product
-                    </button>
-                </form>
             </div>
-
-            <div className='ctnCardAdmin' >
-                {products.map((product, key) => (
-                    <>
-                        <div className='cardAdmin' key={key}>
-                            <img className='cardimgAdmin' src={product.img} alt="" />
-                            <h1 className='cardtittleAdmin'>{product.name}</h1>
-                            <LinkRouter to={`/ModifyProduct/${product._id}`} >
-                                <button><EditIcon/></button>
-                            </LinkRouter>
-                        </div>
-                    </>
-                ))
-                }
-            </div >
+            <div className='box-modify'>
+                <h3 className='modi-title'>Modify your products</h3>
+                <div className='ctnCardAdmin' >
+                    {products.map((product, key) => (
+                        <>
+                            <div className='cardAdmin' key={key}>
+                                <img className='cardimgAdmin' src={product.img} alt="" />
+                                <p className='cardtittleAdmin'>{product.name}</p>
+                                <LinkRouter to={`/ModifyProduct/${product._id}`} >
+                                    <button style={{cursor: 'pointer'}}><EditIcon/></button>
+                                </LinkRouter>
+                            </div>
+                        </>
+                    ))
+                    }
+                </div >
+            </div>
         </>
     )
 }
