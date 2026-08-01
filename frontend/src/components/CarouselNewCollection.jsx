@@ -4,9 +4,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "../styles/carouselNewCollection.css";
-import { Navigation } from "swiper";
+import { Navigation } from "swiper/modules";
 import {useSelector } from 'react-redux';
-import { Link as LinkRouter } from "react-router-dom";
+import { Link as LinkRouter } from "react-router";
 
 
 

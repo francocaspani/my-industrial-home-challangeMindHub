@@ -10,7 +10,7 @@ import '../styles/Footer.css'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import InboxIcon from '@mui/icons-material/Inbox';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import {Link as LinkRouter} from 'react-router-dom';
+import {Link as LinkRouter} from 'react-router';
 import { useDispatch } from 'react-redux';
 import usersActions from '../redux/actions/userActions';
 

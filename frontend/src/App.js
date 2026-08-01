@@ -2,7 +2,7 @@ import './App.css';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar'
 import Index from './pages/Index';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router';
 import SignIn from '../src/components/SignIn'
 import SignUp from '../src/components/SignUp'
 import { useEffect } from 'react';

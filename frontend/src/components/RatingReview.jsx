@@ -10,7 +10,7 @@ import { Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send'
 import ModifyDeleteReview from '../components/ModifyDeleteReview'
-import { Link as LinkRouter } from 'react-router-dom'
+import { Link as LinkRouter } from 'react-router'
 
 const style = { // estilo para la apertura de la imagen del producto desde la card
     position: 'absolute',

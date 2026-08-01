@@ -2,7 +2,7 @@ import React from 'react'
 import productActions from '../redux/actions/productActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { Link as LinkRouter } from "react-router-dom"
+import { Link as LinkRouter } from "react-router"
 import EditIcon from '@mui/icons-material/Edit';
 import "../styles/admin.css"
 

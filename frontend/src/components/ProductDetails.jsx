@@ -9,7 +9,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import CarouselProduct from '../components/CarouselProduct'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router'
 import { useDispatch } from 'react-redux';
 import productActions from '../redux/actions/productActions';
 import basketActions from '../redux/actions/basketActions';
@@ -20,7 +20,7 @@ import usersActions from '../redux/actions/userActions';
 import { toast } from 'react-toastify';
 import '../styles/productDetails.css'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Link as LinkRouter } from "react-router-dom";
+import { Link as LinkRouter } from "react-router";
 
 
 

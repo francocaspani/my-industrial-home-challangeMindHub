@@ -10,10 +10,10 @@ import "swiper/css/scrollbar";
 import "../styles/carouselRooms.css";
 
 // import required modules
-import { Autoplay, Pagination, Navigation } from "swiper";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import {useSelector} from "react-redux";
 // import ambientActions from "../redux/actions/ambientActions";
-import { Link as LinkRouter } from "react-router-dom";
+import { Link as LinkRouter } from "react-router";
 
 export default function CarouselRooms() {
   const allAmbients= useSelector((store) => store.ambientsReducer.ambients)

@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import "../styles/Rooms.css";
-import { Link as LinkRouter } from "react-router-dom";
+import { Link as LinkRouter } from "react-router";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 export default function Room({ eachRoom }) {

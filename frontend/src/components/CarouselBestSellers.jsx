@@ -1,7 +1,7 @@
 import React from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Link as LinkRouter } from "react-router-dom";
+import { Link as LinkRouter } from "react-router";
 
 // Import Swiper styles
 import "swiper/css";
@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import {Pagination, Navigation } from "swiper";
+import { Pagination, Navigation } from "swiper/modules";
 import "../styles/carouselBestSellers.css";
 
 

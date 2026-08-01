@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js"; //Importamos el npm
 import basketActions from "../../redux/actions/basketActions";
 import { useDispatch, useSelector } from "react-redux";
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router'
 
 export default function PayPal(props) {
     //const [{basket},dispatch] = useStateValue(); //traemos la info de nuestro carrito de compra

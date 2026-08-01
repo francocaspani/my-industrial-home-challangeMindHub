@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import basketActions from '../redux/actions/basketActions'
 import BasketCard from '../components/BasketCard'
 import "../styles/basket.css"
-import { Link as LinkRouter } from 'react-router-dom'
+import { Link as LinkRouter } from 'react-router'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import PayPal from '../components/PayForm/PayPal'
 import DeleteIcon from '@mui/icons-material/Delete';

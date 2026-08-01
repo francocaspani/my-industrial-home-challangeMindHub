@@ -2,9 +2,9 @@ import React from 'react'
 import { useEffect } from 'react'
 import productActions from '../redux/actions/productActions'
 import { useDispatch } from 'react-redux'
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Link as LinkRouter } from "react-router-dom";
+import { Link as LinkRouter } from "react-router";
 import "../styles/admin.css"
 
 

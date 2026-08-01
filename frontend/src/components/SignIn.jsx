@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
 import '../styles/signUp.css'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import usersActions from "../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
