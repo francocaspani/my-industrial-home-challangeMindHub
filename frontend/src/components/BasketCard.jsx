@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import basketActions from '../redux/actions/basketActions'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Link as LinkRouter } from "react-router-dom"
+import { Link as LinkRouter } from "react-router"
 import "../styles/basket.css"
 
 function BasketCard({ product, reload }) {

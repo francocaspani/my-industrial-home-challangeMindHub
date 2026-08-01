@@ -28,7 +28,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import '../styles/navbar.css'
-import { Link as LinkRouter, useNavigate } from "react-router-dom"
+import { Link as LinkRouter, useNavigate } from "react-router"
 import { useEffect, useState } from 'react';
 import productActions from '../redux/actions/productActions';
 import basketActions from '../redux/actions/basketActions';

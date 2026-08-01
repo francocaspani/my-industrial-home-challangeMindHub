@@ -4,7 +4,7 @@ import axios from "axios";
 import '../styles/signUp.css'
 import usersActions from "../redux/actions/userActions";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { toast } from 'react-toastify';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';

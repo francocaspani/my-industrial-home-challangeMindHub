@@ -1,7 +1,7 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router'
 import Purchase from '../assets-icons/puchase.png'
-import {Link as LinkRouter} from 'react-router-dom'
+import {Link as LinkRouter} from 'react-router'
 
 const TyForBuy = () => {
     const { id } = useParams()

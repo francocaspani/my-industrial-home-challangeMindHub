@@ -9,7 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import CarouselProduct from '../components/CarouselProduct';
-import { Link as LinkRouter } from "react-router-dom"
+import { Link as LinkRouter } from "react-router"
 
 export default function Favorites() {
   const [basket, setBasket] = useState(false)

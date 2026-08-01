@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "../styles/carouselProducts.css";
-import { Navigation } from "swiper";
+import { Navigation } from "swiper/modules";
 import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ import "../styles/products.css"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
-import { Link as LinkRouter } from "react-router-dom"
+import { Link as LinkRouter } from "react-router"
 import usersActions from '../redux/actions/userActions';
 import { toast } from 'react-toastify';
 import basketActions from '../redux/actions/basketActions';

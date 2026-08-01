@@ -14,7 +14,7 @@ import "../styles/products.css"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
-import { Link as LinkRouter } from "react-router-dom"
+import { Link as LinkRouter } from "react-router"
 import usersActions from '../redux/actions/userActions';
 import { toast } from 'react-toastify';
 import basketActions from '../redux/actions/basketActions';
